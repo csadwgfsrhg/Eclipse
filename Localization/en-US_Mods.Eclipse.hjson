@@ -1,0 +1,10 @@
+DamageClasses.HarvestDamage.DisplayName: Harvest Damage
+
+Items: {
+	WoodenTrowel: {
+		DisplayName: Wooden Trowel
+		Tooltip: ""
+	}
+}
+
+Projectiles.PotatoCrop.DisplayName: Potato Crop

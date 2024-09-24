@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "pANwS6nGdlEDnnUVxfkfLEpzuwaTlj3+DwvPlNANk4cf/BMHY+1FtKWr71xKeAw0oCLmTrPyuH5MQMQlwAp/Ig==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\User\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Eclipse\\Eclipse.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}
