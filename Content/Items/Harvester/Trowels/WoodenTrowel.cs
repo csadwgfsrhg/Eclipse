@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 using Eclipse.Content.Projectiles.Harvester.Crops;
-using Eclipse.Content.GlobalClasses;
+using Eclipse.Content.Gui;
 using System.Numerics;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework.Input;

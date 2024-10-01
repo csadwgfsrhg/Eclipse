@@ -5,6 +5,21 @@ Items: {
 		DisplayName: Wooden Trowel
 		Tooltip: ""
 	}
+
+	BouncyTip: {
+		DisplayName: Bouncy Tip
+		Tooltip: ""
+	}
+
+	VileGarment: {
+		DisplayName: Vile Garment
+		Tooltip: ""
+	}
+
+	VileHood: {
+		DisplayName: Vile Hood
+		Tooltip: ""
+	}
 }
 
 Projectiles.PotatoCrop.DisplayName: Potato Crop
