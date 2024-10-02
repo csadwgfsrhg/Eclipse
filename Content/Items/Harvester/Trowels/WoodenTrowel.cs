@@ -5,7 +5,6 @@ using Terraria.ModLoader;
 
 using Eclipse.Content.Projectiles.Harvester.Crops;
 using Eclipse.Content.Gui;
-using System.Numerics;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework.Input;
 
@@ -45,7 +44,7 @@ namespace Eclipse.Content.Items.Harvester.Trowels
 				charge = 0;
 
             }
-    
+
         }
         public override void AddRecipes()
 		{
