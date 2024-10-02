@@ -3,20 +3,24 @@
 public class BouncyTip : ModItem
 {
     public override void SetDefaults() {
+        Item.accessory = true;
+
         Item.width = 40;
         Item.height = 40;
-        Item.accessory = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual) {
-        player.GetModPlayer<MyPlayer>().BouncyTip = true;
+        if (!player.TryGetModPlayer(out BouncyTipPlayer modPlayer)) {
+            return;
+        }
+
+        modPlayer.Enabled = true;
     }
 
     public override void AddRecipes() {
-        var recipe = CreateRecipe();
-        recipe.AddIngredient(ItemID.PinkGel, 12);
-
-        recipe.AddTile(TileID.WorkBenches);
-        recipe.Register();
+        CreateRecipe()
+            .AddIngredient(ItemID.PinkGel, 12)
+            .AddTile(TileID.WorkBenches)
+            .Register();
     }
 }

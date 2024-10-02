@@ -5,17 +5,19 @@ public class PotatoCrop : ModProjectile
     private int cropgrowth;
 
     public override void SetDefaults() {
-        Projectile.width = 38;
-        Projectile.height = 36;
         Projectile.sentry = true;
         Projectile.friendly = false;
-        Projectile.timeLeft = 1000;
-        Projectile.penetrate = -1;
-        Projectile.aiStyle = -1;
         Projectile.tileCollide = true;
         Projectile.usesLocalNPCImmunity = true;
-    }
 
+        Projectile.width = 38;
+        Projectile.height = 36;
+
+        Projectile.penetrate = -1;
+        Projectile.aiStyle = -1;
+
+        Projectile.timeLeft = 1000;
+    }
 
     public override bool OnTileCollide(Vector2 oldVelocity) {
         return false;
