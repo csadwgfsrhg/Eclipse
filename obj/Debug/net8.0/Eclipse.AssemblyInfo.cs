@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Eclipse")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd5ff9b99bc21a0ca35a347b35bec9a33bb32add")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2fbbeaaffc029e7060c9f07fee0395f4dc766cb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Eclipse")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Eclipse")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
