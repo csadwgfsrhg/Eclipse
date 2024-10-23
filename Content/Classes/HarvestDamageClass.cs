@@ -1,6 +1,6 @@
 namespace Eclipse.Content.Classes;
 
-public sealed class HarvestDamageClass : DamageClass
+public sealed class HarvestDamage : DamageClass
 {
     public override bool UseStandardCritCalcs { get; } = true;
 

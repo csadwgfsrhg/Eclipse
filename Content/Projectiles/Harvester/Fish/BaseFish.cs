@@ -1,15 +1,20 @@
 using System.IO;
+using Eclipse.Content.Classes;
 using Eclipse.Utilities.Extensions;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics;
 
 namespace Eclipse.Content.Projectiles.Harvester.Fish;
 
-public class SpiritAngler : ModProjectile
+public abstract class BaseFish : ModProjectile
 {
     private const float AttackState = 0f;
     private const float ReturnState = 1f;
 
+   public int timeleft;
+
+    public int hungeramt;
     private static readonly VertexStrip Strip = new();
 
     private ref float Timer => ref Projectile.ai[0];
@@ -18,25 +23,18 @@ public class SpiritAngler : ModProjectile
 
     private ref float ParentIndex => ref Projectile.localAI[0];
 
-    public override void SetStaticDefaults() {
-        ProjectileID.Sets.TrailingMode[Type] = 3;
-        ProjectileID.Sets.TrailCacheLength[Type] = 12;
-    }
 
-    public override void SetDefaults() {
+
+    public sealed override void SetDefaults() {
         Projectile.friendly = true;
         Projectile.ignoreWater = true;
         Projectile.tileCollide = false;
 
-        Projectile.localNPCHitCooldown = 15;
-        Projectile.usesLocalNPCImmunity = true;
-
-        Projectile.penetrate = -1;
-
-        Projectile.width = 20;
-        Projectile.height = 20;
+      
 
         Projectile.aiStyle = -1;
+        SetStaticDefaults();
+
     }
 
     public override void SendExtraAI(BinaryWriter writer) {
@@ -46,7 +44,7 @@ public class SpiritAngler : ModProjectile
     public override void ReceiveExtraAI(BinaryReader reader) {
         ParentIndex = reader.Read7BitEncodedInt();
     }
-
+  
     public override void AI() {
         switch (State) {
             case AttackState:
@@ -69,11 +67,12 @@ public class SpiritAngler : ModProjectile
         var length = ProjectileID.Sets.TrailCacheLength[Type];
 
         for (var i = 0; i < length; i += 3) {
+
             Main.EntitySpriteDraw(
                 texture,
                 Projectile.GetOldDrawPosition(i),
                 Projectile.GetDrawFrame(),
-                Projectile.GetAlpha(Color.White) * (0.8f - i / (float)length),
+                Projectile.GetAlpha(Color.Blue) * (0.8f - i / (float)length),
                 Projectile.rotation,
                 texture.Size() / 2f + Projectile.GetDrawOriginOffset(),
                 Projectile.scale,
@@ -90,6 +89,7 @@ public class SpiritAngler : ModProjectile
             texture.Size() / 2f + Projectile.GetDrawOriginOffset(),
             Projectile.scale,
             effects
+
         );
 
         return false;
@@ -118,12 +118,12 @@ public class SpiritAngler : ModProjectile
         var parent = Main.projectile[(int)ParentIndex];
 
         if (parent.ai[0] >= 1f) {
-            State = ReturnState;
+        //    State = ReturnState;
         }
 
         var target = Main.npc[(int)TargetIndex];
 
-        if (Timer >= 180f || target == null || !target.CanBeChasedBy()) {
+        if (Timer >= timeleft || target == null || !target.CanBeChasedBy()) {
             State = ReturnState;
 
             Projectile.netUpdate = true;
@@ -133,7 +133,7 @@ public class SpiritAngler : ModProjectile
             var range = 32f * 32f;
 
             if (distance > range) {
-                var frequency = 0.01f;
+                var frequency = 0.05f;
                 var amplitude = 8f;
 
                 var direction = Projectile.DirectionTo(target.Center);
@@ -144,7 +144,7 @@ public class SpiritAngler : ModProjectile
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, velocity, 0.2f);
             }
             else {
-                Projectile.velocity *= 0.95f;
+                Projectile.velocity *= 0.98f;
             }
         }
 
@@ -160,14 +160,16 @@ public class SpiritAngler : ModProjectile
     private void UpdateReturn() {
         var owner = Main.player[Projectile.owner];
 
-        // TODO: Inflict hunger to the owner.
+   
+   
         if (Projectile.Hitbox.Intersects(owner.Hitbox)) {
+            owner.GetModPlayer<HarvestDamagePlayer>().Hunger += hungeramt;
+
             Projectile.Kill();
             return;
         }
 
-        Projectile.alpha += 5;
-
+   
         var parent = Main.projectile[(int)ParentIndex];
 
         if (parent.active && parent.ai[0] >= 1f) {
@@ -183,7 +185,7 @@ public class SpiritAngler : ModProjectile
         }
         else {
             var direction = Projectile.DirectionTo(owner.Center);
-            var velocity = direction * 12f;
+            var velocity = direction * 8f;
 
             Projectile.velocity = Vector2.SmoothStep(Projectile.velocity, velocity, 0.2f);
 

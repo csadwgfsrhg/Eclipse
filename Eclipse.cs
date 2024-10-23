@@ -1,3 +1,9 @@
-namespace Eclipse;
+using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
 
-public sealed class Eclipse : Mod;
+
+namespace Eclipse;
+public class Fgmod : Mod
+{
+
+}

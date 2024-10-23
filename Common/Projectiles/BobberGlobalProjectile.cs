@@ -1,5 +1,6 @@
 using System.IO;
 using Eclipse.Content.Projectiles.Harvester.Fish;
+using Terraria;
 using Terraria.Audio;
 using Terraria.ModLoader.IO;
 
@@ -11,6 +12,9 @@ namespace Eclipse.Common.Projectiles;
 /// </summary>
 public sealed class BobberGlobalProjectile : GlobalProjectile
 {
+    
+
+
     public const float IdleState = 0f;
     public const float StickingToNPCState = 1f;
     public const float StickingToFishState = 2f;
@@ -32,6 +36,9 @@ public sealed class BobberGlobalProjectile : GlobalProjectile
     public override bool InstancePerEntity { get; } = true;
 
     private Vector2 offset;
+
+
+  
 
     public override bool AppliesToEntity(Projectile entity, bool lateInstantiation) {
         return entity.bobber;
@@ -58,8 +65,9 @@ public sealed class BobberGlobalProjectile : GlobalProjectile
     }
 
     public override void AI(Projectile projectile) {
-        var isReturning = projectile.ai[0] >= 1f;
 
+        var isReturning = projectile.ai[0] >= 1f;
+     
         switch (State) {
             case IdleState:
                 if (!isReturning) {
@@ -140,7 +148,7 @@ public sealed class BobberGlobalProjectile : GlobalProjectile
                     24,
                     Dust.dustWater()
                 );
-                
+
                 dust.velocity.Y -= 4f;
                 dust.velocity.X *= 2.5f;
                 dust.scale = 0.8f;
@@ -152,27 +160,21 @@ public sealed class BobberGlobalProjectile : GlobalProjectile
         }
 
         if (Main.mouseLeft && Main.mouseLeftRelease) {
-            var child = Projectile.NewProjectileDirect(
-                projectile.GetSource_FromAI(),
-                projectile.Center,
-                projectile.velocity,
-                ModContent.ProjectileType<SpiritAngler>(),
-                10,
-                2f,
-                projectile.owner
-            );
+         
 
-            child.localAI[0] = projectile.whoAmI;
+                var child = Projectile.NewProjectileDirect(projectile.GetSource_FromAI(), projectile.Center, projectile.velocity, ModContent.ProjectileType<SpiritBass>(), projectile.damage, 2f, projectile.owner);
+                child.localAI[0] = projectile.whoAmI;
 
-            State = StickingToFishState;
-            Intensity = 0f;
+                State = StickingToFishState;
+                Intensity = 0f;
 
-            ChildIndex = child.whoAmI;
+                ChildIndex = child.whoAmI;
 
-            projectile.ai[0] = 0f;
 
-            projectile.netUpdate = true;
-        }
+                projectile.netUpdate = true;
+            }
+           
+        
     }
 
     private void UpdateIntensity(Projectile projectile) {

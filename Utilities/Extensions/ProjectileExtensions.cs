@@ -19,7 +19,24 @@ public static class ProjectileExtensions
             || projectile.type == ProjectileID.JoustingLance
             || projectile.type == ProjectileID.ShadowJoustingLance;
     }
-
+    public static bool IsBoomerang(this Projectile projectile)
+    {
+        return projectile.type == ProjectileID.EnchantedBoomerang
+            || projectile.type == ProjectileID.IceBoomerang
+               || projectile.type == ProjectileID.BouncingShield
+            || projectile.type == ProjectileID.LightDisc
+            || projectile.type == ProjectileID.Bananarang
+            || projectile.type == ProjectileID.BloodyMachete
+            || projectile.type == ProjectileID.CombatWrench
+            || projectile.type == ProjectileID.Flamarang
+            || projectile.type == ProjectileID.FruitcakeChakram
+            || projectile.type == ProjectileID.PaladinsHammerFriendly
+            || projectile.type == ProjectileID.PossessedHatchet
+            || projectile.type == ProjectileID.Shroomerang
+            || projectile.type == ProjectileID.ThornChakram
+            || projectile.type == ProjectileID.Trimarang
+            || projectile.type == ProjectileID.WoodenBoomerang;
+    }
     /// <summary>
     ///     Gets the projectile's position as screen coordinates.
     /// </summary>

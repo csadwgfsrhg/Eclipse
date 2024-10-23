@@ -23,9 +23,35 @@ Items: {
 		DisplayName: Vile Hood
 		Tooltip: ""
 	}
+
+	StrawDoll: {
+		Tooltip: ""
+		DisplayName: Straw Doll
+	}
 }
 
 Projectiles: {
 	PotatoCrop.DisplayName: Potato Crop
 	SpiritAngler.DisplayName: Spirit Angler
+	SpiritBass.DisplayName: Spirit Bass
+	SpiritPiranha.DisplayName: Spirit Piranha
+	Thorn.DisplayName: Thorn
+	MushroomOrb.DisplayName: Mushroom Orb
+	StrawDollProj.DisplayName: Straw Doll Proj
+	ZombiePortal.DisplayName: Zombie Portal
+}
+
+UI: {
+	ExampleResource: Mods.Eclipse.UI.ExampleResource
+	Hunger: Mods.Eclipse.UI.Hunger
+}
+
+Classes.Hunger: Mods.Eclipse.Classes.Hunger
+
+NPCs: {
+	Gargoyle.DisplayName: Gargoyle
+	ClericZombie.DisplayName: Cleric Zombie
+	GiantBoneSerpentBody1.DisplayName: Giant Bone Serpent Body1
+	GiantBoneSerpentBody3.DisplayName: Giant Bone Serpent Body3
+	GiantBoneSerpentHead.DisplayName: Giant Bone Serpent Head
 }
