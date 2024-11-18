@@ -9,7 +9,7 @@ using Terraria.ModLoader.Utilities;
 namespace Eclipse.Content.NPCs
 {
 
-    public class ClericZombie : ModNPC
+    public class HeartZombie : ModNPC
     {
         public override void SetStaticDefaults()
         {
@@ -47,10 +47,10 @@ namespace Eclipse.Content.NPCs
         public override void AI()
         {
 
-            charge += 1;
+         
             Player player = Main.player[NPC.target];
             Visuals(player);
-            if (charge >= 0)
+            if (charge > 20)
             {
                 NPC.aiStyle = 3;
 
@@ -59,36 +59,35 @@ namespace Eclipse.Content.NPCs
             { NPC.aiStyle = -1;
                 NPC.velocity *= .9f;
             }
-
-
-
-
-            if (charge >= 200)
+            if (charge > 200)
             {
 
 
-                if (Main.rand.Next(0, 8) == 8)
+                if (Main.rand.NextBool(6))
                 {
                     SummonZombies(player);
-                    charge = -100;
+                    charge -= 400;
                 }
                 else
                 {
-                    if (Main.rand.Next(0, 6) == 6)
+                    if (Main.rand.NextBool(6))
                     {
                         OrbProjectile(player);
-                        charge = -100;
+                        charge -= 300;
                     }
                     else
-                    {
+                    {   
                         Heal(player);
-                        charge = 0;
+                        charge -= 200;
                     }
 
                 }
 
             }
-
+            else
+            {
+                charge += 1;
+            }
 
 
         }
@@ -96,8 +95,11 @@ namespace Eclipse.Content.NPCs
 
         private void SummonZombies(Player player)
             {
-
-          Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<ZombiePortal>(), 5, 0, Main.myPlayer);
+        
+            Vector2 direction = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitX);
+          
+            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * 1, ModContent.ProjectileType<ZombiePortal>(), 5, 0, Main.myPlayer);
+     
 
         }
         private void OrbProjectile(Player player)

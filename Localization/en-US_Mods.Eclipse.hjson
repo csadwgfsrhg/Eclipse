@@ -28,6 +28,16 @@ Items: {
 		Tooltip: ""
 		DisplayName: Straw Doll
 	}
+
+	IncendiaryRounds: {
+		DisplayName: Incendiary Rounds
+		Tooltip: ""
+	}
+
+	FreedomEagle: {
+		DisplayName: Freedom Eagle
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -39,6 +49,8 @@ Projectiles: {
 	MushroomOrb.DisplayName: Mushroom Orb
 	StrawDollProj.DisplayName: Straw Doll Proj
 	ZombiePortal.DisplayName: Zombie Portal
+	IncendiaryRoundsProj.DisplayName: Incendiary Rounds Proj
+	EagleBullet.DisplayName: Eagle Bullet
 }
 
 UI: {
@@ -54,4 +66,5 @@ NPCs: {
 	GiantBoneSerpentBody1.DisplayName: Giant Bone Serpent Body1
 	GiantBoneSerpentBody3.DisplayName: Giant Bone Serpent Body3
 	GiantBoneSerpentHead.DisplayName: Giant Bone Serpent Head
+	HeartZombie.DisplayName: Heart Zombie
 }

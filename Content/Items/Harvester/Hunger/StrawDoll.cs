@@ -22,7 +22,7 @@ namespace Eclipse.Content.Items.Harvester.Hunger
             Item.useAnimation = 40;
 
             Item.useStyle = 4;
-
+            Item.noMelee = true;
             Item.noUseGraphic = true;
         }
 

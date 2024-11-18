@@ -152,9 +152,54 @@ namespace Eclipse.Common.Items
     {
         public override void SetDefaults(Item Item)
         {
+            if (Item.type == ItemID.WoodenBow)
+            {
+                Item.damage = 6;
+            }
+            if (Item.type == ItemID.PalmWoodBow)
+            {
+                Item.damage = 8;
+            }
+            if (Item.type == ItemID.RichMahoganyBow)
+            {
+                Item.damage = 8;
+            }
+            if (Item.type == ItemID.PearlwoodBow)
+            {
+                Item.damage = 25;
+            }
+            if (Item.type == ItemID.EbonwoodBow)
+            {
+                Item.damage = 10;
+            }
+            if (Item.type == ItemID.ShadewoodBow)
+            {
+                Item.damage = 10;
+            }
+            if (Item.type == ItemID.AshWoodBow)
+            {
+                Item.damage = 16;
+            }
+            if (Item.type == ItemID.DemonBow)
+            {
+                Item.damage = 17;
+            }
+            if (Item.type == ItemID.TendonBow)
+            {
+                Item.damage = 20;
+            }
+            if (Item.type == ItemID.BorealWoodBow)
+            {
+                Item.damage = 7;
+            }
             if (Item.type == ItemID.Minishark)
             {
                 Item.damage = 9;
+            }
+          
+            if (Item.type == ItemID.TheUndertaker)
+            {
+                Item.damage = 21;
             }
             if (Item.type == ItemID.FlintlockPistol)
             {

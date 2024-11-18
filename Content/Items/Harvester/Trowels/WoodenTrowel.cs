@@ -11,7 +11,8 @@ public class WoodenTrowel : ModItem
         Item.autoReuse = true;
         Item.noMelee = true;
 
-        Item.DamageType = DamageClass.Melee;
+        Item.DamageType = ModContent.GetInstance<HarvestDamage>();
+
         Item.damage = 15;
         Item.knockBack = 6f;
 
@@ -29,6 +30,7 @@ public class WoodenTrowel : ModItem
     }
 
     public override void HoldItem(Player player) {
+        player.GetModPlayer<HarvestDamagePlayer>().Hunger += 1;
         if (!player.TryGetModPlayer(out HarvestDamagePlayer modPlayer)) {
             return;
         }
