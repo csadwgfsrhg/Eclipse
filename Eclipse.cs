@@ -12,11 +12,11 @@ public class Fgmod : Mod
 
     private void On_Player_UpdateManaRegen(On_Player.orig_UpdateManaRegen orig, Player self)
     {
-        if(120 <= self.manaRegenCount)
+        if(120 <= self.manaRegenCount && self.statMana < self.statManaMax2)
         {
             if (self.statMana < self.statManaMax2)
-                self.ManaEffect(self.manaRegen + (int)(self.manaRegenBonus / 20f));
-            self.statMana += self.manaRegen + (int)(self.manaRegenBonus / 20f);
+                self.ManaEffect(self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 80f));
+            self.statMana += self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 80f);
             self.manaRegenCount = 0;
         }
 
