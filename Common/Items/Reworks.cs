@@ -13,6 +13,7 @@ namespace Eclipse.Common.Items
     {
         public override void SetDefaults(Item Item)
         {
+           
             if (Item.type == ItemID.PossessedHatchet)
             {
                 Item.damage = 90;
@@ -150,7 +151,25 @@ namespace Eclipse.Common.Items
             }
         }
     }
-    public class Ranged : GlobalItem
+
+    public class Magic : GlobalItem
+    {
+        public override void SetDefaults(Item Item)
+        {
+
+            if (Item.type == ItemID.BookofSkulls)
+            {
+                Item.damage = 50;
+
+            }
+            if (Item.type == ItemID.DemonScythe)
+            {
+                Item.damage = 43;
+
+            }
+        }
+    }
+public class Ranged : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {

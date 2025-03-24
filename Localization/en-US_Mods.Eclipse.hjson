@@ -43,6 +43,16 @@ Items: {
 		DisplayName: Basalt
 		Tooltip: ""
 	}
+
+	PanicShield: {
+		DisplayName: Panic Shield
+		Tooltip: Increases movement speed at max health and when taking damage
+	}
+
+	ChitinBlade: {
+		DisplayName: Chitin Blade
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -56,6 +66,7 @@ Projectiles: {
 	ZombiePortal.DisplayName: Zombie Portal
 	IncendiaryRoundsProj.DisplayName: Incendiary Rounds Proj
 	EagleBullet.DisplayName: Eagle Bullet
+	ChitinBladeHeld.DisplayName: Chitin Blade Held
 }
 
 UI: {
