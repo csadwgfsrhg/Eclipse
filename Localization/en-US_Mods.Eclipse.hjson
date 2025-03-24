@@ -43,6 +43,11 @@ Items: {
 		DisplayName: Basalt
 		Tooltip: ""
 	}
+
+	PanicShield: {
+		DisplayName: Panic Shield
+		Tooltip: Increases movement speed at max health and when taking damage
+	}
 }
 
 Projectiles: {

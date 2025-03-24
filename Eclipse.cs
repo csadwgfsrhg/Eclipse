@@ -14,13 +14,13 @@ public class Fgmod : Mod
     {
         if(120 <= self.manaRegenCount)
         {
-            self.ManaEffect(self.manaRegen + (int)(self.manaRegenBonus / 20f));
+            if (self.statMana < self.statManaMax2)
+                self.ManaEffect(self.manaRegen + (int)(self.manaRegenBonus / 20f));
             self.statMana += self.manaRegen + (int)(self.manaRegenBonus / 20f);
             self.manaRegenCount = 0;
         }
 
         self.manaRegenCount += 1;
-
-        Main.NewText(self.manaRegenBonus);
+        //Main.NewText(self.manaRegenBonus);
     }
 }
