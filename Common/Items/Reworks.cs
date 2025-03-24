@@ -125,7 +125,10 @@ namespace Eclipse.Common.Items
                 }
                 else
                 {
-                    return true;
+                    player.AddBuff(BuffID.ManaSickness, 700);
+                    player.ManaEffect(item.healMana);
+                    player.statMana += item.healMana;
+                    return false;
                 }
 
             }
@@ -134,7 +137,6 @@ namespace Eclipse.Common.Items
                 return true;
             }
         }
-
     }
     public class Swords : GlobalItem
     {
