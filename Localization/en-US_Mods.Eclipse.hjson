@@ -38,6 +38,11 @@ Items: {
 		DisplayName: Freedom Eagle
 		Tooltip: ""
 	}
+
+	Basalt: {
+		DisplayName: Basalt
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

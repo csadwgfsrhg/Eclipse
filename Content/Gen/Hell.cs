@@ -3,9 +3,10 @@ using Terraria.ModLoader;
 using Terraria.IO;
 using Terraria.WorldBuilding;
 using Terraria.ID;
+using Eclipse.Content.Tiles;
 
 
-namespace Fgmod.Gen
+namespace Eclipse.Content.Gen
 {
     internal class HellGen : GenPass
     {
@@ -15,20 +16,29 @@ namespace Fgmod.Gen
         {
             progress.Message = "Altering Hell";
 
+         
+
 
             for (int i = 0; i < Main.maxTilesX; i++)
             {
-                for (int j = Main.maxTilesY - 200; j < Main.maxTilesY; j++)
+                for (int j = Main.maxTilesY - 250; j < Main.maxTilesY; j++)
                 {
-         
-                    WorldGen.digTunnel(i, j, 0, 0, 1, 1, false);
-            
+                    if (j <= Main.maxTilesY - 200)
+                    {
+                        WorldGen.TileRunner(i, j, WorldGen.genRand.Next(4, 10), WorldGen.genRand.Next(9, 15), ModContent.TileType<Basalt>());
+                    }
+
+                    if (j >= Main.maxTilesY - 60)
+                    {
+                        WorldGen.TileRunner(i, j, WorldGen.genRand.Next(4, 10), WorldGen.genRand.Next(9, 15), TileID.Ash);
+                    }
+               
+
 
                 }
-            }
-
-            }
-        }
+             }
+          }
+       }
     }
 
 
