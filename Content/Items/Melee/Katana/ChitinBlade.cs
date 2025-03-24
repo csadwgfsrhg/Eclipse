@@ -31,7 +31,7 @@ public class ChitinBlade : ModItem
     public override void HoldItem(Player player) {
 
         player.GetModPlayer<EclipseModPlayer>().ChitinBladeHeld = true;
-        player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, -1f * player.direction);
+        player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, -.6f * player.direction);
         if (player.ownedProjectileCounts[Item.shoot]  < 1)
         {
             Main.NewText("you are holding sword");

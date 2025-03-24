@@ -44,17 +44,26 @@ public class ChitinBladeHeld : ModProjectile
         }
 
     
-        Projectile.position.X = player.position.X + 56;
         Projectile.position.Y = player.position.Y + 10;
+        Projectile.direction = player.direction;
         player.heldProj = Projectile.whoAmI;
     }
 
     public override bool PreDraw(ref Color lightColor)
     {
 
+        Player player = Main.player[Projectile.owner];
         SpriteEffects spriteEffects = SpriteEffects.None;
-        if (Projectile.spriteDirection == -1)
+        if (player.direction <= 0)
+        {
             spriteEffects = SpriteEffects.FlipHorizontally;
+            Projectile.position.X = player.position.X + 24;
+        }
+          else
+        {
+            Projectile.position.X = player.position.X + 64;
+        }
+       
 
         // Getting texture of projectile
         Texture2D texture = TextureAssets.Projectile[Type].Value;
