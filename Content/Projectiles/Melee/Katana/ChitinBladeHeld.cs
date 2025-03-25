@@ -109,12 +109,9 @@ public class ChitinBladeHeld : ModProjectile
             }
               
             Projectile.ai[0] += 1f;
-            if (++Projectile.frameCounter >= 6)
-            {
-                Projectile.frameCounter = 0;
-                if (++Projectile.frame >= Main.projFrames[Projectile.type])
-                    Projectile.frame = 0;
-            }
+         
+                    Projectile.frame =  1 + (int)(Projectile.ai[0] / 6);
+             
             if (Projectile.ai[0] >= 36)
             {
                 player.GetModPlayer<EclipseModPlayer>().attack = false;
