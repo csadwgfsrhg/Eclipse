@@ -58,11 +58,7 @@ public class ChitinBladeHeld : ModProjectile
 
 
         Player player = Main.player[Projectile.owner];
-        if ((!player.channel && ChargeTime < 1))
-            {
-
-            player.GetModPlayer<EclipseModPlayer>().attack = false;
-        }
+       
         if (player.channel && (player.GetModPlayer<EclipseModPlayer>().attack == false))
         {
             player.velocity.X /= 1.05f;
@@ -123,9 +119,9 @@ public class ChitinBladeHeld : ModProjectile
             {
                 player.GetModPlayer<EclipseModPlayer>().attack = false;
                 ChargeTime = 0;
-                Projectile.ai[0] = 0; 
                 Projectile.frame = 0;
                 Projectile.friendly = false;
+                Projectile.ai[0] = 0;
 
             }
 

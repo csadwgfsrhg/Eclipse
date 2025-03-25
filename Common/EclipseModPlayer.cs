@@ -40,9 +40,11 @@ namespace Eclipse.Common
         {
             ;
             if (ChitinBladeHeld == true &&  Player.ownedProjectileCounts[ModContent.ProjectileType<ChitinBladeHeld>()] < 1) {
+            
                 Projectile.NewProjectile(Player.GetSource_FromThis() , Player.Center, Vector2.Zero, ModContent.ProjectileType<ChitinBladeHeld>(), 15, 0f, Player.whoAmI, Player.whoAmI);
      
                     }
+         
             ChitinBladeHeld = false;
         }
 
