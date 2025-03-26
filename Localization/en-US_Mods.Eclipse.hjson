@@ -89,8 +89,6 @@ NPCs: {
 	GiantBoneSerpentHead.DisplayName: Giant Bone Serpent Head
 	HeartZombie.DisplayName: Heart Zombie
 
-
-
 	Guy: {
 		DisplayName: Guy
 
@@ -104,4 +102,5 @@ NPCs: {
 			LikeNPC_Princess: I like {NPCName}.
 			Princess_LovesNPC: I like {NPCName}.
 		}
+	}
 }
