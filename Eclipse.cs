@@ -14,9 +14,10 @@ public class Fgmod : Mod
     {
         if(120 <= self.manaRegenCount && self.statMana < self.statManaMax2)
         {
+            var poo = (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 60f);
             if (self.statMana < self.statManaMax2)
-                self.ManaEffect(self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 80f));
-            self.statMana += self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 80f);
+                self.ManaEffect(self.manaRegen + poo);
+            self.statMana += self.manaRegen + poo;
             self.manaRegenCount = 0;
         }
 
