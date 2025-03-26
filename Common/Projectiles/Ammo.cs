@@ -1,6 +1,6 @@
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using Eclipse.Content.Classes;
+
 using Eclipse.Content.Projectiles.Harvester.Crops;
 using Eclipse.Content.Projectiles.Melee.Boomerang;
 using Eclipse.Utilities.Extensions;

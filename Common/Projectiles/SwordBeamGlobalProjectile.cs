@@ -1,5 +1,5 @@
 using System.IO;
-using Eclipse.Content.Classes;
+
 using Eclipse.Content.Projectiles.Harvester.Crops;
 using Eclipse.Content.Projectiles.Melee.Boomerang;
 using Eclipse.Utilities.Extensions;

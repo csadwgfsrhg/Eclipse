@@ -1,6 +1,5 @@
 ﻿
 
-using Eclipse.Content.Classes;
 using Eclipse.Content.Projectiles.Harvester.Hunger;
 using Eclipse.Content.Projectiles.Melee.Boomerang;
 using Eclipse.Content.Projectiles.Ranged.Bullets;

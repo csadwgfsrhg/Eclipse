@@ -1,5 +1,5 @@
 using System.IO;
-using Eclipse.Content.Classes;
+
 using Eclipse.Utilities.Extensions;
 
 using Terraria.GameContent;

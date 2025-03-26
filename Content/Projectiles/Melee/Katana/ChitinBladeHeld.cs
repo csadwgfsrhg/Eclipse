@@ -1,6 +1,6 @@
 using System.IO;
 using Eclipse.Common;
-using Eclipse.Content.Classes;
+
 using Eclipse.Content.Items.Melee.Katana;
 using Eclipse.Utilities.Extensions;
 using Terraria;

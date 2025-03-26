@@ -1,5 +1,5 @@
 using System.IO;
-using Eclipse.Content.Classes;
+
 using Eclipse.Utilities.Extensions;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -14,7 +14,7 @@ public abstract class BaseFish : ModProjectile
 
    public int timeleft;
 
-    public int hungeramt;
+    public int manaamt;
     private static readonly VertexStrip Strip = new();
 
     private ref float Timer => ref Projectile.ai[0];
@@ -163,7 +163,7 @@ public abstract class BaseFish : ModProjectile
    
    
         if (Projectile.Hitbox.Intersects(owner.Hitbox)) {
-            owner.GetModPlayer<HarvestDamagePlayer>().Hunger += hungeramt;
+          owner.statMana += manaamt;
 
             Projectile.Kill();
             return;

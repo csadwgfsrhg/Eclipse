@@ -1,4 +1,4 @@
-﻿using Eclipse.Content.Classes;
+﻿
 using Eclipse.Content.Projectiles.Harvester.Crops;
 
 namespace Eclipse.Content.Items.Harvester.Trowels;
@@ -11,7 +11,7 @@ public class WoodenTrowel : ModItem
         Item.autoReuse = true;
         Item.noMelee = true;
 
-        Item.DamageType = ModContent.GetInstance<HarvestDamage>();
+
 
         Item.damage = 15;
         Item.knockBack = 6f;
@@ -30,21 +30,9 @@ public class WoodenTrowel : ModItem
     }
 
     public override void HoldItem(Player player) {
-        player.GetModPlayer<HarvestDamagePlayer>().Hunger += 1;
-        if (!player.TryGetModPlayer(out HarvestDamagePlayer modPlayer)) {
-            return;
-        }
+    
 
-        charge += modPlayer.Cropgrowth / 100;
-
-        /*
-        if (charge >= 150) {
-            var position = new Vector2(player.position.X + Main.rand.Next(-180, 180), player.position.Y + Main.rand.Next(-180, 180));
-            Projectile.NewProjectile(position, );
-
-            charge = 0;
-        }
-        */
+    
     }
 
     public override void AddRecipes() {

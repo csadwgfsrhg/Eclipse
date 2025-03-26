@@ -1,5 +1,5 @@
 using System.IO;
-using Eclipse.Content.Classes;
+
 using Eclipse.Utilities.Extensions;
 using Terraria;
 using Terraria.DataStructures;
@@ -36,7 +36,7 @@ public class StrawDollProj : ModProjectile
     private Player Owner => Main.player[Projectile.owner];
     public sealed override void OnSpawn(IEntitySource source)
     {
-        Owner.GetModPlayer<HarvestDamagePlayer>().Hunger -= 6;
+     
         Projectile.spriteDirection = Main.MouseWorld.X > Owner.MountedCenter.X ? 1 : -1;
     }
     public override void AI()

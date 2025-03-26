@@ -1,6 +1,5 @@
 ﻿
 
-using Eclipse.Content.Classes;
 using Eclipse.Content.Projectiles.Harvester.Hunger;
 using Eclipse.Utilities.Extensions;
 using Terraria.Audio;

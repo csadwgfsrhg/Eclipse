@@ -1,5 +1,5 @@
 using System.IO;
-using Eclipse.Content.Classes;
+
 using Eclipse.Utilities.Extensions;
 
 using Terraria.GameContent;
@@ -14,7 +14,7 @@ public class SpiritBass : BaseFish
         ProjectileID.Sets.TrailingMode[Type] = 3;
         ProjectileID.Sets.TrailCacheLength[Type] = 4;
         timeleft = 300;
-        hungeramt = 3;
+        manaamt = 3;
         Projectile.localNPCHitCooldown = 20;
         Projectile.usesLocalNPCImmunity = true;
         Projectile.penetrate = -1;

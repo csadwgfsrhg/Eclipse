@@ -1,7 +1,6 @@
 
 
 
-using Eclipse.Content.Classes;
 using Eclipse.Utilities.Extensions;
 using Terraria;
 
@@ -66,7 +65,7 @@ namespace Eclipse.Common.Items
                 )
             {
                 Item.noMelee = true;
-                Item.DamageType = ModContent.GetInstance<HarvestDamage>();
+                Item.DamageType = DamageClass.Summon;
 
             }
             if (Item.type == ItemID.WoodFishingPole)
