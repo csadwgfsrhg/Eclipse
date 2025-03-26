@@ -12,6 +12,7 @@ namespace Eclipse.Common
 {
     class EclipseModPlayer : ModPlayer
     {
+        public bool DerplingPheromones;
        public bool attack ;
         public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
         {
@@ -47,6 +48,9 @@ namespace Eclipse.Common
                     }
          
             ChitinBladeHeld = false;
+
+
+            DerplingPheromones = false;
         }
 
 
