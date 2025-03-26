@@ -104,3 +104,10 @@ NPCs: {
 		}
 	}
 }
+
+Buffs: {
+	DerplingPheromones: {
+		DisplayName: Derpling Pheromones
+		Description: Mods.Eclipse.Buffs.DerplingPheromones.Description
+	}
+}
