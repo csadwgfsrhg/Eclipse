@@ -53,6 +53,11 @@ Items: {
 		DisplayName: Chitin Blade
 		Tooltip: ""
 	}
+
+	VileTrousers: {
+		DisplayName: Vile Trousers
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -83,4 +88,20 @@ NPCs: {
 	GiantBoneSerpentBody3.DisplayName: Giant Bone Serpent Body3
 	GiantBoneSerpentHead.DisplayName: Giant Bone Serpent Head
 	HeartZombie.DisplayName: Heart Zombie
+
+
+
+	Guy: {
+		DisplayName: Guy
+
+		TownNPCMood: {
+			Content: I am content.
+			NoHome: I hate not having a home.
+			FarFromHome: I am too far from home.
+			LoveSpace: I love having so much space.
+			DislikeCrowded: I dislike how crowded I am.
+			HateCrowded: I hate how crowded I am.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
 }
