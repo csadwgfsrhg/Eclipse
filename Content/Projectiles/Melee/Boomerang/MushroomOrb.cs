@@ -133,8 +133,8 @@ public class MushroomOrb : ModProjectile
 
                 if (Projectile.ai[1] == 0)
                 {
-                player.HealEffect(3);
-                player.statLife += 3;
+                player.HealEffect(5);
+                player.statLife += 5;
 
 
                 }

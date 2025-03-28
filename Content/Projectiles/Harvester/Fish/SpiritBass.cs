@@ -14,7 +14,7 @@ public class SpiritBass : BaseFish
         ProjectileID.Sets.TrailingMode[Type] = 3;
         ProjectileID.Sets.TrailCacheLength[Type] = 4;
         timeleft = 300;
-        manaamt = 3;
+        manaamt = 10;
         Projectile.localNPCHitCooldown = 20;
         Projectile.usesLocalNPCImmunity = true;
         Projectile.penetrate = -1;

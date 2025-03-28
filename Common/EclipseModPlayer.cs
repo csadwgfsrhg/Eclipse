@@ -1,4 +1,4 @@
-﻿using Eclipse.Content.Items.Harvester.Trowels;
+﻿
 using Eclipse.Content.Projectiles.Melee.Katana;
 using System;
 using System.Collections.Generic;
@@ -12,8 +12,10 @@ namespace Eclipse.Common
 {
     class EclipseModPlayer : ModPlayer
     {
+        
         public bool DerplingPheromones;
        public bool attack ;
+        public int MinionDrain;
         public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
         {
             if (attack == true)
@@ -30,11 +32,18 @@ namespace Eclipse.Common
 
 
 
-
-        public bool ChitinBladeHeld = false; 
+  
+        public bool ChitinBladeHeld = false;
+        public override void PostUpdateBuffs()
+        {
+           
+            Player.maxTurrets = 200;
+            Player.maxMinions = 200;
+        }
         public override void Initialize()
         {
             base.Initialize();
+          
             Player.manaRegen = 1;
         }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)

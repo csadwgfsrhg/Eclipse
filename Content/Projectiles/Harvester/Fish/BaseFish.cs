@@ -164,6 +164,7 @@ public abstract class BaseFish : ModProjectile
    
         if (Projectile.Hitbox.Intersects(owner.Hitbox)) {
           owner.statMana += manaamt;
+            owner.ManaEffect(manaamt);
 
             Projectile.Kill();
             return;

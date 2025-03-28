@@ -3,12 +3,72 @@
 
 using Eclipse.Utilities.Extensions;
 using Terraria;
+using Terraria.DataStructures;
 
 
 
 namespace Eclipse.Common.Items
 {
-    public class Boomerangs : GlobalItem
+    public class MinionRework : GlobalProjectile
+
+    {
+
+        public override void AI(Projectile projectile)
+        {
+            Player player = Main.player[projectile.owner];
+
+            {
+                if (player.statMana < 1 && (projectile.type == ProjectileID.DD2LightningAuraT1 || projectile.type == ProjectileID.DD2LightningAuraT2 || projectile.type == ProjectileID.DD2LightningAuraT3 ||
+                      projectile.type == ProjectileID.DD2FlameBurstTowerT1 || projectile.type == ProjectileID.DD2FlameBurstTowerT2 || projectile.type == ProjectileID.DD2FlameBurstTowerT3 ||
+                      projectile.type == ProjectileID.DD2ExplosiveTrapT1 || projectile.type == ProjectileID.DD2ExplosiveTrapT2 || projectile.type == ProjectileID.DD2ExplosiveTrapT3 ||
+                       projectile.type == ProjectileID.DD2BallistraTowerT1 || projectile.type == ProjectileID.DD2BallistraTowerT2 || projectile.type == ProjectileID.DD2BallistraTowerT3 ||
+                       projectile.type == ProjectileID.BabySlime || projectile.type == ProjectileID.BabyHornet || projectile.type == ProjectileID.BabyImp ||
+                  projectile.type == ProjectileID.FlinxMinion || projectile.type == ProjectileID.BabyBird || projectile.type == ProjectileID.VampireFrog ||
+                   projectile.type == ProjectileID.HoundiusShootius || projectile.type == ProjectileID.AbigailMinion))
+                {
+
+
+                    projectile.Kill();
+
+
+                }
+                if (projectile.type == ProjectileID.DD2LightningAuraT1 || projectile.type == ProjectileID.DD2LightningAuraT2 || projectile.type == ProjectileID.DD2LightningAuraT3 ||
+                    projectile.type == ProjectileID.DD2FlameBurstTowerT1 || projectile.type == ProjectileID.DD2FlameBurstTowerT2 || projectile.type == ProjectileID.DD2FlameBurstTowerT3 ||
+                    projectile.type == ProjectileID.DD2ExplosiveTrapT1 || projectile.type == ProjectileID.DD2ExplosiveTrapT2 || projectile.type == ProjectileID.DD2ExplosiveTrapT3 ||
+                     projectile.type == ProjectileID.DD2BallistraTowerT1 || projectile.type == ProjectileID.DD2BallistraTowerT2 || projectile.type == ProjectileID.DD2BallistraTowerT3 ||
+                     projectile.type == ProjectileID.HoundiusShootius)
+                {
+          player.slotsMinions += 1;
+                }
+            }
+
+        }
+    }
+    public class ManaStar : GlobalItem
+    {
+        public override void OnSpawn(Item item, IEntitySource source)
+        {
+            if (item.type == ItemID.Star) {
+            item.active = false;
+            
+            }
+        }
+        public override bool OnPickup(Item item, Player player)
+        {
+
+            if (item.type == ItemID.Star)
+            {
+                player.statMana += 10;
+                player.ManaEffect(10);
+           
+            }
+         
+            return true;
+        }
+
+
+    }
+        public class Boomerangs : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {

@@ -58,6 +58,71 @@ Items: {
 		DisplayName: Vile Trousers
 		Tooltip: ""
 	}
+
+	TrapperPants: {
+		Tooltip: ""
+		DisplayName: Trapper Pants
+	}
+
+	TrapperHat: {
+		Tooltip: ""
+		DisplayName: Trapper Hat
+	}
+
+	TrapperCloak: {
+		Tooltip: ""
+		DisplayName: Trapper Cloak
+	}
+
+	MoltenAlloyLeggings: {
+		Tooltip: ""
+		DisplayName: Molten Alloy Leggings
+	}
+
+	MoltenAlloyHelmet: {
+		Tooltip: ""
+		DisplayName: Molten Alloy Helmet
+	}
+
+	MoltenAlloyChestplate: {
+		Tooltip: ""
+		DisplayName: Molten Alloy Chestplate
+	}
+
+	ChitinMask: {
+		Tooltip: ""
+		DisplayName: Chitin Mask
+	}
+
+	ChitinLeggings: {
+		Tooltip: ""
+		DisplayName: Chitin Leggings
+	}
+
+	ChitinChestpeice: {
+		Tooltip: ""
+		DisplayName: Chitin Chestpeice
+	}
+
+	ShadewoodScythe: {
+		Tooltip: ""
+		DisplayName: Shadewood Scythe
+	}
+
+	EbonwoodScythe: {
+		Tooltip: ""
+		DisplayName: Ebonwood Scythe
+	}
+
+	BoneScythe: {
+		Tooltip: ""
+		DisplayName: Bone Scythe
+	}
+
+	BloodCrawlerLeg: {
+		Tooltip: ""
+		DisplayName: Blood Crawler Leg
+	}
 }
 
 Projectiles: {
@@ -72,6 +137,11 @@ Projectiles: {
 	IncendiaryRoundsProj.DisplayName: Incendiary Rounds Proj
 	EagleBullet.DisplayName: Eagle Bullet
 	ChitinBladeHeld.DisplayName: Chitin Blade Held
+	SpiritSkull.DisplayName: Spirit Skull
+	ShadewoodScytheProj.DisplayName: Shadewood Scythe Proj
+	EbonwoodScytheProj.DisplayName: Ebonwood Scythe Proj
+	BoneScytheProjectile.DisplayName: Bone Scythe Projectile
+	BloodCrawlerLegProj.DisplayName: Blood Crawler Leg Proj
 }
 
 UI: {

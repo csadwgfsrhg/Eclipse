@@ -96,7 +96,7 @@ namespace Eclipse.Content.NPCs.Guy
                 case Walking:
 
                     if (NPC.ai[1] % 6 == 0)
-                        NPC.frameCounter = (NPC.frameCounter + 1) % 5;
+                        NPC.frameCounter = (NPC.frameCounter + 1) % 6;
                     break;
 
                 case Attacking:
