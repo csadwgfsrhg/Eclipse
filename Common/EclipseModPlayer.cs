@@ -1,4 +1,5 @@
 ﻿
+using Eclipse.Content.Projectiles.Magic;
 using Eclipse.Content.Projectiles.Melee.Katana;
 using System;
 using System.Collections.Generic;
@@ -34,17 +35,20 @@ namespace Eclipse.Common
 
   
         public bool ChitinBladeHeld = false;
+        public bool LifeCrystalStaffHeld = false;
         public override void PostUpdateBuffs()
         {
            
-            Player.maxTurrets = 200;
-            Player.maxMinions = 200;
+            Player.maxTurrets = (int) Player.slotsMinions + 1;
+            Player.maxMinions = (int) Player.slotsMinions + 1;
+            Player.manaRegen = 2;
         }
         public override void Initialize()
         {
             base.Initialize();
-          
-            Player.manaRegen = 1;
+     
+
+
         }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
@@ -55,11 +59,18 @@ namespace Eclipse.Common
                 Projectile.NewProjectile(Player.GetSource_FromThis() , Player.Center, Vector2.Zero, ModContent.ProjectileType<ChitinBladeHeld>(), 15, 0f, Player.whoAmI, Player.whoAmI);
      
                     }
-         
-            ChitinBladeHeld = false;
+            if (LifeCrystalStaffHeld == true && Player.ownedProjectileCounts[ModContent.ProjectileType<LifeCrystalStaffHeld>()] < 1)
+            {
 
 
-            DerplingPheromones = false;
+                Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ModContent.ProjectileType<LifeCrystalStaffHeld>(), 15, 0f, Player.whoAmI, Player.whoAmI);
+
+            }
+
+          
+
+           LifeCrystalStaffHeld = false;
+        DerplingPheromones = false;
         }
 
 

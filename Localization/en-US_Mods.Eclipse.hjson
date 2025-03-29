@@ -123,6 +123,11 @@ Items: {
 		Tooltip: ""
 		DisplayName: Blood Crawler Leg
 	}
+
+	LifeCrystalStaff: {
+		DisplayName: Life Crystal Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -142,6 +147,9 @@ Projectiles: {
 	EbonwoodScytheProj.DisplayName: Ebonwood Scythe Proj
 	BoneScytheProjectile.DisplayName: Bone Scythe Projectile
 	BloodCrawlerLegProj.DisplayName: Blood Crawler Leg Proj
+	HeartBig.DisplayName: Heart Big
+	HeartShard.DisplayName: Heart Shard
+	LifeCrystalStaffHeld.DisplayName: Life Crystal Staff Held
 }
 
 UI: {

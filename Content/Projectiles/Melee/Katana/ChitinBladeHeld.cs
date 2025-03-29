@@ -4,6 +4,7 @@ using Eclipse.Common;
 using Eclipse.Content.Items.Melee.Katana;
 using Eclipse.Utilities.Extensions;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics;
@@ -49,15 +50,15 @@ public class ChitinBladeHeld : ModProjectile
     public override void AI()
     {
    
-    Projectile.damage = (int)(15 + (15 * ChargeTime / 60));
+    Projectile.damage = (int)(22 * ((60+ ChargeTime) / 60));
    
 
 
 
 
         Player player = Main.player[Projectile.owner];
-        if (player.GetModPlayer<EclipseModPlayer>().ChitinBladeHeld)
-        {
+        player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, -.6f * player.direction);
+       
 
 
             if (player.channel && (player.GetModPlayer<EclipseModPlayer>().attack == false))
@@ -100,7 +101,10 @@ public class ChitinBladeHeld : ModProjectile
 
                 if (Projectile.ai[0] == 0)
                 {
-                    player.velocity = Vector2.Normalize(Main.MouseWorld - player.Center) * (ChargeTime / 6);
+
+                SoundEngine.PlaySound(new SoundStyle("Eclipse/Sounds/SwordSlash") with { PitchVariance = 0.4f, Volume = 0.4f }, Projectile.Center);
+
+                player.velocity = Vector2.Normalize(Main.MouseWorld - player.Center) * (ChargeTime / 6);
                 }
 
                 Projectile.ai[0] += 1f;
@@ -110,7 +114,8 @@ public class ChitinBladeHeld : ModProjectile
                 if (Projectile.ai[0] >= 36)
                 {
                     player.GetModPlayer<EclipseModPlayer>().attack = false;
-                    ChargeTime = 0;
+                player.GetModPlayer<EclipseModPlayer>().ChitinBladeHeld = false;
+                ChargeTime = 0;
                     Projectile.frame = 0;
                     Projectile.friendly = false;
                     Projectile.ai[0] = 0;
@@ -121,19 +126,15 @@ public class ChitinBladeHeld : ModProjectile
             }
 
         }
-        else
+       
                  
 
-        {
-            ChargeTime = 0;
-            Projectile.frame = 0;
-            Projectile.friendly = false;
-            Projectile.ai[0] = 0;
-            Projectile.Kill();
+        
+     
 
-        }
+        
 
-    }
+    
     public override bool PreDraw(ref Color lightColor)
     {
         Player player = Main.player[Projectile.owner];

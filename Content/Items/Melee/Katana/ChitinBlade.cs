@@ -12,26 +12,34 @@ public class ChitinBlade : ModItem
     public override void SetDefaults() {
 
         Item.DamageType = DamageClass.Melee;
-        Item.damage = 15;
+        Item.damage = 22;
         Item.knockBack = 6f;
         Item.width = 40;
         Item.height = 40;
         Item.channel = true;
+        Item.rare = 2;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useTime = 1;
         Item.useAnimation = 1;
         Item.noMelee = true;
         Item.noUseGraphic = true;
         Item.useTurn = true;
+        Item.autoReuse = true;
     }
 
-   
-    public override void HoldItem(Player player) {
+    public override bool? UseItem(Player player)
+    {
+        if (player.GetModPlayer<EclipseModPlayer>().ChitinBladeHeld == true)
+        {
 
+            return false;
+        }
+        else
         player.GetModPlayer<EclipseModPlayer>().ChitinBladeHeld = true;
-        player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, -.6f * player.direction);
-       
+
+        return true;
     }
+   
 
    
 }

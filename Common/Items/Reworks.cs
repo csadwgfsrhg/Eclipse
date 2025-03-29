@@ -9,6 +9,24 @@ using Terraria.DataStructures;
 
 namespace Eclipse.Common.Items
 {
+    public class MinionEquipment : GlobalItem
+    {
+        public override void SetDefaults(Item item)
+        {
+          
+
+           if (item.type == ItemID.SlimeStaff || item.type == ItemID.FlinxStaff || item.type == ItemID.BabyBirdStaff  || item.type == ItemID.AbigailsFlower)   
+            {
+                item.mana = 20;
+            }
+            if ( item.type == ItemID.HornetStaff || item.type == ItemID.ImpStaff || item.type == ItemID.VampireFrogStaff)
+            {
+                item.mana = 30;
+            }
+        }
+     
+
+    }
     public class MinionRework : GlobalProjectile
 
     {
@@ -28,6 +46,8 @@ namespace Eclipse.Common.Items
                 {
 
 
+                    player.maxTurrets = 0;
+                    player.maxMinions = 0;
                     projectile.Kill();
 
 
