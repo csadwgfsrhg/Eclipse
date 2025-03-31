@@ -74,14 +74,14 @@ public class HeartBig : ModProjectile
         }
         else
         {
-            Projectile.width = 20+(int)(ChargeTime /4);
-            Projectile.height = 20+(int)(ChargeTime / 4);
-            Projectile.scale = .5f + (ChargeTime / 120);
+          
             Projectile.position = player.Center;
             Projectile.position.X -= 20;
             Projectile.position.Y -= 10;
             Projectile.velocity = Vector2.Normalize(Main.MouseWorld - player.Center) * 100;
-   
+            Projectile.scale = .5f + (ChargeTime / 120);
+            Projectile.Size = new Vector2(32, 32) * Projectile.scale;
+
             Projectile.rotation = ((float)Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X)) + 500 / (10+ ChargeTime);
         }
 

@@ -99,7 +99,7 @@ public class ChitinBladeHeld : ModProjectile
                     player.direction = 1;
                 }
 
-                if (Projectile.ai[0] == 0)
+                if (Projectile.ai[0] <= 5)
                 {
 
                 SoundEngine.PlaySound(new SoundStyle("Eclipse/Sounds/SwordSlash") with { PitchVariance = 0.4f, Volume = 0.4f }, Projectile.Center);

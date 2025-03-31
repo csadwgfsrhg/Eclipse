@@ -4,6 +4,7 @@ using Eclipse.Common;
 using Eclipse.Content.Items.Melee.Katana;
 using Eclipse.Utilities.Extensions;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics;
@@ -56,10 +57,10 @@ public class HeartShard : ModProjectile
 
         if (player.Hitbox.Intersects(Projectile.Hitbox))
         {
-            player.statLife += 4;
-            player.HealEffect(4);
+            player.statLife += 3;
+            player.HealEffect(3);
             Projectile.Kill();
-
+            SoundEngine.PlaySound(SoundID.Item4 with { Pitch = .5f, PitchVariance = .5f, Volume = .4f },Projectile.Center);
         }
 
     }

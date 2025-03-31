@@ -128,6 +128,11 @@ Items: {
 		DisplayName: Life Crystal Staff
 		Tooltip: ""
 	}
+
+	StarFallStaff: {
+		DisplayName: Star Fall Staff
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -150,6 +155,7 @@ Projectiles: {
 	HeartBig.DisplayName: Heart Big
 	HeartShard.DisplayName: Heart Shard
 	LifeCrystalStaffHeld.DisplayName: Life Crystal Staff Held
+	ManaStar.DisplayName: Mana Star
 }
 
 UI: {

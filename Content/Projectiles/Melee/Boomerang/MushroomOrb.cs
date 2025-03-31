@@ -128,8 +128,8 @@ public class MushroomOrb : ModProjectile
             {
 
 
-
-                Projectile.Kill();
+            SoundEngine.PlaySound(SoundID.Item4 with { Pitch = .5f, PitchVariance = .5f, Volume = .4f }, Projectile.Center);
+            Projectile.Kill();
 
                 if (Projectile.ai[1] == 0)
                 {
