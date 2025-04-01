@@ -11,7 +11,8 @@ namespace Eclipse.Common.Projectiles
 {
     public class Trajectory : ModProjectile
     {
-        int fequency = 0;
+       
+        int fequency = -5;
         public override void SetDefaults()
         {
             Projectile.width = 2;
@@ -22,21 +23,19 @@ namespace Eclipse.Common.Projectiles
             Projectile.tileCollide = true;
             Projectile.aiStyle = 1;
             Projectile.extraUpdates = 120;
+            Projectile.ignoreWater = true;
         }
 
-        public override void OnSpawn(IEntitySource source)
-        {
-           fequency = Main.rand.Next(5);
-        }
+      
         public override void AI()
         {
-
+        
             Projectile.aiStyle = 1;
-            fequency += Main.rand.Next(5); 
+            fequency += 1; 
 
-            if (fequency >= 15)
+            if (fequency >= 5)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType <BeamGlow>());
+                Dust.NewDust(Projectile.position, 0, 0, ModContent.DustType<BeamGlow>(), 0, 0, 255- Projectile.timeLeft * 2, newColor:default, 1.5f) ;
                 fequency = 0;
 
 

@@ -10,16 +10,16 @@ namespace Eclipse.Dusts
 	{
         public override void OnSpawn(Dust dust) {
 			dust.noGravity = true;
-			dust.scale *= .5f; 
+		//	dust.scale *= .5f; 
 			dust.noLight = true;
             dust.velocity *= 1f;
 
 
 		}
 			public override bool Update(Dust dust) { 
-			dust.scale *= 0.83f;
+			dust.scale *= 0.43f;
 
-            Lighting.AddLight(dust.position, .3f, .3f, .0f);
+            //Lighting.AddLight(dust.position, .3f, .3f, .0f);
 
             if (dust.scale < 0.2f) {
 				dust.active = false;
@@ -29,11 +29,11 @@ namespace Eclipse.Dusts
 		}
 
      
-        public override Color? GetAlpha(Dust dust, Color lightColor)
-        {
+       // public override Color? GetAlpha(Dust dust, Color lightColor)
+      //  {
           
-            return new Color(1f, 1f, 1f, 1f);
-        }
+          //  return new Color(1f, 1f, 1f, 1f);
+      //  }
 
         }
 }

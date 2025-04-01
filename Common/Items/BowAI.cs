@@ -63,6 +63,7 @@ public abstract class BowHeld : ModProjectile
             else
             {
               
+
                 SoundEngine.PlaySound(SoundID.Item5 with { Pitch = ( -1/4 + (Projectile.ai[0] / 120)), Volume = (Projectile.ai[0] / 30) });
               Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 3 + (Projectile.velocity * (Projectile.ai[0] / 180)) ) , ProjectileID.WoodenArrowFriendly, (int)(Projectile.damage /2 + (Projectile.damage  * (Projectile.ai[0] / 45))), 0f, player.whoAmI, player.whoAmI);
                 Projectile.Kill();
