@@ -30,7 +30,7 @@ public abstract class BowHeld : ModProjectile
 
         Projectile.timeLeft = 60;
 
-
+        
         Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter);
         if (Main.myPlayer == Projectile.owner)
         {
@@ -65,6 +65,7 @@ public abstract class BowHeld : ModProjectile
               
 
                 SoundEngine.PlaySound(SoundID.Item5 with { Pitch = ( -1/4 + (Projectile.ai[0] / 120)), Volume = (Projectile.ai[0] / 30) });
+                //ammo conversion?
               Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 3 + (Projectile.velocity * (Projectile.ai[0] / 180)) ) , ProjectileID.WoodenArrowFriendly, (int)(Projectile.damage /2 + (Projectile.damage  * (Projectile.ai[0] / 45))), 0f, player.whoAmI, player.whoAmI);
                 Projectile.Kill();
 
@@ -81,10 +82,10 @@ public abstract class BowHeld : ModProjectile
         }
 
         Projectile.spriteDirection = Projectile.direction;
-        player.ChangeDir(Projectile.direction); // Change the player's direction based on the projectile's own
-        player.heldProj = Projectile.whoAmI; // We tell the player that the drill is the held projectile, so it will draw in their hand
-        player.SetDummyItemTime(2); // Make sure the player's item time does not change while the projectile is out
-        Projectile.Center = playerCenter; // Centers the projectile on the player. Projectile.velocity will be added to this in later Terraria code causing the projectile to be held away from the player at a set distance.
+        player.ChangeDir(Projectile.direction); 
+        player.heldProj = Projectile.whoAmI; 
+        player.SetDummyItemTime(2); 
+        Projectile.Center = playerCenter; 
         Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
         player.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
 
@@ -92,4 +93,48 @@ public abstract class BowHeld : ModProjectile
 
     }
 
+}
+internal class TestBow : GlobalItem
+{
+
+    public override void SetDefaults(Item Item)
+    {
+        if (Item.type == ItemID.WoodenBow)
+        {
+            //max charge
+            //arrow amnt
+            //minimum charge
+            //auto release bool
+            //Item.useAmmo = AmmoID.Arrow;
+            Item.DamageType = DamageClass.Ranged;
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.knockBack = 6;
+            Item.shootSpeed = 10f;
+            Item.UseSound = SoundID.Item10;
+            Item.damage = 6;
+            Item.noMelee = true;
+            Item.channel = true;
+            Item.shoot = ModContent.ProjectileType<TestBowHeld>();
+         
+
+        }
+    }
+
+   
+
+
+
+}
+
+internal class TestBowHeld : BowHeld
+{
+    
+    public override string Texture => "Eclipse/Content/Projectiles/Magic/LifeCrystalStaffHeld";
+    public override void SetStaticDefaults()
+    {
+
+
+
+
+    }
 }

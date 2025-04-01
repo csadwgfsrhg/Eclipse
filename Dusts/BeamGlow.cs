@@ -17,11 +17,11 @@ namespace Eclipse.Dusts
 
 		}
 			public override bool Update(Dust dust) { 
-			dust.scale *= 0.43f;
+			dust.scale *= 0.5f;
 
             //Lighting.AddLight(dust.position, .3f, .3f, .0f);
 
-            if (dust.scale < 0.2f) {
+            if (dust.scale < 0.5f) {
 				dust.active = false;
 			}
 

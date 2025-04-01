@@ -35,7 +35,7 @@ namespace Eclipse.Common.Projectiles
 
             if (fequency >= 5)
             {
-                Dust.NewDust(Projectile.position, 0, 0, ModContent.DustType<BeamGlow>(), 0, 0, 255- Projectile.timeLeft * 2, newColor:default, 1.5f) ;
+                Dust.NewDust(Projectile.position, 0, 0, ModContent.DustType<BeamGlow>(), 0, 0, 255- Projectile.timeLeft * 2, newColor:(default), 1.5f) ;
                 fequency = 0;
 
 

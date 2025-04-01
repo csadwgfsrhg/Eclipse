@@ -1,4 +1,5 @@
 ﻿
+using Eclipse.Common.Items;
 using Eclipse.Content.Projectiles.Magic;
 using Eclipse.Content.Projectiles.Melee.Katana;
 using System;
@@ -33,7 +34,7 @@ namespace Eclipse.Common
 
 
 
-  
+     
         public bool ChitinBladeHeld = false;
         public bool LifeCrystalStaffHeld = false;
         public override void PostUpdateBuffs()
@@ -52,7 +53,7 @@ namespace Eclipse.Common
         }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            ;
+         
             if (ChitinBladeHeld == true &&  Player.ownedProjectileCounts[ModContent.ProjectileType<ChitinBladeHeld>()] < 1) {
 
             
