@@ -106,6 +106,7 @@ internal class TestBow : GlobalItem
             //minimum charge
             //auto release bool
             //Item.useAmmo = AmmoID.Arrow;
+            Item.useAmmo = 0;
             Item.DamageType = DamageClass.Ranged;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
