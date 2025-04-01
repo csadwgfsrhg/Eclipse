@@ -40,8 +40,7 @@ namespace Eclipse.Common
         public override void PostUpdateBuffs()
         {
            
-            Player.maxTurrets = (int) Player.slotsMinions + 1;
-            Player.maxMinions = (int) Player.slotsMinions + 1;
+          
             Player.manaRegen = 2;
         }
         public override void Initialize()

@@ -21,7 +21,7 @@ public class Fgmod : Mod
         {
             self.statMana = 0;
         }
-        var poo = self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 75f) - (int)((self.slotsMinions) * 2);
+        var poo = (self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 75f)) / ((int)(1+ (self.slotsMinions / self.maxMinions) *3 ));
         if (120 <= self.manaRegenCount && (self.statMana < self.statManaMax2 || poo < 0))
         {
             self.ManaEffect(poo);
