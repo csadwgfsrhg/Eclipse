@@ -156,6 +156,8 @@ Projectiles: {
 	HeartShard.DisplayName: Heart Shard
 	LifeCrystalStaffHeld.DisplayName: Life Crystal Staff Held
 	ManaStar.DisplayName: Mana Star
+	TestBowHeld.DisplayName: Test Bow Held
+	Trajectory.DisplayName: Trajectory
 }
 
 UI: {

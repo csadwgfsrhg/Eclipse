@@ -252,10 +252,7 @@ public class Ranged : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {
-            if (Item.type == ItemID.WoodenBow)
-            {
-                Item.damage = 6;
-            }
+         
             if (Item.type == ItemID.PalmWoodBow)
             {
                 Item.damage = 8;

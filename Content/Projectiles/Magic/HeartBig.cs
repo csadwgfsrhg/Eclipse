@@ -76,8 +76,8 @@ public class HeartBig : ModProjectile
         {
           
             Projectile.position = player.Center;
-            Projectile.position.X -= 20;
-            Projectile.position.Y -= 10;
+            Projectile.position.X -= 25;
+            Projectile.position.Y -= 20;
             Projectile.velocity = Vector2.Normalize(Main.MouseWorld - player.Center) * 100;
             Projectile.scale = .5f + (ChargeTime / 120);
             Projectile.Size = new Vector2(32, 32) * Projectile.scale;
@@ -96,9 +96,10 @@ public class HeartBig : ModProjectile
     private bool Charge(Player owner)
     {
         // Like other whips, this whip updates twice per frame (Projectile.extraUpdates = 1), so 120 is equal to 1 second.
-        if (stopped == false && (!owner.channel || ChargeTime >= 120 || owner.statMana < 1))
+        if (stopped == false && (!owner.channel || owner.statMana < 1))
         {
-            Projectile.velocity = Vector2.Normalize(Main.MouseWorld - owner.Center) * (10 + (ChargeTime / 10)) ;
+        
+                Projectile.velocity = Vector2.Normalize(Main.MouseWorld - owner.Center) * (10 + (ChargeTime / 10)) ;
             Projectile.damage = (int)(Projectile.damage * ((25 + ChargeTime) / 25));
             stopped = true;
             Projectile.friendly = true;
@@ -106,15 +107,25 @@ public class HeartBig : ModProjectile
         }
        if (stopped == false && owner.channel)
         {
-            ChargeTime++;
-            Projectile.ai[0] += 1;
-            if  (Projectile.ai[0] >= 5)
+            if (ChargeTime >= 120)
             {
-                SoundEngine.PlaySound(SoundID.Item43 with { Pitch = 1 - (ChargeTime / 90), Volume = (ChargeTime / 30) },
-                Projectile.Center);
-                owner.statMana -= 3;
-                Projectile.ai[0] = 0;
+              
+
             }
+            else
+            {
+                ChargeTime++;
+                Projectile.ai[0] += 1;
+                if (Projectile.ai[0] >= 5)
+                {
+                    SoundEngine.PlaySound(SoundID.Item43 with { Pitch = 1 - (ChargeTime / 90), Volume = (ChargeTime / 30) },
+                    Projectile.Center);
+                    owner.statMana -= 3;
+                    Projectile.ai[0] = 0;
+                }
+            }
+           
+          
          
         }
             
