@@ -5,6 +5,7 @@ using Eclipse.Common.Projectiles;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using System.Collections.Generic;
 
 namespace Eclipse.Common.Items;
 
@@ -36,19 +37,19 @@ public abstract class BowHeld : ModProjectile
         {
 
             if (player.channel ||  Projectile.ai[0] <= 20)
-                {
-                Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 3 + (Projectile.velocity * (Projectile.ai[0] / 180))),ModContent.ProjectileType<Trajectory>(), 0, 0f, player.whoAmI, player.whoAmI);
+            {
+                Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 2 + (Projectile.velocity * (Projectile.ai[0] / 180))),ModContent.ProjectileType<Trajectory>(), 0, 0f, player.whoAmI, ai2: Projectile.ai[2]);
             
                 if (Projectile.ai[0] < 80)
                 {
                     Projectile.ai[0] += 1;
                 }
                
-                     if (Projectile.ai[0] == 79)
+                if (Projectile.ai[0] == 79)
                 {
                     SoundEngine.PlaySound(SoundID.Item4);
                 }
-                    float holdoutDistance = player.HeldItem.shootSpeed * Projectile.scale;
+                float holdoutDistance = player.HeldItem.shootSpeed * Projectile.scale;
 
                 Vector2 holdoutOffset = holdoutDistance * Vector2.Normalize(Main.MouseWorld - playerCenter);
                 if (holdoutOffset.X != Projectile.velocity.X || holdoutOffset.Y != Projectile.velocity.Y)
@@ -66,7 +67,7 @@ public abstract class BowHeld : ModProjectile
 
                 SoundEngine.PlaySound(SoundID.Item5 with { Pitch = ( -1/4 + (Projectile.ai[0] / 120)), Volume = (Projectile.ai[0] / 30) });
                 //ammo conversion?
-              Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 3 + (Projectile.velocity * (Projectile.ai[0] / 180)) ) , ProjectileID.WoodenArrowFriendly, (int)(Projectile.damage /2 + (Projectile.damage  * (Projectile.ai[0] / 45))), 0f, player.whoAmI, player.whoAmI);
+                Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 2 + (Projectile.velocity * (Projectile.ai[0] / 180)) ) , (int)Projectile.ai[2], (int)(Projectile.damage /2 + (Projectile.damage  * (Projectile.ai[0] / 45))), 0f, player.whoAmI, player.whoAmI);
                 Projectile.Kill();
 
             }
@@ -96,46 +97,81 @@ public abstract class BowHeld : ModProjectile
 }
 internal class TestBow : GlobalItem
 {
-
+    public static List<int> BowsToOverride = new List<int>()
+        {
+                ItemID.DD2BetsyBow,
+                ItemID.AshWoodBow,
+                ItemID.AshWoodBathtub,
+                ItemID.BloodRainBow,
+                ItemID.BorealWoodBow,
+                ItemID.CopperBow,
+                ItemID.DemonBow,
+                ItemID.EbonwoodBow,
+                ItemID.FairyQueenRangedItem,
+                ItemID.GoldBow,
+                ItemID.HellwingBow,
+                ItemID.IceBow,
+                ItemID.IronBow,
+                ItemID.Marrow,
+                ItemID.MoltenFury,
+                ItemID.PalmWoodBow,
+                ItemID.PearlwoodBow,
+                ItemID.Phantasm,
+                ItemID.DD2PhoenixBow,
+                ItemID.PlatinumBow,
+                ItemID.PulseBow,
+                ItemID.RichMahoganyBow,
+                ItemID.ShadowFlameBow,
+                ItemID.SilverBow,
+                ItemID.TendonBow,
+                ItemID.BeesKnees,
+                ItemID.Tsunami,
+                ItemID.TungstenBow,
+                ItemID.WoodenBow,
+        };
     public override void SetDefaults(Item Item)
     {
-        if (Item.type == ItemID.WoodenBow)
+        
+
+        if (BowsToOverride.Contains(Item.type))
         {
             //max charge
             //arrow amnt
             //minimum charge
             //auto release bool
             //Item.useAmmo = AmmoID.Arrow;
-            Item.useAmmo = 0;
-            Item.DamageType = DamageClass.Ranged;
-            Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 6;
-            Item.shootSpeed = 10f;
-            Item.UseSound = SoundID.Item10;
-            Item.damage = 6;
+            //Item.useAmmo = AmmoID.Arrow;
+            //Item.DamageType = DamageClass.Ranged;
+            //Item.useStyle = ItemUseStyleID.Shoot;
+            //Item.knockBack = 6;
+            //Item.shootSpeed = 10f;
+            //Item.damage = 6;
+            Item.UseSound = SoundID.Item10; //todo custom sound stylez
             Item.noMelee = true;
             Item.channel = true;
-            Item.shoot = ModContent.ProjectileType<TestBowHeld>();
-         
-
         }
     }
+    public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
+        if (BowsToOverride.Contains(item.type))
+        {
+            Projectile.NewProjectile(source, player.Center, new Vector2(MathF.Pow(velocity.X, 8.2f), MathF.Pow(velocity.Y, 8.2f)), ModContent.ProjectileType<TestBowHeld>(), damage, knockback, player.whoAmI, ai2: type);
+            return false;
+        }
+        return true;
+    }
 
-   
+
 
 
 
 }
-
 internal class TestBowHeld : BowHeld
 {
     
     public override string Texture => "Eclipse/Content/Projectiles/Magic/LifeCrystalStaffHeld";
     public override void SetStaticDefaults()
     {
-
-
-
 
     }
 }

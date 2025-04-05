@@ -29,16 +29,18 @@ namespace Eclipse.Common.Projectiles
       
         public override void AI()
         {
-        
-            Projectile.aiStyle = 1;
+            /*var aaa = new Projectile();
+            aaa.SetDefaults((int)Projectile.ai[2]);
+            Projectile.aiStyle = aaa.aiStyle;*/
+            if ((int)Projectile.ai[2] == ProjectileID.JestersArrow)
+                Projectile.aiStyle = -1;
+
             fequency += 1; 
 
             if (fequency >= 5)
             {
                 Dust.NewDust(Projectile.position, 0, 0, ModContent.DustType<BeamGlow>(), 0, 0, 255- Projectile.timeLeft * 2, newColor:(default), 1.5f) ;
                 fequency = 0;
-
-
             }
 
         }

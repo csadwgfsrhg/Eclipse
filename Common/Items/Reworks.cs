@@ -52,7 +52,7 @@ namespace Eclipse.Common.Items
 
 
     }
-        public class Boomerangs : GlobalItem
+    public class Boomerangs : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {
@@ -96,7 +96,7 @@ namespace Eclipse.Common.Items
         }         
 
     }
-        public class FishingRods : GlobalItem
+    public class FishingRods : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {
@@ -212,7 +212,7 @@ namespace Eclipse.Common.Items
             }
         }
     }
-public class Ranged : GlobalItem
+    public class Ranged : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {

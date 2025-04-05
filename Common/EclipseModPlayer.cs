@@ -34,7 +34,8 @@ namespace Eclipse.Common
         }
 
 
-        public bool ChitinBladeHeld = false; 
+        public bool ChitinBladeHeld = false;
+        public bool LifeCrystalStaffHeld = false;
         public override void Initialize()
         {
             base.Initialize();
@@ -61,8 +62,8 @@ namespace Eclipse.Common
 
           
 
-           LifeCrystalStaffHeld = false;
-        DerplingPheromones = false;
+            LifeCrystalStaffHeld = false;
+            DerplingPheromones = false;
         }
 
 
