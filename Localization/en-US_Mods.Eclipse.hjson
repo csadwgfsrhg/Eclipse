@@ -133,6 +133,11 @@ Items: {
 		DisplayName: Star Fall Staff
 		Tooltip: ""
 	}
+
+	ObsidianScythe: {
+		DisplayName: Obsidian Scythe
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -158,6 +163,7 @@ Projectiles: {
 	ManaStar.DisplayName: Mana Star
 	TestBowHeld.DisplayName: Test Bow Held
 	Trajectory.DisplayName: Trajectory
+	ObsidianScytheProjectile.DisplayName: Obsidian Scythe Projectile
 }
 
 UI: {
