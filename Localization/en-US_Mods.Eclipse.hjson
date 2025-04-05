@@ -58,6 +58,11 @@ Items: {
 		DisplayName: Vile Trousers
 		Tooltip: ""
 	}
+
+	Nadir: {
+		DisplayName: Nadir
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -72,6 +77,8 @@ Projectiles: {
 	IncendiaryRoundsProj.DisplayName: Incendiary Rounds Proj
 	EagleBullet.DisplayName: Eagle Bullet
 	ChitinBladeHeld.DisplayName: Chitin Blade Held
+	NadirStar.DisplayName: Nadir Star
+	NadirExplosion.DisplayName: Nadir Explosion
 }
 
 UI: {

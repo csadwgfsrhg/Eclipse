@@ -1,5 +1,6 @@
 ﻿using Eclipse.Content.Items.Harvester.Trowels;
 using Eclipse.Content.Projectiles.Melee.Katana;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using Terraria.DataStructures;
 
 namespace Eclipse.Common
 {
-    class EclipseModPlayer : ModPlayer
+    public class EclipseModPlayer : ModPlayer
     {
         public bool DerplingPheromones;
        public bool attack ;
@@ -27,8 +28,6 @@ namespace Eclipse.Common
                 return false;
             }
         }
-
-
 
 
         public bool ChitinBladeHeld = false; 

@@ -63,7 +63,7 @@ namespace Eclipse.Content.Items.Ranged.Guns
                 Item.useAmmo = AmmoID.Bullet;
                 canshoot -= 1;
                 Item.shoot = ProjectileID.PurificationPowder;
-                Item.UseSound = new SoundStyle($"{nameof(Eclipse)}/Sounds/Gunshot1")
+                Item.UseSound = new SoundStyle($"{(nameof(Eclipse))}/Sounds/Gunshot1")
                 {
                     Volume = 0.9f,
                     PitchVariance = 0.2f,
@@ -78,7 +78,7 @@ namespace Eclipse.Content.Items.Ranged.Guns
                 Item.shoot = 0;
                 Item.useTime = 100;
                 Item.useAnimation = 100;
-                Item.UseSound = new SoundStyle($"{nameof(Eclipse)}/Sounds/Reload1")
+                Item.UseSound = new SoundStyle($"{(nameof(Eclipse))}/Sounds/Reload1")
                 {
                     Volume = 0.9f,
                     PitchVariance = 0.2f,

@@ -1,13 +1,26 @@
-using System.Diagnostics;
+using ReLogic.Content;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 
+
 namespace Eclipse;
-public class Fgmod : Mod
+public class Eclipse : Mod
 {
+    public static Filter SpaceWarp => Filters.Scene["Eclipse:SpaceWarp"];
+    public static Texture2D SpiralNoise;
     public override void Load()
     {
-        On_Player.UpdateManaRegen += On_Player_UpdateManaRegen;
+        if (Main.netMode != NetmodeID.Server)
+        {
+            On_Player.UpdateManaRegen += On_Player_UpdateManaRegen;
+
+            /*Effect sw = ModContent.Request<Effect>("Common/Effects/SpaceWarp").Value;
+            GameShaders.Misc["EclipseMod:SpaceWarp"] = new MiscShaderData(specialShader, "PassName");*/
+            var SpaceWarp = Assets.Request<Effect>("Common/Effects/SpaceWarp", AssetRequestMode.ImmediateLoad);
+            SpiralNoise = ModContent.Request<Texture2D>("Eclipse/Common/Effects/SpiralMap", AssetRequestMode.ImmediateLoad).Value;
+            Filters.Scene["Eclipse:SpaceWarp"] = new Filter(new ScreenShaderData(SpaceWarp, "Fard").UseColor(Color.White).UseImage(SpiralNoise, 1), EffectPriority.VeryHigh);
+            //Filters.Scene["Eclipse:SpaceWarp"].Load();
+        }
     }
 
     private void On_Player_UpdateManaRegen(On_Player.orig_UpdateManaRegen orig, Player self)
