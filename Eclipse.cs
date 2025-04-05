@@ -2,12 +2,16 @@ using ReLogic.Content;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 
+using Eclipse.Common;
+using Terraria;
+using Terraria.DataStructures;
 
 namespace Eclipse;
 public class Eclipse : Mod
 {
     public static Filter SpaceWarp => Filters.Scene["Eclipse:SpaceWarp"];
     public static Texture2D SpiralNoise;
+
     public override void Load()
     {
         if (Main.netMode != NetmodeID.Server)
@@ -25,16 +29,20 @@ public class Eclipse : Mod
 
     private void On_Player_UpdateManaRegen(On_Player.orig_UpdateManaRegen orig, Player self)
     {
-        if(120 <= self.manaRegenCount && self.statMana < self.statManaMax2)
+        if (self.statMana < 0)
         {
-            var poo = (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 60f);
-            if (self.statMana < self.statManaMax2)
-                self.ManaEffect(self.manaRegen + poo);
-            self.statMana += self.manaRegen + poo;
-            self.manaRegenCount = 0;
+            self.statMana = 0;
         }
-
+        var poo = (self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 75f)) / ((int)(1+ (self.slotsMinions / self.maxMinions) *3 ));
+        if (120 <= self.manaRegenCount && (self.statMana < self.statManaMax2 || poo < 0))
+        {
+            self.ManaEffect(poo);
+            self.statMana += poo;
+            self.manaRegenCount = 0;
+          
+    
+        }
         self.manaRegenCount += 1;
-        //Main.NewText(self.manaRegenBonus);
+
     }
 }

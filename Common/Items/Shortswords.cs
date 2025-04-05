@@ -1,7 +1,6 @@
 
 
 
-using Eclipse.Content.Classes;
 using Eclipse.Utilities.Extensions;
 using Microsoft.Build.Framework;
 using System.Security.Cryptography.X509Certificates;

@@ -1,15 +1,58 @@
 
 
 
-using Eclipse.Content.Classes;
 using Eclipse.Utilities.Extensions;
 using Terraria;
+using Terraria.DataStructures;
 
 
 
 namespace Eclipse.Common.Items
 {
-    public class Boomerangs : GlobalItem
+    public class MinionEquipment : GlobalItem
+    {
+        public override void SetDefaults(Item item)
+        {
+          
+
+           if (item.type == ItemID.SlimeStaff || item.type == ItemID.FlinxStaff || item.type == ItemID.BabyBirdStaff  || item.type == ItemID.AbigailsFlower)   
+            {
+                item.mana = 20;
+            }
+            if ( item.type == ItemID.HornetStaff || item.type == ItemID.ImpStaff || item.type == ItemID.VampireFrogStaff)
+            {
+                item.mana = 30;
+            }
+        }
+     
+
+    }
+   
+    public class ManaStar : GlobalItem
+    {
+        public override void OnSpawn(Item item, IEntitySource source)
+        {
+            if (item.type == ItemID.Star) {
+            item.active = false;
+            
+            }
+        }
+        public override bool OnPickup(Item item, Player player)
+        {
+
+            if (item.type == ItemID.Star)
+            {
+                player.statMana += 10;
+                player.ManaEffect(10);
+           
+            }
+         
+            return true;
+        }
+
+
+    }
+        public class Boomerangs : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {
@@ -66,7 +109,7 @@ namespace Eclipse.Common.Items
                 )
             {
                 Item.noMelee = true;
-                Item.DamageType = ModContent.GetInstance<HarvestDamage>();
+                Item.DamageType = DamageClass.Summon;
 
             }
             if (Item.type == ItemID.WoodFishingPole)
@@ -173,10 +216,7 @@ public class Ranged : GlobalItem
     {
         public override void SetDefaults(Item Item)
         {
-            if (Item.type == ItemID.WoodenBow)
-            {
-                Item.damage = 6;
-            }
+         
             if (Item.type == ItemID.PalmWoodBow)
             {
                 Item.damage = 8;

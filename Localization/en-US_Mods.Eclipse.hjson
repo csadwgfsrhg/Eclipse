@@ -59,8 +59,83 @@ Items: {
 		Tooltip: ""
 	}
 
-	Nadir: {
-		DisplayName: Nadir
+	TrapperPants: {
+		Tooltip: ""
+		DisplayName: Trapper Pants
+	}
+
+	TrapperHat: {
+		Tooltip: ""
+		DisplayName: Trapper Hat
+	}
+
+	TrapperCloak: {
+		Tooltip: ""
+		DisplayName: Trapper Cloak
+	}
+
+	MoltenAlloyLeggings: {
+		Tooltip: ""
+		DisplayName: Molten Alloy Leggings
+	}
+
+	MoltenAlloyHelmet: {
+		Tooltip: ""
+		DisplayName: Molten Alloy Helmet
+	}
+
+	MoltenAlloyChestplate: {
+		Tooltip: ""
+		DisplayName: Molten Alloy Chestplate
+	}
+
+	ChitinMask: {
+		Tooltip: ""
+		DisplayName: Chitin Mask
+	}
+
+	ChitinLeggings: {
+		Tooltip: ""
+		DisplayName: Chitin Leggings
+	}
+
+	ChitinChestpeice: {
+		Tooltip: ""
+		DisplayName: Chitin Chestpeice
+	}
+
+	ShadewoodScythe: {
+		Tooltip: ""
+		DisplayName: Shadewood Scythe
+	}
+
+	EbonwoodScythe: {
+		Tooltip: ""
+		DisplayName: Ebonwood Scythe
+	}
+
+	BoneScythe: {
+		Tooltip: ""
+		DisplayName: Bone Scythe
+	}
+
+	BloodCrawlerLeg: {
+		Tooltip: ""
+		DisplayName: Blood Crawler Leg
+	}
+
+	LifeCrystalStaff: {
+		DisplayName: Life Crystal Staff
+		Tooltip: ""
+	}
+
+	StarFallStaff: {
+		DisplayName: Star Fall Staff
+		Tooltip: ""
+	}
+
+	ObsidianScythe: {
+		DisplayName: Obsidian Scythe
 		Tooltip: ""
 	}
 }
@@ -77,8 +152,18 @@ Projectiles: {
 	IncendiaryRoundsProj.DisplayName: Incendiary Rounds Proj
 	EagleBullet.DisplayName: Eagle Bullet
 	ChitinBladeHeld.DisplayName: Chitin Blade Held
-	NadirStar.DisplayName: Nadir Star
-	NadirExplosion.DisplayName: Nadir Explosion
+	SpiritSkull.DisplayName: Spirit Skull
+	ShadewoodScytheProj.DisplayName: Shadewood Scythe Proj
+	EbonwoodScytheProj.DisplayName: Ebonwood Scythe Proj
+	BoneScytheProjectile.DisplayName: Bone Scythe Projectile
+	BloodCrawlerLegProj.DisplayName: Blood Crawler Leg Proj
+	HeartBig.DisplayName: Heart Big
+	HeartShard.DisplayName: Heart Shard
+	LifeCrystalStaffHeld.DisplayName: Life Crystal Staff Held
+	ManaStar.DisplayName: Mana Star
+	TestBowHeld.DisplayName: Test Bow Held
+	Trajectory.DisplayName: Trajectory
+	ObsidianScytheProjectile.DisplayName: Obsidian Scythe Projectile
 }
 
 UI: {

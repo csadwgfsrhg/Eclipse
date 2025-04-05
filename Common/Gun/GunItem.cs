@@ -1,7 +1,6 @@
 
 
 
-using Eclipse.Content.Classes;
 using Eclipse.Utilities.Extensions;
 using Terraria;
 using Terraria.Audio;
