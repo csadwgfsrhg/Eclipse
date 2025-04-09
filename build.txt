@@ -1,3 +1,5 @@
 displayName = Eclipse
 author = FG
 version = 0.1
+modReferences = SubworldLibrary
+modReferences = StructureHelper
