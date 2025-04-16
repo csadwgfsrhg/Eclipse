@@ -6,6 +6,9 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using System.Collections.Generic;
+using System.Drawing;
+using Terraria;
+using Eclipse.Content.Projectiles.Ranged.Ammo;
 
 namespace Eclipse.Common.Items;
 
@@ -50,17 +53,9 @@ internal class TestBow : GlobalItem
 
         if (BowsToOverride.Contains(Item.type))
         {
-            //max charge
-            //arrow amnt
-
-            //auto release bool
-            //Item.useAmmo = AmmoID.Arrow;
-            //Item.useAmmo = AmmoID.Arrow;
-            //Item.DamageType = DamageClass.Ranged;
-            //Item.useStyle = ItemUseStyleID.Shoot;
-            //Item.knockBack = 6;
-            //Item.shootSpeed = 10f;
-            //Item.damage = 6;
+    
+        
+       
             Item.UseSound = SoundID.Item10; //todo custom sound stylez
             Item.noMelee = true;
             Item.autoReuse = false;
@@ -71,12 +66,8 @@ internal class TestBow : GlobalItem
     {
         if (BowsToOverride.Contains(item.type))
         {
-            if (item.type == ItemID.IceBow)
-            {
-
-           //     player.GetModPlayer<Bowplayer>().charge = 2;
-            }
-            Projectile.NewProjectile(source, player.Center, new Vector2(MathF.Pow(velocity.X, 8.2f), MathF.Pow(velocity.Y, 8.2f)), ModContent.ProjectileType<TestBowHeld>(), damage, knockback, player.whoAmI, ai2: type );
+       
+            Projectile.NewProjectile(source, player.Center, new Vector2(MathF.Pow(velocity.X, 8.2f), MathF.Pow(velocity.Y, 8.2f)), ModContent.ProjectileType<TestBowHeld>(), damage, knockback, player.whoAmI, ai1:item.type , ai2: type );
             return false;
         }
       
@@ -99,7 +90,13 @@ internal class TestBowHeld : BowHeld
 }
 public abstract class BowHeld : ModProjectile
 {
-
+    int chargespeed = 3;
+    int arrowcount= 1;    
+    int maxcharge = 240;
+    int arrowspread = 1;
+    bool lifesteal = false;
+    bool reapeater = false;
+    bool charged = false;
     public override void SetDefaults()
     {
         Projectile.width = 50;
@@ -111,8 +108,39 @@ public abstract class BowHeld : ModProjectile
         Projectile.aiStyle = -1;
         Projectile.hide = true;
     }
+    public override void OnSpawn(IEntitySource source)
+    {
+       if (Projectile.ai[1] == ItemID.DemonBow)
+        {
+            arrowcount = 2;
+            chargespeed = 2;
+            arrowspread = 10;
+           
+        }
+        if (Projectile.ai[1] == ItemID.TendonBow)
+        {
+             lifesteal = true;
+            chargespeed = 3;
+            maxcharge = 320;
 
-    
+        }
+        if (Projectile.ai[1] == ItemID.HellwingBow)
+        {
+        
+            chargespeed = 5;
+
+             maxcharge = 200;
+        }
+
+        if (Projectile.ai[1] == ItemID.Tsunami)
+        {     
+            arrowcount = 4;
+            chargespeed = 6;
+            arrowspread = 10;
+            maxcharge = 300;
+        }
+    }
+
     public override void AI()
     {
         Player player = Main.player[Projectile.owner];
@@ -124,18 +152,28 @@ public abstract class BowHeld : ModProjectile
         if (Main.myPlayer == Projectile.owner)
         {
 
-            if (player.channel ||  Projectile.ai[0] <= 20)
+            if (player.channel ||  Projectile.ai[0] <= maxcharge / 6)
             {
-                Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 2 + (Projectile.velocity * (Projectile.ai[0] / 120))),ModContent.ProjectileType<Trajectory>(), 0, 0f, player.whoAmI, ai2: Projectile.ai[2]);
-            
-                if (Projectile.ai[0] < 80)
+
+
+                for (int i = 0; i < arrowcount ; i++)
                 {
-                    Projectile.ai[0] += 1; //player.GetModPlayer<Bowplayer>().charge;
+
+
+                    Vector2 newVelocity = Projectile.velocity.RotatedBy((arrowspread / 10) / (1 + (Projectile.ai[0] * (80 / arrowspread) / maxcharge) ) * (-arrowcount / 2 + i));
+                 
+                    Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), ModContent.ProjectileType<Trajectory>(), 0, 0f, player.whoAmI, ai2: Projectile.ai[2]);
+                   
                 }
-               
-                if (Projectile.ai[0] == 79)
+                if (Projectile.ai[0] < maxcharge)
+                {
+                    Projectile.ai[0] += chargespeed;
+                }
+
+                if ((Projectile.ai[0] >= maxcharge - 1 ) && charged == false)
                 {
                     SoundEngine.PlaySound(SoundID.Item4);
+                    charged = true;
                 }
                 float holdoutDistance = player.HeldItem.shootSpeed * Projectile.scale;
 
@@ -151,11 +189,23 @@ public abstract class BowHeld : ModProjectile
             }
             else
             {
-              
 
-                SoundEngine.PlaySound(SoundID.Item5 with { Pitch = ( -1/4 + (Projectile.ai[0] / 120)), Volume = (Projectile.ai[0] / 30) });
+                for (int i = 0; i < arrowcount; i++)
+                {
+
+                    Vector2 newVelocity = Projectile.velocity.RotatedBy((arrowspread / 10) / (1 + (Projectile.ai[0] * (80 / arrowspread) / maxcharge)) * (-arrowcount / 2 + i));
+                    if (lifesteal  )
+                    {
+                        SoundEngine.PlaySound(SoundID.NPCDeath13 with { Pitch = -1 / 4 + (Projectile.ai[0] / 360), Volume = (.2f) });
+                        Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), ModContent.ProjectileType<TendonShot>(), (int)((Projectile.damage / 2 + (Projectile.damage * (Projectile.ai[0] / 120))) / 12), 0f, player.whoAmI, ai2: Projectile.ai[2]);
+                    }
+
+                    Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), (int)Projectile.ai[2], (int)(Projectile.damage / 2 + (Projectile.damage * (Projectile.ai[0] / 120))), 0f, player.whoAmI, player.whoAmI);
+
+                }
+                SoundEngine.PlaySound(SoundID.Item5 with { Pitch =  -1/4 + (Projectile.ai[0] / 360), Volume = (Projectile.ai[0] / 90) });
               
-                Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (Projectile.velocity / 2 + (Projectile.velocity * (Projectile.ai[0] / 120)) ) , (int)Projectile.ai[2], (int)(Projectile.damage /2 + (Projectile.damage  * (Projectile.ai[0] / 45))), 0f, player.whoAmI, player.whoAmI);
+                
                 Projectile.Kill();
 
             }

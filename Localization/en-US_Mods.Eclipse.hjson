@@ -171,6 +171,7 @@ Projectiles: {
 	ObsidianScytheProjectile.DisplayName: Obsidian Scythe Projectile
 	NadirExplosion.DisplayName: Nadir Explosion
 	NadirStar.DisplayName: Nadir Star
+	TendonShot.DisplayName: Tendon Shot
 }
 
 UI: {
