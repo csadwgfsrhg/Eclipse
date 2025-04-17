@@ -55,7 +55,7 @@ public class HeartBig : ModProjectile
 
                 Vector2 launchVelocity = new Vector2(Main.rand.NextFloat(ChargeTime/6, -ChargeTime / 6), Main.rand.NextFloat(ChargeTime / 6, -ChargeTime / 6));
 
-
+                Dust.NewDust(Projectile.position, 32, 32, DustID.CrimsonSpray, 0, 0, 255, newColor: (default), 1f);
                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<HeartShard>(), 0, Projectile.knockBack, Projectile.owner);
             }
 

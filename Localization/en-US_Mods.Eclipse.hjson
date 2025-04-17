@@ -143,6 +143,16 @@ Items: {
 		DisplayName: Nadir
 		Tooltip: ""
 	}
+
+	MushroomWand: {
+		DisplayName: Mushroom Wand
+		Tooltip: ""
+	}
+
+	GlowingMushroomWand: {
+		DisplayName: Glowing Mushroom Wand
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -172,6 +182,8 @@ Projectiles: {
 	NadirExplosion.DisplayName: Nadir Explosion
 	NadirStar.DisplayName: Nadir Star
 	TendonShot.DisplayName: Tendon Shot
+	MyceliumClump.DisplayName: Mycelium Clump
+	MushroomDust.DisplayName: Mushroom Dust
 }
 
 UI: {
@@ -209,5 +221,10 @@ Buffs: {
 	DerplingPheromones: {
 		DisplayName: Derpling Pheromones
 		Description: Mods.Eclipse.Buffs.DerplingPheromones.Description
+	}
+
+	MushroomHealing: {
+		DisplayName: Mushroom Healing
+		Description: Mods.Eclipse.Buffs.MushroomHealing.Description
 	}
 }
