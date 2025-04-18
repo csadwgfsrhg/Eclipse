@@ -25,6 +25,7 @@ public class MyceliumClump : ModProjectile
         Projectile.tileCollide = true;
         Projectile.penetrate = 3;
         Projectile.width = 26;
+        Projectile.DamageType = DamageClass.Magic;
         Projectile.height = 26;
         Projectile.usesLocalNPCImmunity = true;
         Projectile.localNPCHitCooldown = 30;

@@ -30,6 +30,7 @@ public class GlowingMyceliumClump : ModProjectile
         Projectile.usesLocalNPCImmunity = true;
         Projectile.localNPCHitCooldown = 30;
         Projectile.friendly = true;
+        Projectile.DamageType = DamageClass.Magic;
         Projectile.rotation = Main.rand.Next(360);
         Projectile.aiStyle = -1;
 
