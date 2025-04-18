@@ -1,12 +1,13 @@
 
 
+using Eclipse.Content.Projectiles.Melee.Boomerang;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 
 namespace Eclipse.Content.Projectiles.Magic;
 
-public class MyceliumClump : ModProjectile
+public class GlowingMyceliumClump : ModProjectile
 {
 
 
@@ -23,7 +24,7 @@ public class MyceliumClump : ModProjectile
 
         Projectile.ignoreWater = true;
         Projectile.tileCollide = true;
-        Projectile.penetrate = 3;
+        Projectile.penetrate = 4;
         Projectile.width = 26;
         Projectile.height = 26;
         Projectile.usesLocalNPCImmunity = true;
@@ -48,13 +49,13 @@ public class MyceliumClump : ModProjectile
         Projectile.rotation += (Projectile.velocity.X / 20);
         Projectile.velocity.Y += .2f;
             Projectile.ai[1] -= 1;
-        if (Main.rand.NextBool(100))
+        if (Main.rand.NextBool(50))
         {
-            Dust.NewDust(Projectile.position, 32, 32, DustID.PureSpray, 0, 0, 255, newColor: (default), 1f);
+            Dust.NewDust(Projectile.position, 32, 32, DustID.GlowingMushroom, 0, 0, 255, newColor: (default), 1f);
         }
-        if (Main.rand.NextBool(100))
+        if (Main.rand.NextBool(50))
         {
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<MushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<GlowingMushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
         }
        
       
@@ -66,8 +67,9 @@ public class MyceliumClump : ModProjectile
 
             Vector2 launchVelocity = new Vector2(Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5));
 
-            Dust.NewDust(Projectile.position, 32, 32, DustID.PureSpray, 0, 0, 255, newColor: (default), 1f);
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<MushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
+            Dust.NewDust(Projectile.position, 32, 32, DustID.GlowingMushroom, 0, 0, 255, newColor: (default), 1f);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<GlowingMushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
+         
         }
 
         SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
@@ -84,8 +86,9 @@ public class MyceliumClump : ModProjectile
 
                 Vector2 launchVelocity = new Vector2(Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5));
 
-                Dust.NewDust(Projectile.position, 32, 32, DustID.PureSpray, 0, 0, 255, newColor: (default), 1f);
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<MushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
+                Dust.NewDust(Projectile.position, 32, 32, DustID.GlowingMushroom, 0, 0, 255, newColor: (default), 1f);
+
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<GlowingMushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
             }
 
             SoundEngine.PlaySound(SoundID.Item127, Projectile.position);
@@ -111,8 +114,8 @@ public class MyceliumClump : ModProjectile
                     Vector2 launchVelocity = new Vector2(Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5));
 
             Dust.NewDust(Projectile.position, 32, 32, DustID.PureSpray, 0, 0, 255 , newColor: (default), 1f);
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<MushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
-                }
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<GlowingMushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
+        }
 
                 SoundEngine.PlaySound(SoundID.Item127, Projectile.position);
      

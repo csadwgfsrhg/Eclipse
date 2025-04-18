@@ -32,7 +32,7 @@ namespace Eclipse.Common.Projectiles
             /*var aaa = new Projectile();
             aaa.SetDefaults((int)Projectile.ai[2]);
             Projectile.aiStyle = aaa.aiStyle;*/
-            if ((int)Projectile.ai[2] == ProjectileID.JestersArrow)
+            if ((int)Projectile.ai[2] == ProjectileID.FairyQueenRangedItemShot || (int)Projectile.ai[2] == ProjectileID.PulseBolt || (int)Projectile.ai[2] ==  ProjectileID.JestersArrow || (int)Projectile.ai[2] == ProjectileID.Hellwing)
                 Projectile.aiStyle = -1;
 
             fequency += 1; 

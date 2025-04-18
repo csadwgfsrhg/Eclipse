@@ -100,6 +100,7 @@ namespace Eclipse.Common.Items
     {
         public override void SetDefaults(Item Item)
         {
+
             if (
                 Item.type == ItemID.WoodFishingPole || Item.type == ItemID.ReinforcedFishingPole || Item.type == ItemID.FisherofSouls ||
                 Item.type == ItemID.Fleshcatcher || Item.type == ItemID.ScarabFishingRod || Item.type == ItemID.FiberglassFishingPole ||
@@ -267,19 +268,19 @@ namespace Eclipse.Common.Items
             }
             if (Item.type == ItemID.SilverBow)
             {
-                Item.damage = 14;
+                Item.damage = 15;
             }
             if (Item.type == ItemID.TungstenBow)
             {
-                Item.damage = 14;
+                Item.damage = 15;
             }
             if (Item.type == ItemID.GoldBow)
             {
-                Item.damage = 16;
+                Item.damage = 17;
             }
             if (Item.type == ItemID.PlatinumBow)
             {
-                Item.damage = 17;
+                Item.damage = 18;
             }
             if (Item.type == ItemID.DemonBow)
             {

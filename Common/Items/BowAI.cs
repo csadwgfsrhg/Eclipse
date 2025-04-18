@@ -46,6 +46,7 @@ internal class TestBow : GlobalItem
                 ItemID.Tsunami,
                 ItemID.TungstenBow,
                 ItemID.WoodenBow,
+             
         };
     public override void SetDefaults(Item Item)
     {
@@ -58,7 +59,7 @@ internal class TestBow : GlobalItem
        
             Item.UseSound = SoundID.Item10; //todo custom sound stylez
             Item.noMelee = true;
-            Item.autoReuse = false;
+            Item.autoReuse = true;
             Item.channel = true;
         }
     }
@@ -95,8 +96,8 @@ public abstract class BowHeld : ModProjectile
     int maxcharge = 240;
     int arrowspread = 1;
     bool lifesteal = false;
-    bool reapeater = false;
-    bool charged = false;
+    bool autoreuse = false;
+    int charged = 0;
     public override void SetDefaults()
     {
         Projectile.width = 50;
@@ -126,18 +127,48 @@ public abstract class BowHeld : ModProjectile
         }
         if (Projectile.ai[1] == ItemID.HellwingBow)
         {
-        
+            autoreuse = true;
             chargespeed = 5;
 
-             maxcharge = 200;
+             maxcharge = 120;
         }
 
         if (Projectile.ai[1] == ItemID.Tsunami)
-        {     
+        {
+            autoreuse = true;
             arrowcount = 4;
             chargespeed = 6;
             arrowspread = 10;
-            maxcharge = 300;
+            maxcharge = 200;
+        }
+        if (Projectile.ai[1] == ItemID.FairyQueenRangedItem)
+        {
+            arrowcount = 5;
+            chargespeed = 6;
+            arrowspread = 5;
+            maxcharge = 600;
+        }
+        if (Projectile.ai[1] == ItemID.PulseBow)
+        { 
+            chargespeed = 6;
+            maxcharge = 1000;
+
+        }
+        if (Projectile.ai[1] == ItemID.DD2BetsyBow)
+        {
+            autoreuse = true;
+            chargespeed = 18;
+            maxcharge = 400;
+
+        }
+        if (Projectile.ai[1] == ItemID.Phantasm)
+        {
+            autoreuse = true;
+            arrowcount = 3;
+            arrowspread = 5;
+            chargespeed = 14;
+            maxcharge = 700;
+
         }
     }
 
@@ -152,7 +183,7 @@ public abstract class BowHeld : ModProjectile
         if (Main.myPlayer == Projectile.owner)
         {
 
-            if (player.channel ||  Projectile.ai[0] <= maxcharge / 6)
+            if (charged != 2 && (player.channel  ||  Projectile.ai[0] <= maxcharge / 6))
             {
 
 
@@ -160,7 +191,7 @@ public abstract class BowHeld : ModProjectile
                 {
 
 
-                    Vector2 newVelocity = Projectile.velocity.RotatedBy((arrowspread / 10) / (1 + (Projectile.ai[0] * (80 / arrowspread) / maxcharge) ) * (-arrowcount / 2 + i));
+                    Vector2 newVelocity = Projectile.velocity.RotatedBy((arrowspread / 10f) / (1 + (Projectile.ai[0] * (80 / arrowspread) / maxcharge) ) * (-arrowcount / 2 + i));
                  
                     Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), ModContent.ProjectileType<Trajectory>(), 0, 0f, player.whoAmI, ai2: Projectile.ai[2]);
                    
@@ -170,10 +201,19 @@ public abstract class BowHeld : ModProjectile
                     Projectile.ai[0] += chargespeed;
                 }
 
-                if ((Projectile.ai[0] >= maxcharge - 1 ) && charged == false)
+                if ((Projectile.ai[0] >= maxcharge - 1 ) && charged == 0)
                 {
-                    SoundEngine.PlaySound(SoundID.Item4);
-                    charged = true;
+                  
+                 
+                    if      (autoreuse){
+                        charged = 2;
+                    }
+                    else
+                    {
+                        SoundEngine.PlaySound(SoundID.Item4);
+                        charged = 1;
+                    }
+                
                 }
                 float holdoutDistance = player.HeldItem.shootSpeed * Projectile.scale;
 
@@ -193,11 +233,11 @@ public abstract class BowHeld : ModProjectile
                 for (int i = 0; i < arrowcount; i++)
                 {
 
-                    Vector2 newVelocity = Projectile.velocity.RotatedBy((arrowspread / 10) / (1 + (Projectile.ai[0] * (80 / arrowspread) / maxcharge)) * (-arrowcount / 2 + i));
+                    Vector2 newVelocity = Projectile.velocity.RotatedBy((arrowspread / 10f) / (1 + (Projectile.ai[0] * (80 / arrowspread) / maxcharge)) * (-arrowcount / 2 + i));
                     if (lifesteal  )
                     {
                         SoundEngine.PlaySound(SoundID.NPCDeath13 with { Pitch = -1 / 4 + (Projectile.ai[0] / 360), Volume = (.2f) });
-                        Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), ModContent.ProjectileType<TendonShot>(), (int)((Projectile.damage / 2 + (Projectile.damage * (Projectile.ai[0] / 120))) / 12), 0f, player.whoAmI, ai2: Projectile.ai[2]);
+                        Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), ModContent.ProjectileType<TendonShot>(), 1 + (int)Projectile.ai[0] / 60, 0f, player.whoAmI, ai2: Projectile.ai[2]);
                     }
 
                     Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), (int)Projectile.ai[2], (int)(Projectile.damage / 2 + (Projectile.damage * (Projectile.ai[0] / 120))), 0f, player.whoAmI, player.whoAmI);

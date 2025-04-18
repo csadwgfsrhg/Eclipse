@@ -184,6 +184,8 @@ Projectiles: {
 	TendonShot.DisplayName: Tendon Shot
 	MyceliumClump.DisplayName: Mycelium Clump
 	MushroomDust.DisplayName: Mushroom Dust
+	GlowingMyceliumClump.DisplayName: Glowing Mycelium Clump
+	GlowingMushroomDust.DisplayName: Glowing Mushroom Dust
 }
 
 UI: {
@@ -226,5 +228,10 @@ Buffs: {
 	MushroomHealing: {
 		DisplayName: Mushroom Healing
 		Description: Mods.Eclipse.Buffs.MushroomHealing.Description
+	}
+
+	GlowingMushroomHealing: {
+		DisplayName: Glowing Mushroom Healing
+		Description: Mods.Eclipse.Buffs.GlowingMushroomHealing.Description
 	}
 }

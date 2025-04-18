@@ -15,18 +15,18 @@ namespace Eclipse.Content.Items.Magic
         {
             Item.staff[Type] = true;
         }
-        public override void SetDefaults()
+        public override void SetDefaults()   
         {
             Item.width = 42;
             Item.height = 48;
             Item.rare = 2;
-            Item.damage = 20;
+            Item.damage = 18;
             Item.DamageType = DamageClass.Magic;
-            Item.shoot = ModContent.ProjectileType<MyceliumClump>();
-            Item.shootSpeed = 4f;
+            Item.shoot = ModContent.ProjectileType<GlowingMyceliumClump>();
+            Item.shootSpeed = 8f;
             Item.useTime = 35;
             Item.useAnimation = 35;
-            Item.mana = 18;
+            Item.mana = 20;
             Item.useStyle = 5;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item1;

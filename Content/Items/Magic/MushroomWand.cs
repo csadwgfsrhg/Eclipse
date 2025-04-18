@@ -23,10 +23,10 @@ namespace Eclipse.Content.Items.Magic
             Item.damage = 16;
             Item.DamageType = DamageClass.Magic;
             Item.shoot = ModContent.ProjectileType<MyceliumClump>();
-            Item.shootSpeed = 4f;
+            Item.shootSpeed = 8f;
             Item.useTime = 40;
             Item.useAnimation = 40;
-            Item.mana = 16;
+            Item.mana = 15;
             Item.useStyle = 5;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item1;

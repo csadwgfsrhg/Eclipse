@@ -17,7 +17,7 @@ public class TendonShot : ModProjectile
 {
 
 
-
+    int heal;
 
     public sealed override void SetDefaults()
     {
@@ -37,19 +37,24 @@ public class TendonShot : ModProjectile
         Projectile.DamageType = DamageClass.Ranged;
 
     }
-
-    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+    public override void OnSpawn(IEntitySource source)
     {
-     //   Projectile.damage += target.defense / 2;
+        heal = Projectile.damage;
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         Player player = Main.player[Projectile.owner];
-     
-        player.statLife +=(damageDone);
-        player.HealEffect(damageDone);
 
-            }
+        player.statLife += (heal);
+        player.HealEffect(heal);
+
+    }
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+    {
+        target.lifeRegen = -60;
+        Projectile.damage = 1;
+    }
+   
 
 
 
