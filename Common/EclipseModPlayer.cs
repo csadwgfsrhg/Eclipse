@@ -10,15 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.Graphics.Effects;
 
 namespace Eclipse.Common
 {
     public class EclipseModPlayer : ModPlayer
     {
-        
+        public float BlahHole;
+        public Vector2 HolePos;
         public bool DerplingPheromones;
-       public bool attack ;
+        public bool attack;
         public int MinionDrain;
+
         public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
         {
             if (attack == true)
@@ -38,14 +41,16 @@ namespace Eclipse.Common
         public bool LifeCrystalStaffHeld = false;
         public override void Initialize()
         {
+            BlahHole = 0f;
+            HolePos = Vector2.Zero;
             base.Initialize();
-     
-
-
         }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-         
+            Filters.Scene.Activate("Eclipse:PixelPerfect");
+            Filters.Scene["Eclipse:PixelPerfect"].GetShader().Update(Main.gameTimeCache);
+
+
             if (ChitinBladeHeld == true &&  Player.ownedProjectileCounts[ModContent.ProjectileType<ChitinBladeHeld>()] < 1) {
 
             

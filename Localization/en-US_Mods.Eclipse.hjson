@@ -202,11 +202,18 @@ NPCs: {
 			Princess_LovesNPC: I like {NPCName}.
 		}
 	}
+
+	SlimeSerpent.DisplayName: Slime Serpent
 }
 
 Buffs: {
 	DerplingPheromones: {
 		DisplayName: Derpling Pheromones
 		Description: Mods.Eclipse.Buffs.DerplingPheromones.Description
+	}
+
+	BlackHole: {
+		DisplayName: Black Hole
+		Description: Mods.Eclipse.Buffs.BlackHole.Description
 	}
 }

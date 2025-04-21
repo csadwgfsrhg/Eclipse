@@ -1,4 +1,6 @@
-﻿using Eclipse.Content.Projectiles.Magic;
+﻿using Eclipse.Common;
+using Eclipse.Content.Buffs;
+using Eclipse.Content.Projectiles.Magic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +40,6 @@ namespace Eclipse.Content.Items.Magic
             Item.mana = 20;
 
             Item.UseSound = SoundID.Item9;
-            
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
@@ -46,10 +47,8 @@ namespace Eclipse.Content.Items.Magic
                 return false;
 
 
-            Filters.Scene.Activate("Eclipse:SpaceWarp");
-            Vector2 Target = Main.MouseWorld;
-            Filters.Scene["Eclipse:SpaceWarp"].GetShader().UseTargetPosition(Target).Update(Main.gameTimeCache);
 
+            player.AddBuff(ModContent.BuffType<BlackHole>(), 300);
             Vector2 SpawnPos = new Vector2(Main.MouseWorld.X + Main.rand.Next(-210, 211), player.Center.Y + Main.rand.NextFloat(777, 1579));
             Projectile.NewProjectile(source, SpawnPos, Vector2.UnitY * -Item.shootSpeed, type, damage, knockback, ai2: Main.rand.Next(8));
 
@@ -57,12 +56,32 @@ namespace Eclipse.Content.Items.Magic
         }
         public override void HoldItem(Player player)
         {
+        }
+        public override void UpdateInventory(Player player)
+        {
+            var mp = player.GetModPlayer<EclipseModPlayer>();
+            if (player.HeldItem.type != Item.type)
+            {
+                mp.BlahHole = 0;
+                player.ClearBuff(ModContent.BuffType<BlackHole>());
+            }
 
+            if (mp.BlahHole < 1f)
+                mp.BlahHole += 0.001f;
 
+            Filters.Scene["Eclipse:SpaceWarp"].GetShader().UseProgress(mp.BlahHole).UseTargetPosition(mp.HolePos).Update(Main.gameTimeCache);
         }
         public override bool AltFunctionUse(Player player)
         {
-            Filters.Scene["Eclipse:SpaceWarp"].Deactivate();
+            var mp = player.GetModPlayer<EclipseModPlayer>();
+
+            if (!Filters.Scene["Eclipse:SpaceWarp"].Active)
+            {
+                mp.BlahHole = 0f;
+                mp.HolePos = Main.MouseWorld;
+                Filters.Scene.Activate("Eclipse:SpaceWarp");
+                return true;
+            }
             return true;
         }
         public override void AddRecipes()
