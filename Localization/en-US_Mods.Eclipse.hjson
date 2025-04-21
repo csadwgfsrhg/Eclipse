@@ -143,6 +143,16 @@ Items: {
 		DisplayName: Nadir
 		Tooltip: ""
 	}
+
+	MushroomWand: {
+		DisplayName: Mushroom Wand
+		Tooltip: ""
+	}
+
+	GlowingMushroomWand: {
+		DisplayName: Glowing Mushroom Wand
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -171,6 +181,11 @@ Projectiles: {
 	ObsidianScytheProjectile.DisplayName: Obsidian Scythe Projectile
 	NadirExplosion.DisplayName: Nadir Explosion
 	NadirStar.DisplayName: Nadir Star
+	TendonShot.DisplayName: Tendon Shot
+	MyceliumClump.DisplayName: Mycelium Clump
+	MushroomDust.DisplayName: Mushroom Dust
+	GlowingMyceliumClump.DisplayName: Glowing Mycelium Clump
+	GlowingMushroomDust.DisplayName: Glowing Mushroom Dust
 }
 
 UI: {
@@ -215,5 +230,14 @@ Buffs: {
 	BlackHole: {
 		DisplayName: Black Hole
 		Description: Mods.Eclipse.Buffs.BlackHole.Description
+	}
+	MushroomHealing: {
+		DisplayName: Mushroom Healing
+		Description: Mods.Eclipse.Buffs.MushroomHealing.Description
+	}
+
+	GlowingMushroomHealing: {
+		DisplayName: Glowing Mushroom Healing
+		Description: Mods.Eclipse.Buffs.GlowingMushroomHealing.Description
 	}
 }

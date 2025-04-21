@@ -100,6 +100,7 @@ namespace Eclipse.Common.Items
     {
         public override void SetDefaults(Item Item)
         {
+
             if (
                 Item.type == ItemID.WoodFishingPole || Item.type == ItemID.ReinforcedFishingPole || Item.type == ItemID.FisherofSouls ||
                 Item.type == ItemID.Fleshcatcher || Item.type == ItemID.ScarabFishingRod || Item.type == ItemID.FiberglassFishingPole ||
@@ -216,7 +217,10 @@ namespace Eclipse.Common.Items
     {
         public override void SetDefaults(Item Item)
         {
-         
+            if (Item.type == ItemID.WoodenBow)
+            {
+                Item.damage = 6;
+            }
             if (Item.type == ItemID.PalmWoodBow)
             {
                 Item.damage = 8;
@@ -241,17 +245,50 @@ namespace Eclipse.Common.Items
             {
                 Item.damage = 16;
             }
+          
+            if (Item.type == ItemID.BorealWoodBow)
+            {
+                Item.damage = 7;
+            }
+            if (Item.type == ItemID.CopperBow)
+            {
+                Item.damage = 9;
+            }
+            if (Item.type == ItemID.TinBow)
+            {
+                Item.damage = 10;
+            }
+            if (Item.type == ItemID.IronBow)
+            {
+                Item.damage = 11;
+            }
+            if (Item.type == ItemID.LeadBow)
+            {
+                Item.damage = 12;
+            }
+            if (Item.type == ItemID.SilverBow)
+            {
+                Item.damage = 15;
+            }
+            if (Item.type == ItemID.TungstenBow)
+            {
+                Item.damage = 15;
+            }
+            if (Item.type == ItemID.GoldBow)
+            {
+                Item.damage = 17;
+            }
+            if (Item.type == ItemID.PlatinumBow)
+            {
+                Item.damage = 18;
+            }
             if (Item.type == ItemID.DemonBow)
             {
                 Item.damage = 17;
             }
             if (Item.type == ItemID.TendonBow)
             {
-                Item.damage = 20;
-            }
-            if (Item.type == ItemID.BorealWoodBow)
-            {
-                Item.damage = 7;
+                Item.damage = 18;
             }
             if (Item.type == ItemID.Minishark)
             {

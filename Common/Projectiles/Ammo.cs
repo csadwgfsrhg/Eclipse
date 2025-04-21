@@ -18,10 +18,23 @@ namespace Eclipse.Common.Projectiles;
 public sealed class Ammo : GlobalProjectile
 {
 
+    public override void AI(Projectile Projectile)
+    {
+        if (Projectile.type == ProjectileID.Hellwing)
+        {
+            Projectile.velocity = Projectile.oldVelocity;
+        }
+    }
     public override void SetDefaults(Projectile Projectile)
     {
 
-        if (Projectile.type == ProjectileID.JestersArrow)
+        if (Projectile.type == ProjectileID.PulseBolt)
+        {
+            Projectile.localNPCHitCooldown = 10;
+            Projectile.usesLocalNPCImmunity = true;
+        }
+        
+            if (Projectile.type == ProjectileID.JestersArrow)
 
         {
 
