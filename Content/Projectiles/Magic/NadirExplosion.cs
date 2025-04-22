@@ -34,7 +34,7 @@ namespace Eclipse.Content.Projectiles.Magic
 
         public override void AI()
         {
-            if (Projectile.timeLeft % 7 == 0)
+            if (Projectile.timeLeft % 5 == 0)
                 Projectile.frame++;
             base.AI();
         }

@@ -33,7 +33,10 @@ public class Eclipse : Mod
 
     
     public static Filter SpaceWarp => Filters.Scene["Eclipse:SpaceWarp"];
+    public static Filter PixelPerfect => Filters.Scene["Eclipse:PixelPerfect"];
+    public static Asset<Effect> JigglePhysics;
     public static Texture2D SpiralNoise;
+    public static Texture2D THENOISEPIZZATOWER;
 
     public override void Load()
     {
@@ -44,12 +47,21 @@ public class Eclipse : Mod
             /*Effect sw = ModContent.Request<Effect>("Common/Effects/SpaceWarp").Value;
             GameShaders.Misc["EclipseMod:SpaceWarp"] = new MiscShaderData(specialShader, "PassName");*/
             var SpaceWarp = Assets.Request<Effect>("Common/Effects/SpaceWarp", AssetRequestMode.ImmediateLoad);
-            SpiralNoise = ModContent.Request<Texture2D>("Eclipse/Common/Effects/SpiralMap", AssetRequestMode.ImmediateLoad).Value;
-            Filters.Scene["Eclipse:SpaceWarp"] = new Filter(new ScreenShaderData(SpaceWarp, "Fard").UseColor(Color.White).UseImage(SpiralNoise, 1), EffectPriority.VeryHigh);
+            SpiralNoise = ModContent.Request<Texture2D>("Eclipse/Common/Effects/4SpiralMap", AssetRequestMode.ImmediateLoad).Value;
+            Filters.Scene["Eclipse:SpaceWarp"] = new Filter(new ScreenShaderData(SpaceWarp, "Fard").UseImage(SpiralNoise, 1), EffectPriority.High);
+            
+            var PixelPerfect = Assets.Request<Effect>("Common/Effects/PixelPerfect", AssetRequestMode.ImmediateLoad);
+            Filters.Scene["Eclipse:PixelPerfect"] = new Filter(new ScreenShaderData(PixelPerfect, "Fard").UseImage(SpiralNoise, 1), EffectPriority.VeryHigh);
+            
+            
+            JigglePhysics = ModContent.Request<Effect>("Eclipse/Common/Effects/JigglePhysics", AssetRequestMode.AsyncLoad);
+            THENOISEPIZZATOWER = ModContent.Request<Texture2D>("Eclipse/Common/Effects/THENOISEPIZZATOWER", AssetRequestMode.ImmediateLoad).Value;
             //Filters.Scene["Eclipse:SpaceWarp"].Load();
         }
     }
-
+    public override void PostSetupContent()
+    {
+    }
     private void On_Player_UpdateManaRegen(On_Player.orig_UpdateManaRegen orig, Player self)
     {
         if (self.statMana < 0)

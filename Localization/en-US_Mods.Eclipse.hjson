@@ -223,6 +223,8 @@ NPCs: {
 			Princess_LovesNPC: I like {NPCName}.
 		}
 	}
+
+	SlimeSerpent.DisplayName: Slime Serpent
 }
 
 Buffs: {
@@ -231,6 +233,10 @@ Buffs: {
 		Description: Mods.Eclipse.Buffs.DerplingPheromones.Description
 	}
 
+	BlackHole: {
+		DisplayName: Black Hole
+		Description: Mods.Eclipse.Buffs.BlackHole.Description
+	}
 	MushroomHealing: {
 		DisplayName: Mushroom Healing
 		Description: Mods.Eclipse.Buffs.MushroomHealing.Description
