@@ -88,8 +88,7 @@ public class MyceliumClump : ModProjectile
                 Dust.NewDust(Projectile.position, 32, 32, DustID.PureSpray, 0, 0, 255, newColor: (default), 1f);
                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<MushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
             }
-
-            SoundEngine.PlaySound(SoundID.Item127, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Item154 with { PitchVariance = .4f }, Projectile.position);
             Projectile.ai[1] = 30;
         }
             if (Projectile.velocity.X == 0)
@@ -105,7 +104,7 @@ public class MyceliumClump : ModProjectile
 }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
-      Projectile.velocity.Y = -Projectile.velocity.Y * 1.5f;
+    
         for (int i = 0; i < Main.rand.Next(1, 3); i++)
                 {
 
@@ -115,8 +114,9 @@ public class MyceliumClump : ModProjectile
             Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<MushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
                 }
 
-                SoundEngine.PlaySound(SoundID.Item127, Projectile.position);
-     
+        SoundEngine.PlaySound(SoundID.Item154 with { PitchVariance = .4f }, Projectile.position);
+        Projectile.velocity.Y = -Projectile.velocity.Y * 1.5f;
+
     }
     
   

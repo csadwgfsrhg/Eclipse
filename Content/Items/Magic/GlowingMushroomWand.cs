@@ -29,7 +29,7 @@ namespace Eclipse.Content.Items.Magic
             Item.mana = 20;
             Item.useStyle = 5;
             Item.noMelee = true;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item95;
 
 
         }

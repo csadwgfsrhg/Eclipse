@@ -5,10 +5,33 @@ using Terraria.Graphics.Shaders;
 using Eclipse.Common;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 
 namespace Eclipse;
 public class Eclipse : Mod
 {
+    
+
+        private void TextureOverride()
+        {
+
+            TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Ash");
+        TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Hellstone");
+    }
+
+
+
+        public override void PostSetupContent()
+        {
+
+            TextureOverride();
+
+
+
+
+        }
+
+    
     public static Filter SpaceWarp => Filters.Scene["Eclipse:SpaceWarp"];
     public static Texture2D SpiralNoise;
 

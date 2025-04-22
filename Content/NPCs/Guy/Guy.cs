@@ -38,8 +38,8 @@ namespace Eclipse.Content.NPCs.Guy
         public override void SetDefaults()
         {
             NPC.lifeMax = 300;
-            NPC.width = 50;
-            NPC.height = 56;
+            NPC.width = 48;
+            NPC.height = 48;
             NPC.townNPC = true;
             NPC.aiStyle = 7;
             NPC.friendly = true;

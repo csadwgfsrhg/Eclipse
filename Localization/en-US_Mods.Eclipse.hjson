@@ -153,6 +153,11 @@ Items: {
 		DisplayName: Glowing Mushroom Wand
 		Tooltip: ""
 	}
+
+	VileMushroomScepter: {
+		DisplayName: Vile Mushroom Scepter
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -186,6 +191,7 @@ Projectiles: {
 	MushroomDust.DisplayName: Mushroom Dust
 	GlowingMyceliumClump.DisplayName: Glowing Mycelium Clump
 	GlowingMushroomDust.DisplayName: Glowing Mushroom Dust
+	VileDust.DisplayName: Vile Dust
 }
 
 UI: {

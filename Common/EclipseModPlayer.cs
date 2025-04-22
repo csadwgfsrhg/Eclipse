@@ -18,7 +18,14 @@ namespace Eclipse.Common
         
         public bool DerplingPheromones;
        public bool attack ;
-        public int MinionDrain;
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
+        {
+           
+             //   new Item(ItemID.ManaCrystal, 3);
+            
+      
+            return base.AddStartingItems(mediumCoreDeath);
+        }
         public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
         {
             if (attack == true)

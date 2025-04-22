@@ -52,7 +52,7 @@ public class GlowingMyceliumClump : ModProjectile
             Projectile.ai[1] -= 1;
         if (Main.rand.NextBool(50))
         {
-            Dust.NewDust(Projectile.position, 32, 32, DustID.GlowingMushroom, 0, 0, 255, newColor: (default), 1f);
+            Dust.NewDust(Projectile.position, 32, 32, DustID.MushroomSpray, 0, 0, 255, newColor: (default), 1f);
         }
         if (Main.rand.NextBool(50))
         {
@@ -68,7 +68,7 @@ public class GlowingMyceliumClump : ModProjectile
 
             Vector2 launchVelocity = new Vector2(Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5));
 
-            Dust.NewDust(Projectile.position, 32, 32, DustID.GlowingMushroom, 0, 0, 255, newColor: (default), 1f);
+            Dust.NewDust(Projectile.position, 32, 32, DustID.MushroomSpray, 0, 0, 255, newColor: (default), 1f);
             Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<GlowingMushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
          
         }
@@ -87,12 +87,12 @@ public class GlowingMyceliumClump : ModProjectile
 
                 Vector2 launchVelocity = new Vector2(Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5));
 
-                Dust.NewDust(Projectile.position, 32, 32, DustID.GlowingMushroom, 0, 0, 255, newColor: (default), 1f);
+                Dust.NewDust(Projectile.position, 32, 32, DustID.MushroomSpray, 0, 0, 255, newColor: (default), 1f);
 
                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<GlowingMushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
             }
 
-            SoundEngine.PlaySound(SoundID.Item127, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Item154 with { PitchVariance = .4f }, Projectile.position);
             Projectile.ai[1] = 30;
         }
             if (Projectile.velocity.X == 0)
@@ -108,18 +108,19 @@ public class GlowingMyceliumClump : ModProjectile
 }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
-      Projectile.velocity.Y = -Projectile.velocity.Y * 1.5f;
+  
         for (int i = 0; i < Main.rand.Next(1, 3); i++)
                 {
 
                     Vector2 launchVelocity = new Vector2(Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5));
 
-            Dust.NewDust(Projectile.position, 32, 32, DustID.PureSpray, 0, 0, 255 , newColor: (default), 1f);
+            Dust.NewDust(Projectile.position, 32, 32, DustID.MushroomSpray, 0, 0, 255 , newColor: (default), 1f);
             Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ModContent.ProjectileType<GlowingMushroomDust>(), 1, Projectile.knockBack, Projectile.owner);
         }
 
-                SoundEngine.PlaySound(SoundID.Item127, Projectile.position);
-     
+            
+        SoundEngine.PlaySound(SoundID.Item154 with { PitchVariance = .4f }, Projectile.position);
+        Projectile.velocity.Y = -Projectile.velocity.Y * 1.5f;
     }
     
   
