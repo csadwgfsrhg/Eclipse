@@ -59,9 +59,7 @@ public class Eclipse : Mod
             //Filters.Scene["Eclipse:SpaceWarp"].Load();
         }
     }
-    public override void PostSetupContent()
-    {
-    }
+  
     private void On_Player_UpdateManaRegen(On_Player.orig_UpdateManaRegen orig, Player self)
     {
         if (self.statMana < 0)

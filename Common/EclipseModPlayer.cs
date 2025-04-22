@@ -19,7 +19,7 @@ namespace Eclipse.Common
         public float BlahHole;
         public Vector2 HolePos;
         public bool DerplingPheromones;
-<<<<<<< HEAD
+
        public bool attack ;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
@@ -29,11 +29,11 @@ namespace Eclipse.Common
       
             return base.AddStartingItems(mediumCoreDeath);
         }
-=======
-        public bool attack;
+
+      
         public int MinionDrain;
 
->>>>>>> a33100bdcae274b2c7969f402e3d1b7cd4f0e946
+
         public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
         {
             if (attack == true)
