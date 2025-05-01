@@ -17,7 +17,14 @@ public class Eclipse : Mod
     {
 
         TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Ash");
+        TextureAssets.Tile[TileID.AshGrass] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/AshGrass");
         TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Hellstone");
+        TextureAssets.Tile[TileID.Stone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Stone");
+        TextureAssets.Tile[TileID.ActiveStoneBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Stone");
+        TextureAssets.Tile[TileID.Dirt] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Dirt");
+        TextureAssets.Tile[TileID.ClayBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Clay");
+        TextureAssets.Liquid[LiquidID.Lava] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Lava");
+        TextureAssets.Tile[TileID.Mud] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Mud");
     }
 
 
@@ -34,7 +41,7 @@ public class Eclipse : Mod
 
     
     public static Filter SpaceWarp => Filters.Scene["Eclipse:SpaceWarp"];
-    public static Filter PixelPerfect => Filters.Scene["Eclipse:PixelPerfect"];
+  //  public static Filter PixelPerfect => Filters.Scene["Eclipse:PixelPerfect"];
     public static Asset<Effect> JigglePhysics;
     public static Texture2D SpiralNoise;
     public static Texture2D THENOISEPIZZATOWER;
@@ -52,8 +59,8 @@ public class Eclipse : Mod
             SpiralNoise = ModContent.Request<Texture2D>("Eclipse/Common/Effects/4SpiralMap", AssetRequestMode.ImmediateLoad).Value;
             Filters.Scene["Eclipse:SpaceWarp"] = new Filter(new ScreenShaderData(SpaceWarp, "Fard").UseImage(SpiralNoise, 1), EffectPriority.High);
             
-            var PixelPerfect = Assets.Request<Effect>("Common/Effects/PixelPerfect", AssetRequestMode.ImmediateLoad);
-            Filters.Scene["Eclipse:PixelPerfect"] = new Filter(new ScreenShaderData(PixelPerfect, "Fard").UseImage(SpiralNoise, 1), EffectPriority.VeryHigh);
+     //       var PixelPerfect = Assets.Request<Effect>("Common/Effects/PixelPerfect", AssetRequestMode.ImmediateLoad);
+         //   Filters.Scene["Eclipse:PixelPerfect"] = new Filter(new ScreenShaderData(PixelPerfect, "Fard").UseImage(SpiralNoise, 1), EffectPriority.VeryHigh);
             
             
             JigglePhysics = ModContent.Request<Effect>("Eclipse/Common/Effects/JigglePhysics", AssetRequestMode.AsyncLoad);

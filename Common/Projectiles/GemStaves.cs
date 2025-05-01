@@ -32,16 +32,52 @@ internal class staves : GlobalItem
             Item.shootSpeed = 5;
          
         }
+        if (Item.type == ItemID.SapphireStaff)
+        {
+            Item.mana = 6;
+
+        }
+        if (Item.type == ItemID.AmberStaff)
+        {
+            Item.mana = 8;
+
+        }
+        if (Item.type == ItemID.AmethystStaff)
+        {
+            Item.mana = 5;
+            Item.shootSpeed = 8;
+
+        }
+
 
     }
     public override bool Shoot(Item Item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
+        if (Item.type == ItemID.AmethystStaff)
+        {
+     
+            for (int i = 0; i < 2; i++)
+            {
+
+                velocity = velocity.RotatedByRandom(.2f) ;
+                
+                Projectile.NewProjectile(source, position, velocity * Main.rand.NextFloat(.5f, 1.2f), type, damage, knockback, player.whoAmI);
+             
+
+
+            }
+            return false;
+
+        }
+
+
+
         if (Item.type == ItemID.DiamondStaff)
         {
         
                 
                 position += Vector2.Normalize(velocity) * 45f;
-             //   velocity = velocity.RotateRandom(1);
+                velocity = velocity.RotateRandom(1);
                 Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
         
             return false;
@@ -56,13 +92,26 @@ public sealed class GemStaves : GlobalProjectile
 
     public override void SetDefaults(Projectile Projectile)
     {
+        if (Projectile.type == ProjectileID.TopazBolt)
+        {
+            Projectile.penetrate = 3;
+
+          
+
+        }
+        if (Projectile.type == ProjectileID.AmethystBolt)
+        {
+            Projectile.timeLeft = 60;
+
+
+        }
         if (Projectile.type == ProjectileID.DiamondBolt)
 
         {
 
-             Projectile.extraUpdates = 5;
-     
-            Projectile.timeLeft = 500;
+             Projectile.extraUpdates = 1;
+
+            Projectile.timeLeft = 100;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
         }
@@ -76,9 +125,84 @@ public sealed class GemStaves : GlobalProjectile
             Projectile.localNPCHitCooldown = 30;
             Projectile.timeLeft = 23;
         }
+        if (Projectile.type == ProjectileID.RubyBolt)
+        {
+            Projectile.penetrate = 5;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 3;
+        
+        }
+        if (Projectile.type == ProjectileID.AmberBolt)
+        {
+            Projectile.extraUpdates = 5;
+            Projectile.timeLeft = 15;
+            Projectile.penetrate = 2;
+            Projectile.friendly = true;
+        
+
+        }
+    }
+    public override void OnSpawn(Projectile Projectile, IEntitySource source)
+    {
+       
+
+            if (Projectile.type == ProjectileID.RubyBolt)
+        {
+            Projectile.ai[1] = 0;
+        }
+    }
+    public override void OnHitNPC(Projectile Projectile, NPC target, NPC.HitInfo hit, int damageDone)
+    {
+        
+        if (Projectile.type == ProjectileID.SapphireBolt)
+        {
+            Player player = Main.player[Projectile.owner];
+            player.statMana += 6;
+            player.ManaEffect(6);
+        }
+        if (Projectile.type == ProjectileID.RubyBolt && Projectile.ai[2] ==0)
+        {
+            Projectile.ai[2] += 1;
+            Projectile.timeLeft = 2;
+            Projectile.width = 60;
+            Projectile.height = 60;
+            Projectile.position.X -= 30;
+            Projectile.position.Y -= 30;
+         
+
+            for (int i = 0; i < 12; i++)
+            {
+                Dust.NewDust(Projectile.position, 60, 60, DustID.GemRuby, Projectile.velocity.X / 4, Projectile.velocity.Y / 4, 255, newColor: (default), 1f);
+                
+            }
+           
+        }
     }
     public override void OnKill(Projectile Projectile, int timeLeft)
     {
+      
+
+       
+
+
+            if (Projectile.type == ProjectileID.AmberBolt && Projectile.ai[2] != 2 )
+            {
+             
+                for (int i = 0; i < 2; i++)
+                {
+
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Projectile.velocity.RotateRandom(1), ProjectileID.AmberBolt, Projectile.damage , Projectile.knockBack, Projectile.owner, ai2: 1 +
+            Projectile.ai[2]);
+
+                }
+
+            
+            
+        }
+
+
+
+
         if (Projectile.type == ProjectileID.EmeraldBolt && Projectile.ai[2] != 1)
         {
 
@@ -96,18 +220,29 @@ public sealed class GemStaves : GlobalProjectile
     }
     public override bool OnTileCollide(Projectile Projectile, Vector2 oldVelocity)
     {
-        if (Projectile.type == ProjectileID.SapphireBolt)
+      
+
+        if (Projectile.type == ProjectileID.RubyBolt && Projectile.ai[2] == 0)
         {
-            Projectile.velocity = oldVelocity;
-            Projectile.ai[1] += 1;
+            Projectile.ai[2] += 1;
+            Projectile.timeLeft = 2;
+            Projectile.width = 60;
+            Projectile.height = 60;
+            Projectile.position.X -= 30;
+            Projectile.position.Y -= 30;
+             
+            for (int i = 0; i < 12; i++)
+            {
+                Dust.NewDust(Projectile.position, 60, 60, DustID.GemRuby, Projectile.velocity.X / 4, Projectile.velocity.Y /4, 255, newColor: (default), 1f);
+
+            }
+       
             return false;
         }
 
 
 
-
-
-        if ((Projectile.type == ProjectileID.EmeraldBolt && Projectile.ai[2] == 1))
+        if ((Projectile.type == ProjectileID.EmeraldBolt && Projectile.ai[2] == 1) || Projectile.type == ProjectileID.AmberBolt)
         {
             if (Projectile.velocity.X == 0)
             {
@@ -119,18 +254,18 @@ public sealed class GemStaves : GlobalProjectile
             }
             return false;
         }
-        else return true;
+         return true;
     }
    
     public override void AI(Projectile Projectile)
     {
-      
+    
         if (Projectile.type == ProjectileID.DiamondBolt)
 
         {
 
            
-            Projectile.velocity = Vector2.Normalize(Main.MouseWorld - Projectile.Center) / (1000 / Projectile.timeLeft * 2) + Projectile.oldVelocity * 1.005f;
+            Projectile.velocity = Vector2.Normalize(Main.MouseWorld - Projectile.Center)  + Projectile.oldVelocity * .99f;
            
           
 
