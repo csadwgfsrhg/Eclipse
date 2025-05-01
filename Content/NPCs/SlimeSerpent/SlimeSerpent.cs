@@ -1,4 +1,5 @@
-﻿using Terraria.DataStructures;
+﻿using Terraria.Audio;
+using Terraria.DataStructures;
 
 namespace Eclipse.Content.NPCs.SlimeSerpent
 {
@@ -19,12 +20,17 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             NPC.lavaImmune = true;
             NPC.lifeMax = 250;
 
+            NPC.GravityIgnoresLiquid = true;
+            NPC.GravityIgnoresSpace = true;
+
             NPC.friendly = false;
             NPC.aiStyle = -1;
             NPC.knockBackResist = 0f;
 
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath11;
+
+            NPC.waterMovementSpeed = 1f;
 
 
         }
@@ -67,26 +73,50 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
         public void InitPhase()
         {
             Player target = Main.player[NPC.target];
+            NPC.noGravity = true;
+            NPC.noTileCollide = true;
             // a little initilization of targeting n shit
             switch (NPC.ai[1])
             {
                 // Looping
                 case 1:
-                    NPC.ai[0] = 1000; // cant do random intervals not enuf ai :pensive:
+                    NPC.ai[0] = 600; // cant do random intervals not enuf ai :pensive:
 
                     break;
 
 
                 // Charging
                 case 2:
-                    NPC.ai[0] = 1200;
-                    DashTarget = NPC.DirectionTo(target.Center) * 20;
+                    NPC.ai[0] = 450;
                     break;
+
+                // BouncyBallz
+                case 3:
+
+
+                    NPC.ai[0] = 500;
+                    NPC.noGravity = false;
+                    NPC.noTileCollide = false;
+
+                    if (NPC.collideX)
+                    {
+                        ChangePhaseRand();
+                        return;
+                    }
+
+                    NPC.velocity = -Vector2.UnitY.RotatedByRandom(MathHelper.PiOver2) * 8;
+                break;
             }
+
+
         }
+
+
         public void ChangePhaseRand()
         {
-            NPC.ai[1] = Main.rand.Next(1, 3);
+            int OldPhase = (int)NPC.ai[1];
+            while (NPC.ai[1] == OldPhase)
+                NPC.ai[1] = Main.rand.Next(1, 5);
             InitPhase();
         }
         public override void OnSpawn(IEntitySource source)
@@ -127,6 +157,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             for (int i = 0; Main.rand.Next(4, 8) > i; i++)
                 Dust.NewDust(NPC.Center, NPC.width, NPC.height, DustID.t_Slime, 1, 1, 157, new Color(43, 109, 138), 0.8f);
         }
+        const float LerpSpeed = 140f;
         public override void AI()
         {
             float ISHOWSPEED = 30f;
@@ -138,6 +169,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 //HEAD
                 NPC.TargetClosest();
                 Player target = Main.player[NPC.target];
+                NPC.FaceTarget();
                 NPC.spriteDirection = -NPC.direction;
 
                 switch (NPC.ai[1])
@@ -146,19 +178,65 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                     case 1:
                         Vector2 Loop = GetLoop(-NPC.ai[0], ISHOWSPEED, LeSize);
                         Vector2 ToLErp = (target.Center + Loop - NPC.Size / 2);
+                        NPC.velocity = Vector2.Zero;
+                        NPC.position += (ToLErp - NPC.position) / LerpSpeed;
 
-                        NPC.position += (ToLErp - NPC.position) / 140f;
-                    break;
+                        if (NPC.Center.Distance(target.Center) <= 200)
+                            NPC.frameCounter = 0;
+                        else
+                            NPC.frameCounter = 1;
+
+                        break;
 
 
                     // Charging
                     case 2:
+
+                        if (NPC.ai[0] % 70 == 0)
+                        {
+                            DashTarget = NPC.DirectionTo(target.position).RotatedByRandom(0.2f);
+                            NPC.velocity = DashTarget * 30;
+                        }
+
+                        if (NPC.ai[0] % 70 < 30)
+                            NPC.frameCounter = 0;
+                        else
+                            NPC.frameCounter = 1;
+
+                        NPC.velocity += (Vector2.Zero - NPC.velocity) / 30;
+
+                    break;
+
+                    // BouncyBallz
+                    case 3:
+
+                        NPC.frameCounter = 2;
+                        if (NPC.collideY)
+                        {
+                            NPC.velocity = (Vector2.UnitY * -Main.rand.Next(10, 16)).RotatedByRandom(0.3f);
+                            SoundEngine.PlaySound(Eclipse.BOING, NPC.Center);
+                        }
+
+                    break;
+
+                    // Spawn Slimes
+                    case 4:
+
+                        NPC.frameCounter = 2;
+                        if (NPC.collideY)
+                        {
+                            NPC.velocity = (Vector2.UnitY * -Main.rand.Next(10, 16)).RotatedByRandom(0.3f);
+                            SoundEngine.PlaySound(Eclipse.BOING, NPC.Center);
+                        }
 
                     break;
                 }
 
                 if (NPC.ai[0] > 0)
                     NPC.ai[0]--;
+                else
+                    ChangePhaseRand();
+
             }
             else
             {
@@ -170,24 +248,49 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                 if (NPC.ai[3] > 1)
                 {
-                    NPC? PreviousSegment = GetSegment((int)NPC.ai[2], (int)NPC.ai[3] - 1);
-                    if (PreviousSegment == null)
+                    NPC? FollowingSegment = GetSegment((int)NPC.ai[2], (int)NPC.ai[3] - 1);
+                    if (FollowingSegment == null)
                     {
                         NPC.ai[3] -= 1;
                     }
                     else
                     {
-                        if (!PreviousSegment.active)
+                        if (!FollowingSegment.active)
                         {
                             NPC.ai[3] -= 1;
-                            Main.npc[PreviousSegment.whoAmI].type = -1;
+                            Main.npc[FollowingSegment.whoAmI].type = -1;
                         }
                     }
                 }
-                
 
-                Player target = Main.player[TheHead.target];
+                Player target;
+                if (TheHead.active)
+                {
+                    target = Main.player[TheHead.target];
+                }
+                else
+                {
+                    NPC.active = false;
+                    return;
+                }
 
+                switch (NPC.ai[1])
+                {
+                    default:
+                        NPC.noGravity = true;
+                        NPC.noTileCollide = true;
+                    break;
+
+                    case 3:
+                        if (NPC.noGravity && NPC.noTileCollide)
+                        {
+                            NPC.noGravity = false;
+                            NPC.noTileCollide = false;
+                            NPC.velocity = -Vector2.UnitY.RotatedByRandom(MathHelper.PiOver2) * 8;
+                        }
+                        break;
+
+                }
                 switch (NPC.ai[1])
                 {
                     // Looping
@@ -195,8 +298,45 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         Vector2 Loop = GetLoop(-NPC.ai[0] - NPC.ai[3] * 8, ISHOWSPEED, LeSize);
                         Vector2 ToLErp = (target.Center + Loop - NPC.Size / 2);
 
-                        NPC.position += (ToLErp - NPC.position) / 140f;
+                        NPC.velocity = Vector2.Zero;
+                        NPC.position += (ToLErp - NPC.position) / LerpSpeed;
                     break;
+
+                    // Charging
+                    case 2:
+
+                        if ((int)NPC.ai[3] - 1 != 0)
+                        {
+                            NPC FollowingSegment = GetSegment((int)NPC.ai[2], (int)NPC.ai[3] - 1);
+                            NPC.position += (FollowingSegment.position - NPC.position) / 10;
+                        }
+                        else
+                            NPC.position += (TheHead.position - NPC.position) / 10;
+
+                    break;
+
+                    // BouncyBallz
+                    case 3:
+
+                        if (NPC.collideY)
+                        {
+                            NPC.velocity = (Vector2.UnitY * -Main.rand.Next(10, 16)).RotatedByRandom(0.3f);
+                            SoundEngine.PlaySound(Eclipse.BOING, NPC.Center);
+                            /*if (NPC.ai[0] < 70)
+                                NPC.velocity = (new Vector2(-Vector2.Normalize(TheHead.position - NPC.position).X, 1) * -Main.rand.Next(10, 16)).RotatedByRandom(0.3f);
+                            else
+                                NPC.velocity = (Vector2.UnitY * -Main.rand.Next(10, 16)).RotatedByRandom(0.3f);*/
+                        }
+
+                        if (NPC.ai[0] < 60)
+                        {
+                            NPC.noTileCollide = true;
+                            NPC.noGravity = true;
+                            Vector2 ResetPos = TheHead.position - (TheHead.DirectionTo(target.position) * 20 * NPC.ai[3]);
+                            NPC.velocity = Vector2.Zero;
+                            NPC.position += (ResetPos - NPC.position) / 20;
+                        }
+                        break;
                 }
                 
             }

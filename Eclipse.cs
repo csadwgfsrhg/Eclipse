@@ -6,30 +6,31 @@ using Eclipse.Common;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Audio;
 
 namespace Eclipse;
 public class Eclipse : Mod
 {
     
 
-        private void TextureOverride()
-        {
+    private void TextureOverride()
+    {
 
-            TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Ash");
+        TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Ash");
         TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Hellstone");
     }
 
 
 
-        public override void PostSetupContent()
-        {
+    public override void PostSetupContent()
+    {
 
-            TextureOverride();
-
-
+        TextureOverride();
 
 
-        }
+
+
+    }
 
     
     public static Filter SpaceWarp => Filters.Scene["Eclipse:SpaceWarp"];
@@ -37,6 +38,7 @@ public class Eclipse : Mod
     public static Asset<Effect> JigglePhysics;
     public static Texture2D SpiralNoise;
     public static Texture2D THENOISEPIZZATOWER;
+    public static SoundStyle BOING;
 
     public override void Load()
     {
@@ -57,6 +59,8 @@ public class Eclipse : Mod
             JigglePhysics = ModContent.Request<Effect>("Eclipse/Common/Effects/JigglePhysics", AssetRequestMode.AsyncLoad);
             THENOISEPIZZATOWER = ModContent.Request<Texture2D>("Eclipse/Common/Effects/THENOISEPIZZATOWER", AssetRequestMode.ImmediateLoad).Value;
             //Filters.Scene["Eclipse:SpaceWarp"].Load();
+
+            BOING = new SoundStyle($"{nameof(Eclipse)}/Sounds/BOING") { Volume = 1f, PitchVariance = 0.5f };
         }
     }
   
