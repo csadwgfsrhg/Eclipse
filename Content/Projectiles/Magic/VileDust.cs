@@ -28,7 +28,7 @@ namespace Eclipse.Content.Projectiles.Magic;
 			Projectile.penetrate = -1;
 			Projectile.tileCollide = true;
         Projectile.usesLocalNPCImmunity = true;
-        Projectile.localNPCHitCooldown = 20;
+        Projectile.localNPCHitCooldown = 15;
         AIType = ProjectileID.Bullet;
 
        
