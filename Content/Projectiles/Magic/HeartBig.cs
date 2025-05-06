@@ -15,7 +15,10 @@ namespace Eclipse.Content.Projectiles.Magic;
 public class HeartBig : ModProjectile
 {
 
-
+    public override void SetStaticDefaults()
+    {
+        Main.projFrames[Projectile.type] = 11;
+    }
 
 
     public sealed override void SetDefaults()
@@ -32,7 +35,7 @@ public class HeartBig : ModProjectile
         Projectile.usesLocalNPCImmunity = true;
         Projectile.localNPCHitCooldown = -1;
         Projectile.friendly = false;
-
+        Projectile.rotation = Main.rand.Next(360);
         Projectile.aiStyle = -1;
 
 
@@ -42,8 +45,8 @@ public class HeartBig : ModProjectile
 
     private float ChargeTime
     {
-        get => Projectile.ai[1];
-        set => Projectile.ai[1] = value;
+        get => Projectile.ai[2];
+        set => Projectile.ai[2] = value;
     }
     public override void OnKill(int timeLeft)
     {
@@ -64,25 +67,37 @@ public class HeartBig : ModProjectile
     }
     public override void AI()
     {
-        Player player = Main.player[Projectile.owner];
+        if (Main.rand.NextBool(30)) {
+            Dust.NewDust(Projectile.position, 32, 32, DustID.CrimsonSpray, 0, 0, 255, newColor: (default), 1f);
+
+        }
+      
+        if (Projectile.ai[1] % 6 == 0)
+            Projectile.frame = (int)(  Projectile.frame + 1) % 11;
+
+        Projectile.ai[1]++;
+    
+    Player player = Main.player[Projectile.owner];
         if (stopped == true)
         {
 
             Projectile.tileCollide = true;
-            Projectile.aiStyle = 25;
+            Projectile.aiStyle = 0;
+            Projectile.velocity.Y += .5f;
+               Projectile.rotation += (Projectile.velocity.X / 20);
             Projectile.velocity *= .99f;
         }
         else
         {
           
             Projectile.position = player.Center;
-            Projectile.position.X -= 25;
-            Projectile.position.Y -= 20;
+            Projectile.position.X -= 18;
+            Projectile.position.Y -= 22;
             Projectile.velocity = Vector2.Normalize(Main.MouseWorld - player.Center) * 100;
             Projectile.scale = .5f + (ChargeTime / 120);
             Projectile.Size = new Vector2(32, 32) * Projectile.scale;
 
-            Projectile.rotation = ((float)Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X)) + 500 / (10+ ChargeTime);
+         
         }
 
 
@@ -95,7 +110,8 @@ public class HeartBig : ModProjectile
 
     private bool Charge(Player owner)
     {
-        // Like other whips, this whip updates twice per frame (Projectile.extraUpdates = 1), so 120 is equal to 1 second.
+      
+      
         if (stopped == false && (!owner.channel || owner.statMana < 1))
         {
         
@@ -107,13 +123,17 @@ public class HeartBig : ModProjectile
         }
        if (stopped == false && owner.channel)
         {
+            Projectile.rotation += (10f / ChargeTime);
+            Projectile.rotation = ((float)Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X)) + 500 / (10 + ChargeTime) + 1f;
             if (ChargeTime >= 120)
             {
-              
+
+                Projectile.rotation += .1f;
 
             }
             else
             {
+
                 ChargeTime++;
                 Projectile.ai[0] += 1;
                 if (Projectile.ai[0] >= 5)
@@ -136,9 +156,5 @@ public class HeartBig : ModProjectile
         return true;
 
     }
-    public override Color? GetAlpha(Color lightColor)
-    {
-        return new Color(1f, 1f, 1f, 1f);
-
-    }
+ 
 }
