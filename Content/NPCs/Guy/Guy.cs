@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
 using Terraria.Utilities;
 
 
@@ -16,8 +17,12 @@ namespace Eclipse.Content.NPCs.Guy
     
     public class Guy : ModNPC
     {
-
+        public override string Name => "Beast Fisher";
+        public override string Texture => "Eclipse/Content/NPCs/Guy/Guy";
         public static Texture2D glow;
+        bool GlowmaskNeeded = false;
+        const int Idle = 0, Walking = 1, Attacking = 14, Emote = 7;
+        float OldAi;
         public override string GetChat()
         {
             WeightedRandom<string> poggerschat = new WeightedRandom<string>();
@@ -45,6 +50,16 @@ namespace Eclipse.Content.NPCs.Guy
                 "Cordless",
             };
         }
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            NPC.rarity = 3;
+            bestiaryEntry.Info.AddRange([
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
+				// Sets your NPC's flavor text in the bestiary. (use localization keys)
+				new FlavorTextBestiaryInfoElement("He lives in his makeshift fishing hut, seeking peace and quiet from his bitch wife through fishing."),
+            ]);
+
+        }
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 10;
@@ -52,15 +67,14 @@ namespace Eclipse.Content.NPCs.Guy
             NPCID.Sets.AttackFrameCount[Type] = 3;
             NPCID.Sets.ExtraFramesCount[Type] = 1;
             NPCID.Sets.AttackType[Type] = 2;
-            NPCID.Sets.AttackTime[Type] = 160;
             NPCID.Sets.HatOffsetY[Type] = -4;
             NPCID.Sets.ExtraTextureCount[Type] = 1;
             NPCID.Sets.AttackTime[Type] = 53;
+            NPCID.Sets.AttackAverageChance[Type] = 3;
 
 
             //NPC happiness, beastiary. (emots/shimmer maybe)
         }
-        float OldAi;
         public override void SetDefaults()
         {
             NPC.lifeMax = 300;
@@ -75,7 +89,6 @@ namespace Eclipse.Content.NPCs.Guy
 
 
         }
-        const int Idle = 0, Walking = 1, Attacking = 14, Emote = 7;
         public override void PostAI()
         {
             if (NPC.ai[0] != OldAi)
@@ -104,16 +117,10 @@ namespace Eclipse.Content.NPCs.Guy
 
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        public override void FindFrame(int frameHeight)
         {
-/*            Main.NewText(NPC.ai[0]);
-            Main.NewText(NPC.ai[1]);*/
-
-            glow ??= (Texture2D)ModContent.Request<Texture2D>(Texture + "_Glow");
-
-            Vector2 NeededOffset = new Vector2(NPC.direction == 1 ? -18 : -10, 0);
-            bool GlowmaskNeeded = false;
-            switch(NPC.ai[0])
+            GlowmaskNeeded = false;
+            switch (NPC.ai[0])
             {
                 case Idle:
                     NPC.frameCounter = 0;
@@ -128,7 +135,6 @@ namespace Eclipse.Content.NPCs.Guy
                 case Attacking:
 
 
-
                     GlowmaskNeeded = true;
                     if (NPC.ai[1] == NPCID.Sets.AttackTime[Type])
                         NPC.frameCounter = 6;
@@ -139,14 +145,22 @@ namespace Eclipse.Content.NPCs.Guy
                     //Main.NewText(NPC.frameCounter);
                     break;
             }
-
-            Rectangle frame = new Rectangle(0, (int)NPC.frameCounter * (56 + 2), 76, 56);
-
+            Rectangle frame = new Rectangle(0, (int)NPC.frameCounter * /*(56 + 2)*/frameHeight, 76, 56);
             NPC.frame = frame;
+        }
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+/*            Main.NewText(NPC.ai[0]);
+            Main.NewText(NPC.ai[1]);*/
+
+            glow ??= (Texture2D)ModContent.Request<Texture2D>(Texture + "_Glow");
+
+            Vector2 NeededOffset = new Vector2(NPC.direction == 1 ? -18 : -10, -6);
+            
             SpriteEffects DrawDir = NPC.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.position - screenPos + NeededOffset, frame, drawColor, 0f, Vector2.Zero, 1f, DrawDir, 1f);
+            spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.position - screenPos + NeededOffset, NPC.frame, drawColor, 0f, Vector2.Zero, 1f, DrawDir, 1f);
             if (GlowmaskNeeded)
-                spriteBatch.Draw(glow, NPC.position - screenPos + NeededOffset, frame, drawColor, 0f, Vector2.Zero, 1f, DrawDir, 1f);
+                spriteBatch.Draw(glow, NPC.position - screenPos + NeededOffset, NPC.frame, drawColor, 0f, Vector2.Zero, 1f, DrawDir, 1f);
             return false;
         }
 

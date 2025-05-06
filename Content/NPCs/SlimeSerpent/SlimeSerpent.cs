@@ -1,4 +1,5 @@
-﻿using Terraria.Audio;
+﻿using System.IO;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Animations;
@@ -8,10 +9,28 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 {
     public class SlimeSerpent : ModNPC
     {
-        public override string Texture => "Eclipse/Content/NPCs/SlimeSerpent/SlimeSerpentHead";
         public static WeightedRandom<Item> ItemTable = new WeightedRandom<Item>();
         Item? item;
         int tier;
+        const float LerpSpeed = 140f;
+        public Vector2 OldPos;
+        int Segments = 7;
+        Vector2 DashTarget = Vector2.Zero;
+        int? SegmentsInBody = null;
+        public static Texture2D tex;
+        public static Texture2D bodytex;
+        
+        public override string Texture => "Eclipse/Content/NPCs/SlimeSerpent/SlimeSerpentHead";
+        
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            base.SendExtraAI(writer);
+        }
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            base.ReceiveExtraAI(reader);
+        }
+        
         public override void SetStaticDefaults()
         {
             if (ItemTable.elements.Count == 0)
@@ -19,6 +38,24 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                 switch (tier)
                 {
+                    case 2:
+                        ItemTable.Add(new Item(ItemID.Glowstick, Main.rand.Next(40, 75)), 0.2);
+                        ItemTable.Add(new Item(ItemID.ThrowingKnife, Main.rand.Next(40, 75)), 0.2);
+                        ItemTable.Add(new Item(ItemID.Shuriken, Main.rand.Next(40, 75)), 0.2);
+                        ItemTable.Add(new Item(ItemID.HerbBag, Main.rand.Next(2, 5)), 0.2);
+
+                        ItemTable.Add(new Item(ItemID.Spear), 0.2);
+                        ItemTable.Add(new Item(ItemID.Blowpipe), 0.2);
+                        ItemTable.Add(new Item(ItemID.WoodenBoomerang), 0.2);
+                        ItemTable.Add(new Item(ItemID.TigerClimbingGear), 0.2);
+                        ItemTable.Add(new Item(ItemID.Aglet), 0.2);
+                        ItemTable.Add(new Item(ItemID.Umbrella), 0.05);
+                        ItemTable.Add(new Item(ItemID.SlimeStaff), 0.01);
+                        ItemTable.Add(new Item(ItemID.PortableStool), 0.21);
+                        ItemTable.Add(new Item(ItemID.WandofSparking), 0.21);
+                        ItemTable.Add(new Item(ItemID.CordageGuide), 0.15);
+                    break;
+
                     case 3:
                         ItemTable.Add(new Item(ItemID.HermesBoots), 0.2);
                         ItemTable.Add(new Item(ItemID.CloudinaBottle), 0.2);
@@ -113,11 +150,8 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             if (Main.rand.NextBool(2))
                 item = ItemTable.Get();
         }
-        public static Texture2D tex;
-        public static Texture2D bodytex;
         public int GetNumSegments(int Head)
         {
-            Main.NewText("hi");
             int seg = 0;
             for (int i = 0; Main.npc.Length > i; i++)
             {
@@ -126,7 +160,6 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             }
             return seg;
         }
-        int? SegmentsInBody = null;
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             SegmentsInBody ??= GetNumSegments((int)NPC.ai[2]);
@@ -156,7 +189,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 spriteBatch.Draw(tex, NPC.position - screenPos + NPC.Size / 2, frame, lecolore, rot, NPC.Size / 2, TotalScale, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
             else
             {
-                spriteBatch.Draw(bodytex, NPC.position - screenPos + NPC.Size / 2, null, lecolore, rot, NPC.Size / 2, TotalScale - NPC.ai[3] * 0.111f, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(bodytex, NPC.position - screenPos + NPC.Size / 2, null, lecolore, rot, NPC.Size / 2, TotalScale - NPC.ai[3] * 0.111f * TotalScale, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
 
                 if (item is not null)
                 {
@@ -171,8 +204,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
             return false;
         }
-        int Segments = 7;
-        Vector2 DashTarget = Vector2.Zero;
+        
         public void AdjustToDifficulty()
         {
             float DifficultyFactor = 1f;
@@ -230,11 +262,8 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 case 4:
                     NPC.ai[0] = 120;
                     NPC.velocity = NPC.DirectionTo(target.position).RotatedByRandom(0.2f) * 5;
-
-                    break;
+                break;
             }
-
-
         }
 
         public void ChangePhaseRand()
@@ -324,7 +353,6 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             }
             AdjustToDifficulty();
         }
-        public Vector2 OldPos;
         public Vector2 GetLoop(float ai0, float speed, Vector2 size) => new Vector2(MathF.Sin(ai0 / speed) * size.X, MathF.Cos(ai0 / speed) * size.Y);
         public NPC? GetSegment(int Head, int SegmentNo)
         {
@@ -352,7 +380,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             for (int i = 0; Main.rand.Next(4, 8) > i; i++)
                 Dust.NewDust(NPC.Center, NPC.width, NPC.height, DustID.t_Slime, 1, 1, 157, new Color(43, 109, 138), 0.8f);
         }
-        const float LerpSpeed = 140f;
+
         public override void AI()
         {
             float ISHOWSPEED = 30f;
