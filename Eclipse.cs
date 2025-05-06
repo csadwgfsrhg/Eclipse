@@ -16,17 +16,24 @@ public class Eclipse : Mod
     private void TextureOverride()
     {
         TextureAssets.Npc[NPCID.DungeonGuardian] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/NPCs/DungeonGuardian");
-        
+
         TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Ash");
-        TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Hellstone");
         TextureAssets.Tile[TileID.AshGrass] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/AshGrass");
+        TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Hellstone");
         TextureAssets.Tile[TileID.Stone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Stone");
         TextureAssets.Tile[TileID.ActiveStoneBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Stone");
         TextureAssets.Tile[TileID.Dirt] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Dirt");
         TextureAssets.Tile[TileID.ClayBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Clay");
         TextureAssets.Liquid[LiquidID.Lava] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lava");
         TextureAssets.Tile[TileID.Mud] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Mud");
+        TextureAssets.Tile[TileID.Heart] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/LifeCrystal");
+        TextureAssets.Tile[TileID.LifeCrystalBoulder] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/LifeCrystal");
+        TextureAssets.Item[ItemID.IceBlade] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/IceBlade");
+        TextureAssets.Item[ItemID.Starfury] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/Starfury");
+        TextureAssets.Item[ItemID.EnchantedSword] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/EnchantedSword");
+        TextureAssets.Item[ItemID.LifeCrystal] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/LifeCrystal");
     }
+}
 
 
 

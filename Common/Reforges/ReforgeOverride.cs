@@ -2,25 +2,36 @@
 
 using Eclipse.Content.Items.Magic;
 using Eclipse.Content.Items.Runes;
+using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.ModLoader;
 using Terraria.Utilities;
 
 namespace Eclipse.Common.Reforges;
 public class ReforgeOverride : GlobalItem
 {
 
+
+   
+
     public override bool? PrefixChance(Item item, int pre, UnifiedRandom rand)
     {
-        return false;
+        if (pre == -3 || pre == -1)
+        {
+            return false;
+        }
+      else
+            return true;
     }
+  
 
 
-
-    public override void RightClick(Item item, Player player)
+    public override bool CanRightClick(Item item)
     {
-        base.RightClick(item, player);
+
+        bool canreforge = true;
         if ((item.type == ItemID.SlimeGun
             || item.type == ItemID.SlimeStaff
             || item.type == ItemID.StickyGrenade
@@ -28,17 +39,30 @@ public class ReforgeOverride : GlobalItem
             || item.type == ItemID.HealingPotion
             || item.type == ItemID.SlimeHook
             || item.type == ItemID.LesserHealingPotion
-            ))// && (player.HeldItem = ModContent.ItemType<MutatedGenome>()))
+            ) && (Main.mouseItem.ModItem is MutatedGenome))
         {
-            //      item.prefix(ModContent.PrefixType<Mutated>);
-            SoundEngine.PlaySound(SoundID.Item);
-
+       
+            canreforge = true;
 
 
 
         }
+        else
+        {
+            canreforge = false;
+        }
+
+        if (canreforge)
+        {
+          
+            item.Prefix(0);
+            item.Prefix(Main.mouseItem.prefix);
+            Main.mouseItem.TurnToAir();
+
+
+        }
+        return base.CanRightClick(item);
     }
 
-  
-}
+    }
 
