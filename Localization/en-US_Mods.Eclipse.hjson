@@ -158,6 +158,11 @@ Items: {
 		DisplayName: Vile Mushroom Scepter
 		Tooltip: ""
 	}
+
+	BouncyBall: {
+		DisplayName: Bouncy Ball
+		Tooltip: '''"That's just the golfball AI but it does damage"'''
+	}
 }
 
 Projectiles: {
@@ -192,6 +197,7 @@ Projectiles: {
 	GlowingMyceliumClump.DisplayName: Glowing Mycelium Clump
 	GlowingMushroomDust.DisplayName: Glowing Mushroom Dust
 	VileDust.DisplayName: Vile Dust
+	BouncyBallProjectile.DisplayName: Bouncy Ball Projectile
 }
 
 UI: {

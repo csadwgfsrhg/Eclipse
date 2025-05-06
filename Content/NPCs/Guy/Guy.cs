@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent;
+using Terraria.Utilities;
 
 
 namespace Eclipse.Content.NPCs.Guy
@@ -17,6 +18,33 @@ namespace Eclipse.Content.NPCs.Guy
     {
 
         public static Texture2D glow;
+        public override string GetChat()
+        {
+            WeightedRandom<string> poggerschat = new WeightedRandom<string>();
+            poggerschat.Add("I hate my bitch wife, I can NEVER find any peace and quiet around her. I just wana fish for god's sake!");
+            poggerschat.Add("Back in my fishing prime in '87 they used to call me the master baiter.");
+            poggerschat.Add("Fun fact: Derplings pee out of our belly buttons.");
+            poggerschat.Add("Derp derp derpaty derp.", 0.1);
+            poggerschat.Add("DO THE DISHES", 0.1);
+            poggerschat.Add("PORN IS FOR LOOSERS.", 0.1);
+            poggerschat.Add("Who the fuck listens to \"THE WEEKEND\". 😂", 0.1);
+            poggerschat.Add("🅱0I", 0.001);
+            return poggerschat;
+        }
+        public override List<string> SetNPCNameList()
+        {
+            return new List<string> {
+                "Yharim",
+                "Lillhult",
+                "Solhetta",
+                "Duracell",
+                "Salton",
+                "Ralph Lauren",
+                "WiiU",
+                "Vitomix",
+                "Cordless",
+            };
+        }
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 10;
@@ -28,8 +56,6 @@ namespace Eclipse.Content.NPCs.Guy
             NPCID.Sets.HatOffsetY[Type] = -4;
             NPCID.Sets.ExtraTextureCount[Type] = 1;
             NPCID.Sets.AttackTime[Type] = 53;
-
-            
 
 
             //NPC happiness, beastiary. (emots/shimmer maybe)

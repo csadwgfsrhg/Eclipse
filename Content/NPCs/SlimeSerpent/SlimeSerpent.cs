@@ -1,14 +1,90 @@
 ﻿using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Animations;
+using Terraria.Utilities;
 
 namespace Eclipse.Content.NPCs.SlimeSerpent
 {
     public class SlimeSerpent : ModNPC
     {
         public override string Texture => "Eclipse/Content/NPCs/SlimeSerpent/SlimeSerpentHead";
+        public static WeightedRandom<Item> ItemTable = new WeightedRandom<Item>();
+        Item? item;
+        int tier;
         public override void SetStaticDefaults()
         {
-            
+            if (ItemTable.elements.Count == 0)
+            {
+
+                switch (tier)
+                {
+                    case 3:
+                        ItemTable.Add(new Item(ItemID.HermesBoots), 0.2);
+                        ItemTable.Add(new Item(ItemID.CloudinaBottle), 0.2);
+                        ItemTable.Add(new Item(ItemID.MagicMirror), 0.2);
+                        ItemTable.Add(new Item(ItemID.BandofRegeneration), 0.2);
+                        ItemTable.Add(new Item(ItemID.TigerClimbingGear), 0.2);
+                        ItemTable.Add(new Item(ItemID.Aglet), 0.2);
+                        ItemTable.Add(new Item(ItemID.LavaCharm), 0.05);
+                        ItemTable.Add(new Item(ItemID.SlimeStaff), 0.01);
+                        ItemTable.Add(new Item(ItemID.SuspiciousLookingEye), 0.21);
+                        ItemTable.Add(new Item(ItemID.AngelStatue), 0.21);
+                        ItemTable.Add(new Item(ItemID.LifeCrystal), 0.15);
+                    break;
+                }
+                
+                ItemTable.Add(new Item(ItemID.Torch, Main.rand.Next(12, 34)), 1);
+                ItemTable.Add(new Item(ItemID.Bomb, Main.rand.Next(10, 25)), 1);
+                ItemTable.Add(new Item(ItemID.RegenerationPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.ShinePotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.NightOwlPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.SwiftnessPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.ArcheryPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.GillsPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.HunterPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.MiningPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.DandelionBanner, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.PotionOfReturn, Main.rand.Next(2, 6)), 0.2);
+                ItemTable.Add(new Item(ItemID.RecallPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.GravitationPotion, Main.rand.Next(2, 6)), 0.2);
+                ItemTable.Add(new Item(ItemID.LesserHealingPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.HealingPotion, Main.rand.Next(2, 6)), 1);
+                
+                
+                
+                ItemTable.Add(new Item(ItemID.Honeyfin), 0.5);
+                ItemTable.Add(new Item(ItemID.VariegatedLardfish), 0.5);
+                ItemTable.Add(new Item(ItemID.Tuna), 0.5);
+                ItemTable.Add(new Item(ItemID.Trout), 0.5);
+                ItemTable.Add(new Item(ItemID.Stinkfish), 0.5);
+                ItemTable.Add(new Item(ItemID.SpecularFish), 0.5);
+                ItemTable.Add(new Item(ItemID.Shrimp), 0.5);
+                ItemTable.Add(new Item(ItemID.Salmon), 0.5);
+                ItemTable.Add(new Item(ItemID.RockLobster), 0.5);
+                ItemTable.Add(new Item(ItemID.RedSnapper), 0.5);
+                ItemTable.Add(new Item(ItemID.Prismite), 0.5);
+                ItemTable.Add(new Item(ItemID.PrincessFish), 0.5);
+                ItemTable.Add(new Item(ItemID.Obsidifish), 0.5);
+                ItemTable.Add(new Item(ItemID.ArmoredCavefish), 0.5);
+                ItemTable.Add(new Item(ItemID.NeonTetra), 0.5);
+                ItemTable.Add(new Item(ItemID.Hemopiranha), 0.5);
+                ItemTable.Add(new Item(ItemID.GreenJellyfish), 0.5);
+                ItemTable.Add(new Item(ItemID.GoldenCarp), 0.01);
+                ItemTable.Add(new Item(ItemID.Fish), 0.05);
+                ItemTable.Add(new Item(ItemID.ZephyrFish), 0.05);
+                ItemTable.Add(new Item(ItemID.FrostMinnow), 0.5);
+                ItemTable.Add(new Item(ItemID.Flounder), 0.5);
+                ItemTable.Add(new Item(ItemID.FlarefinKoi), 0.5);
+                ItemTable.Add(new Item(ItemID.Ebonkoi), 0.5);
+                ItemTable.Add(new Item(ItemID.DoubleCod), 0.5);
+                ItemTable.Add(new Item(ItemID.Damselfish), 0.5);
+                ItemTable.Add(new Item(ItemID.CrimsonTigerfish), 0.5);
+                ItemTable.Add(new Item(ItemID.ChaosFish), 0.5);
+                ItemTable.Add(new Item(ItemID.BlueJellyfish), 0.5);
+                ItemTable.Add(new Item(ItemID.Bass), 0.5);
+                ItemTable.Add(new Item(ItemID.AtlanticCod), 0.5);
+            }
         }
         public override void SetDefaults()
         {
@@ -27,18 +103,33 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             NPC.aiStyle = -1;
             NPC.knockBackResist = 0f;
 
+
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath11;
 
             NPC.waterMovementSpeed = 1f;
 
-
+            item = null;
+            if (Main.rand.NextBool(2))
+                item = ItemTable.Get();
         }
         public static Texture2D tex;
         public static Texture2D bodytex;
+        public int GetNumSegments(int Head)
+        {
+            Main.NewText("hi");
+            int seg = 0;
+            for (int i = 0; Main.npc.Length > i; i++)
+            {
+                if (Main.npc[i].ai[2] == Head && Main.npc[i].type == Type && Main.npc[i].active)
+                    seg++;
+            }
+            return seg;
+        }
+        int? SegmentsInBody = null;
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-
+            SegmentsInBody ??= GetNumSegments((int)NPC.ai[2]);
             Player target = Main.player[NPC.target];
             float rot = new Vector2(MathF.Abs(target.position.X - NPC.position.X), target.position.Y - NPC.position.Y).ToRotation();
             rot = MathHelper.Clamp(rot * NPC.direction, MathHelper.ToRadians(-30), MathHelper.ToRadians(30));
@@ -56,20 +147,48 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             }
 
             spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, Eclipse.JigglePhysics.Value, Main.GameViewMatrix.TransformationMatrix);
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, /*Eclipse.JigglePhysics.Value*/null, Main.GameViewMatrix.TransformationMatrix);
+            Color lecolore =  Color.White;
+
+            float TotalScale = MathHelper.Clamp(1f + (SegmentsInBody.Value - 5) * 0.25f, 1f, 5f);
 
             if (NPC.ai[3] == 0)
-                spriteBatch.Draw(tex, NPC.position - screenPos + NPC.Size / 2, frame, Color.White, rot, NPC.Size / 2, 1f, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(tex, NPC.position - screenPos + NPC.Size / 2, frame, lecolore, rot, NPC.Size / 2, TotalScale, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
             else
-                spriteBatch.Draw(bodytex, NPC.position - screenPos + NPC.Size / 2, null, Color.White, rot, NPC.Size / 2, 1f - NPC.ai[3] * 0.111f, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+            {
+                spriteBatch.Draw(bodytex, NPC.position - screenPos + NPC.Size / 2, null, lecolore, rot, NPC.Size / 2, TotalScale - NPC.ai[3] * 0.111f, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
 
+                if (item is not null)
+                {
+                    Main.instance.LoadItem(item.type);
+                    float ItemScale = TotalScale - NPC.ai[3] * 0.111f;
+                    Vector2 ItemOffset = (item.Size / new Vector2(2, 2)) * ItemScale;
+                    spriteBatch.Draw(TextureAssets.Item[item.type].Value, NPC.Center - screenPos, null, Color.White * 0.8f, rot, item.Size / 2, -ItemScale, SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically, 1f);
+                }
+            }
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
 
             return false;
         }
-        public int Segments = 7;
+        int Segments = 7;
         Vector2 DashTarget = Vector2.Zero;
+        public void AdjustToDifficulty()
+        {
+            float DifficultyFactor = 1f;
+
+            if (Main.expertMode)
+                DifficultyFactor = 1.5f;
+            if (Main.masterMode)
+                DifficultyFactor = 2f;
+            if (Main.getGoodWorld)
+                DifficultyFactor *= 1.75f;
+
+            NPC.lifeMax = (int)(NPC.life * DifficultyFactor);
+            NPC.life = NPC.lifeMax;
+
+            NPC.damage = (int)(NPC.damage * DifficultyFactor);
+        }
         public void InitPhase()
         {
             Player target = Main.player[NPC.target];
@@ -106,11 +225,17 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                     NPC.velocity = -Vector2.UnitY.RotatedByRandom(MathHelper.PiOver2) * 8;
                 break;
+
+                // Spawn Slimes
+                case 4:
+                    NPC.ai[0] = 120;
+                    NPC.velocity = NPC.DirectionTo(target.position).RotatedByRandom(0.2f) * 5;
+
+                    break;
             }
 
 
         }
-
 
         public void ChangePhaseRand()
         {
@@ -121,16 +246,83 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
         }
         public override void OnSpawn(IEntitySource source)
         {
-            //CALL ONLY FOR HEAD
-            if (NPC.ai[3] == 0)
+            //CALLED ONLY FOR HEAD
+            if (NPC.ai[3] <= 0)
             {
-                ChangePhaseRand();
+                if (NPC.ai[3] == 0)
+                    tier = Main.rand.Next(1, 4);
+                else
+                    tier = (int)MathF.Abs(NPC.ai[3]);
+                NPC.ai[3] = 0;
 
+                switch (tier)
+                {
+                    case 1:
+                        NPC.lifeMax = 500;
+                        NPC.life = 500;
+                        NPC.damage = 25;
+                        NPC.defense = 0;
+                        NPC.value = Item.buyPrice(gold: 1, silver: 50);
+                        Segments = 5;
+                    break;
+                    
+                    case 2:
+                        NPC.lifeMax = 1000;
+                        NPC.life = 1000;
+                        NPC.damage = 35;
+                        NPC.defense = 5;
+                        NPC.value = Item.buyPrice(gold: 3);
+                        Segments = 6;
+                        break;
+                    
+                    case 3:
+                        NPC.lifeMax = 2000;
+                        NPC.life = 2000;
+                        NPC.damage = 50;
+                        NPC.defense = 10;
+                        NPC.value = Item.buyPrice(gold: 7, silver: 50);
+                        Segments = 7;
+                        break;
+                }
+
+                ChangePhaseRand();
+                //SEGMENTS INCLUDE THE HEAD
                 for (int i = 1; Segments > i; i++)
                 {
                     NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.position.X, (int)NPC.position.Y, Type, ai0: NPC.ai[0], ai2: NPC.whoAmI, ai3: i);
                 }
             }
+            else
+            {
+                // BODY
+                switch (tier)
+                {
+                    case 1:
+                        NPC.lifeMax = 125;
+                        NPC.life = 125;
+                        NPC.defense = 0;
+                        NPC.damage = 15;
+                        NPC.value = Item.buyPrice(silver: 50);
+                        break;
+
+                    case 2:
+                        NPC.lifeMax = 300;
+                        NPC.life = 1000;
+                        NPC.damage = 20;
+                        NPC.defense = 5;
+                        NPC.value = Item.buyPrice(gold: 1, silver: 25);
+                        break;
+
+                    case 3:
+                        NPC.lifeMax = 750;
+                        NPC.life = 750;
+                        NPC.damage = 30;
+                        NPC.defense = 10;
+                        NPC.value = Item.buyPrice(gold: 3, silver: 50);
+                        break;
+                }
+            }
+            AdjustToDifficulty();
         }
         public Vector2 OldPos;
         public Vector2 GetLoop(float ai0, float speed, Vector2 size) => new Vector2(MathF.Sin(ai0 / speed) * size.X, MathF.Cos(ai0 / speed) * size.Y);
@@ -145,6 +337,9 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
         }
         public override void OnKill()
         {
+            if (item is not null)
+                Item.NewItem(NPC.GetSource_DropAsItem(), NPC.Center, new Item(item.type));
+
             if (NPC.ai[3] == 0)
             {
                 for (int i = 1; Segments > i; i++)
@@ -222,14 +417,38 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                     // Spawn Slimes
                     case 4:
 
-                        NPC.frameCounter = 2;
-                        if (NPC.collideY)
+                        if (NPC.ai[0] >= 60)
                         {
-                            NPC.velocity = (Vector2.UnitY * -Main.rand.Next(10, 16)).RotatedByRandom(0.3f);
-                            SoundEngine.PlaySound(Eclipse.BOING, NPC.Center);
+                            NPC.frameCounter = 1;
+
+                            if (NPC.ai[0] == 60)
+                            {
+                                NPC.frameCounter = 0;
+
+                                for (int i = 0; 7 > i; i++)
+                                {
+                                    int[] slimes = { NPCID.BlueSlime, NPCID.GreenSlime, NPCID.PurpleSlime, NPCID.SlimeSpiked };
+                                    int spawn = slimes[Main.rand.Next(slimes.Length)];
+
+                                    if (Main.rand.NextBool(50))
+                                        spawn = NPCID.Pinky;
+                                    
+                                    if (Main.rand.NextBool(512))
+                                        spawn = NPCID.GoldenSlime;
+                                    
+                                    if (Main.rand.NextBool(8192))
+                                        spawn = NPCID.DungeonGuardian;
+
+                                    Vector2 SpawnPos = Main.player[NPC.target].Center + new Vector2(Main.rand.Next(-500, 500), Main.rand.Next(-1200, -900));
+                                    NPC.NewNPC(NPC.GetBossSpawnSource(target.whoAmI), (int)SpawnPos.X, (int)SpawnPos.Y, spawn);
+                                }
+                                SoundEngine.PlaySound(SoundID.DD2_BetsyScream, NPC.Center);
+
+                            }
                         }
 
-                    break;
+                        NPC.velocity += (Vector2.Zero - NPC.velocity) / 30;
+                        break;
                 }
 
                 if (NPC.ai[0] > 0)
@@ -302,16 +521,19 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.position += (ToLErp - NPC.position) / LerpSpeed;
                     break;
 
-                    // Charging
+                    // Charging and Spawn Slimes
                     case 2:
+                    case 4:
+
+                        int locallerpspeed = NPC.ai[1] == 2 ? 10 : 70;
 
                         if ((int)NPC.ai[3] - 1 != 0)
                         {
                             NPC FollowingSegment = GetSegment((int)NPC.ai[2], (int)NPC.ai[3] - 1);
-                            NPC.position += (FollowingSegment.position - NPC.position) / 10;
+                            NPC.position += (FollowingSegment.position - NPC.position) / locallerpspeed;
                         }
                         else
-                            NPC.position += (TheHead.position - NPC.position) / 10;
+                            NPC.position += (TheHead.position - NPC.position) / locallerpspeed;
 
                     break;
 
@@ -336,7 +558,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                             NPC.velocity = Vector2.Zero;
                             NPC.position += (ResetPos - NPC.position) / 20;
                         }
-                        break;
+                    break;
                 }
                 
             }

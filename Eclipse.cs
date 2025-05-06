@@ -15,21 +15,16 @@ public class Eclipse : Mod
 
     private void TextureOverride()
     {
-
-        TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Ash");
-        TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Hellstone");
+        TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Ash");
+        TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Hellstone");
+        TextureAssets.Npc[NPCID.DungeonGuardian] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/NPCs/DungeonGuardian");
     }
 
 
 
     public override void PostSetupContent()
     {
-
         TextureOverride();
-
-
-
-
     }
 
     
