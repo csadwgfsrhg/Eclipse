@@ -240,7 +240,7 @@ public abstract class BowHeld : ModProjectile
                         Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), ModContent.ProjectileType<TendonShot>(), 1 + (int)Projectile.ai[0] / 60, 0f, player.whoAmI, ai2: Projectile.ai[2]);
                     }
 
-                    Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), (int)Projectile.ai[2], (int)(Projectile.damage / 2 + (Projectile.damage * (Projectile.ai[0] / 120))), 0f, player.whoAmI, player.whoAmI);
+                    Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, (newVelocity / 2 + (newVelocity * (Projectile.ai[0] / 360))), (int)Projectile.ai[2], (int)(Projectile.damage / 2 + (Projectile.damage * (Projectile.ai[0] / 120))), (Projectile.knockBack / 2) * (Projectile.ai[0] / 240), player.whoAmI, player.whoAmI);
 
                 }
                 SoundEngine.PlaySound(SoundID.Item5 with { Pitch =  -1/4 + (Projectile.ai[0] / 360), Volume = (Projectile.ai[0] / 90) });

@@ -4,6 +4,7 @@ using Terraria.IO;
 using Terraria.WorldBuilding;
 using Terraria.ID;
 using Eclipse.Content.Tiles;
+using Terraria.Graphics.Shaders;
 
 
 namespace Eclipse.Content.Gen
@@ -11,36 +12,44 @@ namespace Eclipse.Content.Gen
     internal class HellGen : GenPass
     {
         public HellGen(string name, float weight) : base(name, weight) { }
-
+        int x = 0;
+        int y = 0;
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
             progress.Message = "Altering Hell";
+ 
+            Tile tile = Main.tile[x, y];
+            Point point = new Point(x, y);
 
-         
+            //
 
 
-            for (int i = 0; i < Main.maxTilesX; i++)
+
+
+
+
+            ShapeData shapeData = new ShapeData();
+            WorldUtils.Gen(point, new Shapes.Circle(Main.rand.Next(10), Main.rand.Next(20)), new Actions.Blank().Output(shapeData));
             {
-                for (int j = Main.maxTilesY - 250; j < Main.maxTilesY; j++)
-                {
-                    if (j <= Main.maxTilesY - 200)
-                    {
-                        WorldGen.TileRunner(i, j, WorldGen.genRand.Next(4, 10), WorldGen.genRand.Next(9, 15), ModContent.TileType<Basalt>());
-                    }
+          
 
-                    if (j >= Main.maxTilesY - 60)
-                    {
-                        WorldGen.TileRunner(i, j, WorldGen.genRand.Next(4, 10), WorldGen.genRand.Next(9, 15), TileID.Ash);
-                    }
+
+
+            };
+
+
+
+
+           // WorldGen.(i, j, WorldGen.genRand.Next(4, 10), WorldGen.genRand.Next(9, 15), ModContent.TileType<Basalt>());
+                   //     WorldGen.TileRunner(i, j, WorldGen.genRand.Next(4, 10), WorldGen.genRand.Next(9, 15), TileID.Ash);
+         
                
 
 
                 }
              }
           }
-       }
-    }
-
+    
 
 
 

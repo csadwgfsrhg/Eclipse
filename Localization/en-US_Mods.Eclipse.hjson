@@ -146,12 +146,12 @@ Items: {
 
 	MushroomWand: {
 		DisplayName: Mushroom Wand
-		Tooltip: ""
+		Tooltip: "Shoots a bouncing mushroom that leaves healing mist "
 	}
 
 	GlowingMushroomWand: {
 		DisplayName: Glowing Mushroom Wand
-		Tooltip: ""
+		Tooltip: Shoots a Extra bouncy glowing mushroom that leaves mana and health healing mist
 	}
 
 	VileMushroomScepter: {
@@ -162,6 +162,40 @@ Items: {
 	BouncyBall: {
 		DisplayName: Bouncy Ball
 		Tooltip: '''"That's just the golfball AI but it does damage"'''
+	}
+	MutatedGenome: {
+		DisplayName: Mutated Genome
+		Tooltip: applies mutated reforge to slime items
+	}
+
+	StoneScalingRune: {
+		DisplayName: Stone Scaling Rune
+		Tooltip: Scales weapon to light green rariety
+	}
+
+	BouncyRune: {
+		DisplayName: Bouncy Rune
+		Tooltip: Applies bouncy reforge to melee weapons
+	}
+
+	CopperScalingRune: {
+		DisplayName: Copper Scaling Rune
+		Tooltip: Scales weapon to light orange rariety
+	}
+
+	GoldScalingRune: {
+		DisplayName: Gold Scaling Rune
+		Tooltip: Scales weapon to pink rariety
+	}
+
+	SilverScalingRune: {
+		DisplayName: Silver Scaling Rune
+		Tooltip: Scales weapon to light red rariety
+	}
+
+	WoodScalingRune: {
+		DisplayName: Wood Scaling Rune
+		Tooltip: Scales weapon to light blue rariety
 	}
 }
 
@@ -254,3 +288,5 @@ Buffs: {
 		Description: Mods.Eclipse.Buffs.GlowingMushroomHealing.Description
 	}
 }
+
+Prefixes.Mutated.DisplayName: Mutated

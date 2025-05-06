@@ -19,7 +19,6 @@ public class VileGarment : ModItem
             .AddIngredient(ItemID.VilePowder, 15)
             .AddIngredient(ItemID.RottenChunk, 7)
             .AddIngredient(ItemID.Leather)
-            .AddIngredient(ItemID.WormTooth, 2)
             .AddTile(TileID.WorkBenches)
             .Register();
     }
