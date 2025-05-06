@@ -33,7 +33,7 @@ public class Eclipse : Mod
         TextureAssets.Item[ItemID.EnchantedSword] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/EnchantedSword");
         TextureAssets.Item[ItemID.LifeCrystal] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/LifeCrystal");
     }
-}
+
 
 
 
