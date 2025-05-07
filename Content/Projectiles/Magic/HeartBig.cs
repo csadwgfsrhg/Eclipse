@@ -95,9 +95,10 @@ public class HeartBig : ModProjectile
             Projectile.position.Y -= 22;
             Projectile.velocity = Vector2.Normalize(Main.MouseWorld - player.Center) * 100;
             Projectile.scale = .5f + (ChargeTime / 120);
-            Projectile.Size = new Vector2(32, 32) * Projectile.scale;
+           
+            Projectile.Resize((int)(32 * Projectile.scale), (int)(32 * Projectile.scale));
 
-         
+
         }
 
 

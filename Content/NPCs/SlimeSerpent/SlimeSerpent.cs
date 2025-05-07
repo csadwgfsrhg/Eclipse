@@ -1,4 +1,5 @@
-﻿using Terraria.Audio;
+﻿using Eclipse.Content.Items.Runes;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Animations;
@@ -24,16 +25,17 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         ItemTable.Add(new Item(ItemID.CloudinaBottle), 0.2);
                         ItemTable.Add(new Item(ItemID.MagicMirror), 0.2);
                         ItemTable.Add(new Item(ItemID.BandofRegeneration), 0.2);
-                        ItemTable.Add(new Item(ItemID.TigerClimbingGear), 0.2);
+                        ItemTable.Add(new Item(ItemID.ClimbingClaws), 0.2);
+                        ItemTable.Add(new Item(ItemID.ShoeSpikes), 0.2);
                         ItemTable.Add(new Item(ItemID.Aglet), 0.2);
                         ItemTable.Add(new Item(ItemID.LavaCharm), 0.05);
                         ItemTable.Add(new Item(ItemID.SlimeStaff), 0.01);
                         ItemTable.Add(new Item(ItemID.SuspiciousLookingEye), 0.21);
                         ItemTable.Add(new Item(ItemID.AngelStatue), 0.21);
-                        ItemTable.Add(new Item(ItemID.LifeCrystal), 0.15);
+                     
                     break;
                 }
-                
+              
                 ItemTable.Add(new Item(ItemID.Torch, Main.rand.Next(12, 34)), 1);
                 ItemTable.Add(new Item(ItemID.Bomb, Main.rand.Next(10, 25)), 1);
                 ItemTable.Add(new Item(ItemID.RegenerationPotion, Main.rand.Next(2, 6)), 1);
@@ -44,26 +46,26 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 ItemTable.Add(new Item(ItemID.GillsPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.HunterPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.MiningPotion, Main.rand.Next(2, 6)), 1);
-                ItemTable.Add(new Item(ItemID.DandelionBanner, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ItemID.WormholePotion, Main.rand.Next(2, 6)), 0.2);
                 ItemTable.Add(new Item(ItemID.PotionOfReturn, Main.rand.Next(2, 6)), 0.2);
                 ItemTable.Add(new Item(ItemID.RecallPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.GravitationPotion, Main.rand.Next(2, 6)), 0.2);
                 ItemTable.Add(new Item(ItemID.LesserHealingPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.HealingPotion, Main.rand.Next(2, 6)), 1);
-                
-                
-                
-                ItemTable.Add(new Item(ItemID.Honeyfin), 0.5);
+
+
+                ItemTable.Add(new Item(ModContent.ItemType<MutatedGenome>()), 1);
+                ItemTable.Add(new Item(ItemID.Honeyfin), 0.2);
                 ItemTable.Add(new Item(ItemID.VariegatedLardfish), 0.5);
-                ItemTable.Add(new Item(ItemID.Tuna), 0.5);
-                ItemTable.Add(new Item(ItemID.Trout), 0.5);
+                ItemTable.Add(new Item(ItemID.Tuna), 2);
+                ItemTable.Add(new Item(ItemID.Trout), 2);
                 ItemTable.Add(new Item(ItemID.Stinkfish), 0.5);
                 ItemTable.Add(new Item(ItemID.SpecularFish), 0.5);
                 ItemTable.Add(new Item(ItemID.Shrimp), 0.5);
                 ItemTable.Add(new Item(ItemID.Salmon), 0.5);
                 ItemTable.Add(new Item(ItemID.RockLobster), 0.5);
                 ItemTable.Add(new Item(ItemID.RedSnapper), 0.5);
-                ItemTable.Add(new Item(ItemID.Prismite), 0.5);
+                ItemTable.Add(new Item(ItemID.Prismite), .2);
                 ItemTable.Add(new Item(ItemID.PrincessFish), 0.5);
                 ItemTable.Add(new Item(ItemID.Obsidifish), 0.5);
                 ItemTable.Add(new Item(ItemID.ArmoredCavefish), 0.5);
@@ -82,7 +84,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 ItemTable.Add(new Item(ItemID.CrimsonTigerfish), 0.5);
                 ItemTable.Add(new Item(ItemID.ChaosFish), 0.5);
                 ItemTable.Add(new Item(ItemID.BlueJellyfish), 0.5);
-                ItemTable.Add(new Item(ItemID.Bass), 0.5);
+                ItemTable.Add(new Item(ItemID.Bass), 2);
                 ItemTable.Add(new Item(ItemID.AtlanticCod), 0.5);
             }
         }
@@ -262,7 +264,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.life = 500;
                         NPC.damage = 25;
                         NPC.defense = 0;
-                        NPC.value = Item.buyPrice(gold: 1, silver: 50);
+                        NPC.value = Item.buyPrice( silver: 50);
                         Segments = 5;
                     break;
                     
@@ -271,7 +273,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.life = 1000;
                         NPC.damage = 35;
                         NPC.defense = 5;
-                        NPC.value = Item.buyPrice(gold: 3);
+                        NPC.value = Item.buyPrice(gold: 1);
                         Segments = 6;
                         break;
                     
@@ -280,7 +282,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.life = 2000;
                         NPC.damage = 50;
                         NPC.defense = 10;
-                        NPC.value = Item.buyPrice(gold: 7, silver: 50);
+                        NPC.value = Item.buyPrice(gold: 2);
                         Segments = 7;
                         break;
                 }
@@ -302,7 +304,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.life = 125;
                         NPC.defense = 0;
                         NPC.damage = 15;
-                        NPC.value = Item.buyPrice(silver: 50);
+                        NPC.value = Item.buyPrice(silver: 10);
                         break;
 
                     case 2:
@@ -310,7 +312,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.life = 1000;
                         NPC.damage = 20;
                         NPC.defense = 5;
-                        NPC.value = Item.buyPrice(gold: 1, silver: 25);
+                        NPC.value = Item.buyPrice(silver: 25);
                         break;
 
                     case 3:
@@ -318,7 +320,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.life = 750;
                         NPC.damage = 30;
                         NPC.defense = 10;
-                        NPC.value = Item.buyPrice(gold: 3, silver: 50);
+                        NPC.value = Item.buyPrice( silver: 50);
                         break;
                 }
             }
@@ -425,19 +427,18 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                             {
                                 NPC.frameCounter = 0;
 
-                                for (int i = 0; 7 > i; i++)
+                                for (int i = 0; 2 + tier > i; i++)
                                 {
                                     int[] slimes = { NPCID.BlueSlime, NPCID.GreenSlime, NPCID.PurpleSlime, NPCID.SlimeSpiked };
                                     int spawn = slimes[Main.rand.Next(slimes.Length)];
 
                                     if (Main.rand.NextBool(50))
                                         spawn = NPCID.Pinky;
-                                    
+
                                     if (Main.rand.NextBool(512))
                                         spawn = NPCID.GoldenSlime;
-                                    
-                                    if (Main.rand.NextBool(8192))
-                                        spawn = NPCID.DungeonGuardian;
+
+                               
 
                                     Vector2 SpawnPos = Main.player[NPC.target].Center + new Vector2(Main.rand.Next(-500, 500), Main.rand.Next(-1200, -900));
                                     NPC.NewNPC(NPC.GetBossSpawnSource(target.whoAmI), (int)SpawnPos.X, (int)SpawnPos.Y, spawn);
@@ -446,8 +447,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                             }
                         }
-
-                        NPC.velocity += (Vector2.Zero - NPC.velocity) / 30;
+                            NPC.velocity += (Vector2.Zero - NPC.velocity) / 30;
                         break;
                 }
 

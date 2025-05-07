@@ -163,6 +163,7 @@ Items: {
 		DisplayName: Bouncy Ball
 		Tooltip: '''"That's just the golfball AI but it does damage"'''
 	}
+
 	MutatedGenome: {
 		DisplayName: Mutated Genome
 		Tooltip: applies mutated reforge to slime items
@@ -232,6 +233,7 @@ Projectiles: {
 	GlowingMushroomDust.DisplayName: Glowing Mushroom Dust
 	VileDust.DisplayName: Vile Dust
 	BouncyBallProjectile.DisplayName: Bouncy Ball Projectile
+	ClamBubble.DisplayName: Clam Bubble
 }
 
 UI: {
@@ -265,6 +267,7 @@ NPCs: {
 	}
 
 	SlimeSerpent.DisplayName: Slime Serpent
+	ClamDiver.DisplayName: Clam Diver
 }
 
 Buffs: {

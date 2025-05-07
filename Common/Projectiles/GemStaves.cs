@@ -19,7 +19,7 @@ namespace Eclipse.Common.Projectiles;
 
 
 
-internal class staves : GlobalItem
+internal class Staves : GlobalItem
 {
     public override void SetDefaults(Item Item)
     {
