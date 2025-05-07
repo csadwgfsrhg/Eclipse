@@ -1,4 +1,5 @@
 ﻿using Eclipse.Content.Items.Runes;
+using System.IO;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -9,10 +10,28 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 {
     public class SlimeSerpent : ModNPC
     {
-        public override string Texture => "Eclipse/Content/NPCs/SlimeSerpent/SlimeSerpentHead";
         public static WeightedRandom<Item> ItemTable = new WeightedRandom<Item>();
         Item? item;
         int tier;
+        const float LerpSpeed = 140f;
+        public Vector2 OldPos;
+        int Segments = 7;
+        Vector2 DashTarget = Vector2.Zero;
+        int? SegmentsInBody = null;
+        public static Texture2D tex;
+        public static Texture2D bodytex;
+
+        public override string Texture => "Eclipse/Content/NPCs/SlimeSerpent/SlimeSerpentHead";
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            base.SendExtraAI(writer);
+        }
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            base.ReceiveExtraAI(reader);
+        }
+
         public override void SetStaticDefaults()
         {
             if (ItemTable.elements.Count == 0)
@@ -20,22 +39,39 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                 switch (tier)
                 {
+                    case 2:
+                        ItemTable.Add(new Item(ItemID.Glowstick, Main.rand.Next(40, 75)), 0.2);
+                        ItemTable.Add(new Item(ItemID.ThrowingKnife, Main.rand.Next(40, 75)), 0.2);
+                        ItemTable.Add(new Item(ItemID.Shuriken, Main.rand.Next(40, 75)), 0.2);
+                        ItemTable.Add(new Item(ItemID.HerbBag, Main.rand.Next(2, 5)), 0.2);
+
+                        ItemTable.Add(new Item(ItemID.Spear), 0.2);
+                        ItemTable.Add(new Item(ItemID.Blowpipe), 0.2);
+                        ItemTable.Add(new Item(ItemID.WoodenBoomerang), 0.2);
+                        ItemTable.Add(new Item(ItemID.TigerClimbingGear), 0.2);
+                        ItemTable.Add(new Item(ItemID.Aglet), 0.2);
+                        ItemTable.Add(new Item(ItemID.Umbrella), 0.05);
+                        ItemTable.Add(new Item(ItemID.SlimeStaff), 0.01);
+                        ItemTable.Add(new Item(ItemID.PortableStool), 0.21);
+                        ItemTable.Add(new Item(ItemID.WandofSparking), 0.21);
+                        ItemTable.Add(new Item(ItemID.CordageGuide), 0.15);
+                        break;
+
                     case 3:
                         ItemTable.Add(new Item(ItemID.HermesBoots), 0.2);
                         ItemTable.Add(new Item(ItemID.CloudinaBottle), 0.2);
                         ItemTable.Add(new Item(ItemID.MagicMirror), 0.2);
                         ItemTable.Add(new Item(ItemID.BandofRegeneration), 0.2);
-                        ItemTable.Add(new Item(ItemID.ClimbingClaws), 0.2);
-                        ItemTable.Add(new Item(ItemID.ShoeSpikes), 0.2);
+                        ItemTable.Add(new Item(ItemID.TigerClimbingGear), 0.2);
                         ItemTable.Add(new Item(ItemID.Aglet), 0.2);
                         ItemTable.Add(new Item(ItemID.LavaCharm), 0.05);
                         ItemTable.Add(new Item(ItemID.SlimeStaff), 0.01);
                         ItemTable.Add(new Item(ItemID.SuspiciousLookingEye), 0.21);
                         ItemTable.Add(new Item(ItemID.AngelStatue), 0.21);
-                     
-                    break;
+                        ItemTable.Add(new Item(ItemID.LifeCrystal), 0.15);
+                        break;
                 }
-              
+
                 ItemTable.Add(new Item(ItemID.Torch, Main.rand.Next(12, 34)), 1);
                 ItemTable.Add(new Item(ItemID.Bomb, Main.rand.Next(10, 25)), 1);
                 ItemTable.Add(new Item(ItemID.RegenerationPotion, Main.rand.Next(2, 6)), 1);
@@ -46,26 +82,26 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 ItemTable.Add(new Item(ItemID.GillsPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.HunterPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.MiningPotion, Main.rand.Next(2, 6)), 1);
-                ItemTable.Add(new Item(ItemID.WormholePotion, Main.rand.Next(2, 6)), 0.2);
+                ItemTable.Add(new Item(ItemID.DandelionBanner, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.PotionOfReturn, Main.rand.Next(2, 6)), 0.2);
                 ItemTable.Add(new Item(ItemID.RecallPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.GravitationPotion, Main.rand.Next(2, 6)), 0.2);
                 ItemTable.Add(new Item(ItemID.LesserHealingPotion, Main.rand.Next(2, 6)), 1);
                 ItemTable.Add(new Item(ItemID.HealingPotion, Main.rand.Next(2, 6)), 1);
+                ItemTable.Add(new Item(ModContent.ItemType<MutatedGenome>()), 2);
 
 
-                ItemTable.Add(new Item(ModContent.ItemType<MutatedGenome>()), 1);
-                ItemTable.Add(new Item(ItemID.Honeyfin), 0.2);
+                ItemTable.Add(new Item(ItemID.Honeyfin), 0.5);
                 ItemTable.Add(new Item(ItemID.VariegatedLardfish), 0.5);
-                ItemTable.Add(new Item(ItemID.Tuna), 2);
-                ItemTable.Add(new Item(ItemID.Trout), 2);
+                ItemTable.Add(new Item(ItemID.Tuna), 0.5);
+                ItemTable.Add(new Item(ItemID.Trout), 0.5);
                 ItemTable.Add(new Item(ItemID.Stinkfish), 0.5);
                 ItemTable.Add(new Item(ItemID.SpecularFish), 0.5);
                 ItemTable.Add(new Item(ItemID.Shrimp), 0.5);
                 ItemTable.Add(new Item(ItemID.Salmon), 0.5);
                 ItemTable.Add(new Item(ItemID.RockLobster), 0.5);
                 ItemTable.Add(new Item(ItemID.RedSnapper), 0.5);
-                ItemTable.Add(new Item(ItemID.Prismite), .2);
+                ItemTable.Add(new Item(ItemID.Prismite), 0.5);
                 ItemTable.Add(new Item(ItemID.PrincessFish), 0.5);
                 ItemTable.Add(new Item(ItemID.Obsidifish), 0.5);
                 ItemTable.Add(new Item(ItemID.ArmoredCavefish), 0.5);
@@ -84,7 +120,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 ItemTable.Add(new Item(ItemID.CrimsonTigerfish), 0.5);
                 ItemTable.Add(new Item(ItemID.ChaosFish), 0.5);
                 ItemTable.Add(new Item(ItemID.BlueJellyfish), 0.5);
-                ItemTable.Add(new Item(ItemID.Bass), 2);
+                ItemTable.Add(new Item(ItemID.Bass), 0.5);
                 ItemTable.Add(new Item(ItemID.AtlanticCod), 0.5);
             }
         }
@@ -115,11 +151,8 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             if (Main.rand.NextBool(2))
                 item = ItemTable.Get();
         }
-        public static Texture2D tex;
-        public static Texture2D bodytex;
         public int GetNumSegments(int Head)
         {
-            Main.NewText("hi");
             int seg = 0;
             for (int i = 0; Main.npc.Length > i; i++)
             {
@@ -128,7 +161,6 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             }
             return seg;
         }
-        int? SegmentsInBody = null;
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             SegmentsInBody ??= GetNumSegments((int)NPC.ai[2]);
@@ -150,7 +182,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, /*Eclipse.JigglePhysics.Value*/null, Main.GameViewMatrix.TransformationMatrix);
-            Color lecolore =  Color.White;
+            Color lecolore = Color.White;
 
             float TotalScale = MathHelper.Clamp(1f + (SegmentsInBody.Value - 5) * 0.25f, 1f, 5f);
 
@@ -158,7 +190,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 spriteBatch.Draw(tex, NPC.position - screenPos + NPC.Size / 2, frame, lecolore, rot, NPC.Size / 2, TotalScale, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
             else
             {
-                spriteBatch.Draw(bodytex, NPC.position - screenPos + NPC.Size / 2, null, lecolore, rot, NPC.Size / 2, TotalScale - NPC.ai[3] * 0.111f, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(bodytex, NPC.position - screenPos + NPC.Size / 2, null, lecolore, rot, NPC.Size / 2, TotalScale - NPC.ai[3] * 0.111f * TotalScale, NPC.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
 
                 if (item is not null)
                 {
@@ -173,8 +205,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
             return false;
         }
-        int Segments = 7;
-        Vector2 DashTarget = Vector2.Zero;
+
         public void AdjustToDifficulty()
         {
             float DifficultyFactor = 1f;
@@ -226,17 +257,14 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                     }
 
                     NPC.velocity = -Vector2.UnitY.RotatedByRandom(MathHelper.PiOver2) * 8;
-                break;
+                    break;
 
                 // Spawn Slimes
                 case 4:
                     NPC.ai[0] = 120;
                     NPC.velocity = NPC.DirectionTo(target.position).RotatedByRandom(0.2f) * 5;
-
                     break;
             }
-
-
         }
 
         public void ChangePhaseRand()
@@ -266,8 +294,8 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.defense = 0;
                         NPC.value = Item.buyPrice( silver: 50);
                         Segments = 5;
-                    break;
-                    
+                        break;
+
                     case 2:
                         NPC.lifeMax = 1000;
                         NPC.life = 1000;
@@ -276,13 +304,13 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.value = Item.buyPrice(gold: 1);
                         Segments = 6;
                         break;
-                    
+
                     case 3:
                         NPC.lifeMax = 2000;
                         NPC.life = 2000;
                         NPC.damage = 50;
                         NPC.defense = 10;
-                        NPC.value = Item.buyPrice(gold: 2);
+                        NPC.value = Item.buyPrice(gold: 3);
                         Segments = 7;
                         break;
                 }
@@ -312,7 +340,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         NPC.life = 1000;
                         NPC.damage = 20;
                         NPC.defense = 5;
-                        NPC.value = Item.buyPrice(silver: 25);
+                        NPC.value = Item.buyPrice( silver: 25);
                         break;
 
                     case 3:
@@ -326,7 +354,6 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             }
             AdjustToDifficulty();
         }
-        public Vector2 OldPos;
         public Vector2 GetLoop(float ai0, float speed, Vector2 size) => new Vector2(MathF.Sin(ai0 / speed) * size.X, MathF.Cos(ai0 / speed) * size.Y);
         public NPC? GetSegment(int Head, int SegmentNo)
         {
@@ -354,7 +381,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
             for (int i = 0; Main.rand.Next(4, 8) > i; i++)
                 Dust.NewDust(NPC.Center, NPC.width, NPC.height, DustID.t_Slime, 1, 1, 157, new Color(43, 109, 138), 0.8f);
         }
-        const float LerpSpeed = 140f;
+
         public override void AI()
         {
             float ISHOWSPEED = 30f;
@@ -402,7 +429,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                         NPC.velocity += (Vector2.Zero - NPC.velocity) / 30;
 
-                    break;
+                        break;
 
                     // BouncyBallz
                     case 3:
@@ -414,7 +441,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                             SoundEngine.PlaySound(Eclipse.BOING, NPC.Center);
                         }
 
-                    break;
+                        break;
 
                     // Spawn Slimes
                     case 4:
@@ -427,7 +454,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                             {
                                 NPC.frameCounter = 0;
 
-                                for (int i = 0; 2 + tier > i; i++)
+                                for (int i = 0; 3 + tier > i; i++)
                                 {
                                     int[] slimes = { NPCID.BlueSlime, NPCID.GreenSlime, NPCID.PurpleSlime, NPCID.SlimeSpiked };
                                     int spawn = slimes[Main.rand.Next(slimes.Length)];
@@ -438,7 +465,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                                     if (Main.rand.NextBool(512))
                                         spawn = NPCID.GoldenSlime;
 
-                               
+                                   
 
                                     Vector2 SpawnPos = Main.player[NPC.target].Center + new Vector2(Main.rand.Next(-500, 500), Main.rand.Next(-1200, -900));
                                     NPC.NewNPC(NPC.GetBossSpawnSource(target.whoAmI), (int)SpawnPos.X, (int)SpawnPos.Y, spawn);
@@ -447,7 +474,8 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                             }
                         }
-                            NPC.velocity += (Vector2.Zero - NPC.velocity) / 30;
+
+                        NPC.velocity += (Vector2.Zero - NPC.velocity) / 30;
                         break;
                 }
 
@@ -498,7 +526,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                     default:
                         NPC.noGravity = true;
                         NPC.noTileCollide = true;
-                    break;
+                        break;
 
                     case 3:
                         if (NPC.noGravity && NPC.noTileCollide)
@@ -519,7 +547,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
 
                         NPC.velocity = Vector2.Zero;
                         NPC.position += (ToLErp - NPC.position) / LerpSpeed;
-                    break;
+                        break;
 
                     // Charging and Spawn Slimes
                     case 2:
@@ -535,7 +563,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         else
                             NPC.position += (TheHead.position - NPC.position) / locallerpspeed;
 
-                    break;
+                        break;
 
                     // BouncyBallz
                     case 3:
@@ -558,9 +586,9 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                             NPC.velocity = Vector2.Zero;
                             NPC.position += (ResetPos - NPC.position) / 20;
                         }
-                    break;
+                        break;
                 }
-                
+
             }
         }
     }
