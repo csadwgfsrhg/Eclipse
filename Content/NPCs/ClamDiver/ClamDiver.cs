@@ -36,7 +36,16 @@ namespace Eclipse.Content.NPCs.ClamDiver
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-
+            npcLoot.Add(ItemDropRule.Common(ItemID.FishingSeaweed, 2, 0, 3));
+            npcLoot.Add(ItemDropRule.Common(ItemID.OldShoe, 3, 0, 1));
+            npcLoot.Add(ItemDropRule.Common(ItemID.TinCan, 4, 0, 1));
+            npcLoot.Add(ItemDropRule.Common(ItemID.Coral, 1, 0, 3));
+            npcLoot.Add(ItemDropRule.Common(ItemID.Seashell, 1, 2, 4));
+            npcLoot.Add(ItemDropRule.Common(ItemID.WhitePearl, 10));
+            npcLoot.Add(ItemDropRule.Common(ItemID.BlackPearl, 25));
+            npcLoot.Add(ItemDropRule.Common(ItemID.PinkPearl, 50));
+            npcLoot.Add(ItemDropRule.Common(ItemID.DivingHelmet, 5));
+            npcLoot.Add(ItemDropRule.Common(ItemID.PirateMap, 3));
         }
 
         int startFrame = 0;
@@ -63,7 +72,7 @@ namespace Eclipse.Content.NPCs.ClamDiver
         
             if (charge< 0)
             {
-                NPC.velocity *= .9f;
+                NPC.velocity.X *= .9f;
                 NPC.aiStyle = -1;
                 OpenMouth(player);
 
@@ -71,7 +80,7 @@ namespace Eclipse.Content.NPCs.ClamDiver
     }
     else
             {
-
+                NPC.velocity *= .98f;
                 WalkAnim(player);
                 NPC.aiStyle = 26;
                 anime = 0;
@@ -81,12 +90,12 @@ namespace Eclipse.Content.NPCs.ClamDiver
 
             }
 
-            if (charge > 80)
+            if (charge > 100 - (NPC.lifeMax - NPC.life) / (NPC.lifeMax / 60))
             {
                 if (Main.rand.NextBool(3))
                 {
                 
-                    charge = -(Main.rand.Next(80, 120));
+                    charge = -(Main.rand.Next(100, 150));
                 }
                 else
                 {
@@ -111,23 +120,27 @@ namespace Eclipse.Content.NPCs.ClamDiver
         
             Vector2 direction = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitX) ;
           
-            if (shoot >= 10) {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * Main.rand.NextFloat(.8f, 3f), ModContent.ProjectileType<ClamBubble>(), 5, 1, Main.myPlayer);
+            if (shoot >= 12 - (NPC.lifeMax - NPC.life) / (NPC.lifeMax / 6) ) {
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, direction * Main.rand.NextFloat(.8f, 6f), ModContent.ProjectileType<ClamBubble>(), 5, 1, Main.myPlayer);
                 shoot = 0;
             }
 
-            if (anime <= 2)
+            if (anime <= 30)
 
             {
+                shoot = 0;
                 SoundEngine.PlaySound(SoundID.DD2_DrakinBreathIn, NPC.position);
             }
+            else
+            {
+                shoot += Main.rand.Next(2);
 
-                anime += 1;
+            }
+            anime += 1;
 
 
-            shoot += Main.rand.Next(2);
-
-            if (anime < 10 || anime > 90)
+        
+            if (anime < 10 || charge > -10)
             {
                 NPC.frame.Y = 4 * frameHeight;
             
@@ -164,8 +177,8 @@ namespace Eclipse.Content.NPCs.ClamDiver
 
          
 
-            NPC.frameCounter += 0.5f;
-            NPC.frameCounter += NPC.velocity.Length() / 10f;
+            NPC.frameCounter += 0.4f;
+            NPC.frameCounter += NPC.velocity.Length() / 15f;
             if (NPC.frameCounter > frameSpeed)
             {
                 NPC.frameCounter = 0;
