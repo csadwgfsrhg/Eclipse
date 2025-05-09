@@ -1,5 +1,6 @@
 ﻿
 
+using Eclipse.Content.NPCs.ClamDiver;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -36,16 +37,18 @@ namespace Eclipse.Content.Projectiles.Enemy
         public override void OnSpawn(IEntitySource source)
         {
 
-            bubbleobject = Main.rand.Next(20);
-         //   if (bubbleobject == 0)
-          
+            bubbleobject = Main.rand.Next(2);
+            if (bubbleobject == 0)
                 bubbleHeld = ModContent.Request<Texture2D>("Eclipse/Content/Projectiles/Enemy/ClamMine", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-            
-           
-                
-             
-            //     Projectile.scale = Main.rand.NextFloat(.5f, 1f);
-            Projectile.Resize((int)(Projectile.width * Projectile.scale), (int)(Projectile.height * Projectile.scale));
+
+            //     if (bubbleobject == 1)
+            // bubbleHeld = ModContent.Request<Texture2D>("Eclipse/Content/Enemy/ClamDiver/Clam", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+
+
+
+
+            //   Projectile.scale = Main.rand.NextFloat(.5f, 1f);
+            //Projectile.Resize((int)(Projectile.width * Projectile.scale), (int)(Projectile.height * Projectile.scale));
 
         }
 
@@ -59,30 +62,14 @@ namespace Eclipse.Content.Projectiles.Enemy
             SoundEngine.PlaySound(SoundID.Item54, Projectile.position);
           
             if (bubbleobject == 0) 
-        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(0, 1), ProjectileID.BombSkeletronPrime, 10,  1);
+        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(0, 1), ModContent.ProjectileType<ClamMine>(), 10,  1);
+
 
             if (bubbleobject == 1)
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(player.Center - Projectile.Center) * 10, ProjectileID.DD2DarkMageBolt, 10, 1);
+                NPC.NewNPCDirect(Projectile.GetSource_FromThis(), (int)Projectile.Center.X, (int)Projectile.Center.Y, ModContent.NPCType<Clam>(), Projectile.whoAmI);
 
 
-            if (bubbleobject == 2)
-                NPC.NewNPCDirect(Projectile.GetSource_FromThis(), (int)Projectile.Center.X, (int)Projectile.Center.Y, NPCID.Piranha, Projectile.whoAmI);
-
-
-            if (bubbleobject == 3)
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(Main.rand.Next(-5, 5), Main.rand.Next(-5, 5)), ProjectileID.GreekFire1, 10, 1);
-
-            if (bubbleobject == 4)
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(player.Center - Projectile.Center) , ProjectileID.DemonSickle, 10, 1);
-
-            if (bubbleobject == 5)
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(player.Center  - Projectile.Center) * 7 + new Vector2(Main.rand.Next(-1, 1), Main.rand.Next(-5, 0)), ProjectileID.WoodenArrowHostile, 10, 1);
-            if (bubbleobject == 6)
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(player.Center - Projectile.Center) * 4 + new Vector2(Main.rand.Next(-2, 2), Main.rand.Next(-2, 2)), ProjectileID.LostSoulHostile, 10, 1);
-            if (bubbleobject == 7)
-                NPC.NewNPCDirect(Projectile.GetSource_FromThis(), (int)Projectile.Center.X, (int)Projectile.Center.Y, NPCID.BlueJellyfish, Projectile.whoAmI);
-            if (bubbleobject == 8)
-                NPC.NewNPCDirect(Projectile.GetSource_FromThis(), (int)Projectile.Center.X, (int)Projectile.Center.Y, NPCID.Crab, Projectile.whoAmI);
+          
             
 
         }
@@ -90,7 +77,7 @@ namespace Eclipse.Content.Projectiles.Enemy
         {
             Player player = Main.LocalPlayer;
 
-          
+            Lighting.AddLight(Projectile.position, .1f, .2f, .3f);
 
             if (Projectile.timeLeft >= 240)
             {
@@ -118,14 +105,22 @@ namespace Eclipse.Content.Projectiles.Enemy
         }
         public override bool PreDraw(ref Color lightColor)
         {
-         
+            Color drawColor = Projectile.GetAlpha(lightColor);
             Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.Transform);
-            Main.spriteBatch.Draw(bubbleHeld, (Projectile.Center - new Vector2(16, 16 )) - Main.screenPosition, Color.White);
+            Main.spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+
+            Main.spriteBatch.Draw(bubbleHeld, (Projectile.Center - new Vector2(18, 18)) - Main.screenPosition, null, drawColor);
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
 
             return true;
         }
-        
+        public override void PostDraw(Color lightColor)
+        {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.Transform);
+        }
     }
 
 	}

@@ -234,6 +234,8 @@ Projectiles: {
 	VileDust.DisplayName: Vile Dust
 	BouncyBallProjectile.DisplayName: Bouncy Ball Projectile
 	ClamBubble.DisplayName: Clam Bubble
+	ClamMine.DisplayName: Clam Mine
+	MineExplosion.DisplayName: Mine Explosion
 }
 
 UI: {
@@ -268,6 +270,7 @@ NPCs: {
 
 	SlimeSerpent.DisplayName: Slime Serpent
 	ClamDiver.DisplayName: Clam Diver
+	Clam.DisplayName: Clam
 
 	"Beast Fisher": {
 		DisplayName: Beast  Fisher

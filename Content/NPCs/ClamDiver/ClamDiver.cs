@@ -21,12 +21,12 @@ namespace Eclipse.Content.NPCs.ClamDiver
             NPC.width = 66;
             NPC.height = 76;
             NPC.damage = 20;
-            NPC.defense = 11;
+            NPC.defense = 16;
             NPC.lifeMax = 700;
             NPC.HitSound = SoundID.NPCHit1;
-            NPC.DeathSound = SoundID.NPCDeath2;
-            NPC.value = 60f;
-            NPC.knockBackResist = 0.1f;
+            NPC.DeathSound = SoundID.NPCDeath18;
+            NPC.value = 10000f;
+            NPC.knockBackResist = 0f;
             NPC.aiStyle = 26;
 
 
@@ -75,16 +75,16 @@ namespace Eclipse.Content.NPCs.ClamDiver
                 NPC.velocity.X *= .9f;
                 NPC.aiStyle = -1;
                 OpenMouth(player);
+                NPC.defense = 5;
 
-
-    }
+            }
     else
             {
                 NPC.velocity *= .98f;
                 WalkAnim(player);
                 NPC.aiStyle = 26;
                 anime = 0;
-
+                NPC.defense = 16;
 
 
 
