@@ -12,6 +12,7 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 using static Eclipse.Content.Items.Runes.BouncyRune;
+using static Eclipse.Content.Items.Runes.ShinyItems;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Eclipse.Common.Reforges;

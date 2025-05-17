@@ -26,13 +26,13 @@ namespace Eclipse.Content.Items.Runes
 
 
     }
-    public  class ShinyItems : GlobalTile
+    public class ShinyItems : GlobalTile
     {
 
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-           
-        
+
+
             Player player = Main.LocalPlayer;
             if (player.HeldItem.prefix == ModContent.PrefixType<Shiny>() && type == TileID.Stone)
 
@@ -50,33 +50,34 @@ namespace Eclipse.Content.Items.Runes
 
 
             }
-          
-        
-
-    }
-    public class Shiny : ModPrefix
-    {
 
 
-        public override bool CanRoll(Item item)
-               => true;
 
-        public override PrefixCategory Category
-            => PrefixCategory.AnyWeapon;
-
-        public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
+        }
+        public class Shiny : ModPrefix
         {
 
-        
-            useTimeMult *= .9f;
-   
+
+            public override bool CanRoll(Item item)
+                   => true;
+
+            public override PrefixCategory Category
+                => PrefixCategory.AnyWeapon;
+
+            public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
+            {
+
+
+                useTimeMult *= .9f;
+
+            }
+
+            public override void Apply(Item item)
+            {
+                //
+            }
+
+
         }
-
-        public override void Apply(Item item)
-        {
-            //
-        }
-
-
     }
 }
