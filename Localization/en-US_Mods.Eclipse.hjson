@@ -166,41 +166,58 @@ Items: {
 
 	MutatedGenome: {
 		DisplayName: Mutated Genome
-		Tooltip: applies mutated reforge to slime items
-	}
-
-	StoneScalingRune: {
-		DisplayName: Stone Scaling Rune
-		Tooltip: Scales weapon to light green rariety
+		Tooltip:
+			'''
+			applies mutated reforge to slime items
+			Appliable only to lower rarity items
+			'''
 	}
 
 	BouncyRune: {
 		DisplayName: Bouncy Rune
-		Tooltip: Applies bouncy reforge to melee weapons
-	}
-
-	CopperScalingRune: {
-		DisplayName: Copper Scaling Rune
-		Tooltip: Scales weapon to light orange rariety
-	}
-
-	GoldScalingRune: {
-		DisplayName: Gold Scaling Rune
-		Tooltip: Scales weapon to pink rariety
-	}
-
-	SilverScalingRune: {
-		DisplayName: Silver Scaling Rune
-		Tooltip: Scales weapon to light red rariety
-	}
-
-	WoodScalingRune: {
-		DisplayName: Wood Scaling Rune
-		Tooltip: Scales weapon to light blue rariety
+		Tooltip:
+			'''
+			Applies bouncy reforge to melee weapons
+			Appliable only to lower rarity items
+			'''
 	}
 
 	SimpleRune: {
 		DisplayName: Simple Rune
+		Tooltip:
+			'''
+			Applies Simple reforge to any weapon
+			Appliable only to lower rarity items
+			'''
+	}
+
+	TyfloiteGeode: {
+		DisplayName: Tyfloite Geode
+		Tooltip: ""
+	}
+
+	CopperScalingRune: {
+		DisplayName: Copper Scaling Rune
+		Tooltip: ""
+	}
+
+	GoldScalingRune: {
+		DisplayName: Gold Scaling Rune
+		Tooltip: ""
+	}
+
+	SilverScalingRune: {
+		DisplayName: Silver Scaling Rune
+		Tooltip: ""
+	}
+
+	StoneScalingRune: {
+		DisplayName: Stone Scaling Rune
+		Tooltip: ""
+	}
+
+	WoodScalingRune: {
+		DisplayName: Wood Scaling Rune
 		Tooltip: ""
 	}
 }
@@ -320,4 +337,5 @@ Prefixes: {
 	Mutated.DisplayName: Mutated
 	Simple.DisplayName: Simple
 	Bouncy.DisplayName: Bouncy
+	Shiny.DisplayName: Shiny
 }

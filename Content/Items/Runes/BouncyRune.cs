@@ -7,7 +7,6 @@ namespace Eclipse.Content.Items.Runes
     public class BouncyRune : ModItem
 
     {
-        public override bool CanRightClick() => true;
         public override void SetDefaults()
         {
 

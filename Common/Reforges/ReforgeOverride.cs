@@ -23,8 +23,7 @@ namespace Eclipse.Common.Reforges;
 
 public class ReforgeOverride : GlobalItem
 {
- 
-   public override int ChoosePrefix(Item item, UnifiedRandom rand)
+    public override int ChoosePrefix(Item item, UnifiedRandom rand)
     {
         //ModContent.PrefixType<Mutated>(),
         //   List<int> UniversalPrefixesIDs = [ ModContent.PrefixType<Simple>()];
@@ -50,7 +49,16 @@ public class ReforgeOverride : GlobalItem
 
     public override bool CanRightClick(Item item)
     {
-        if (item.rare < Main.mouseItem.rare && (item.DamageType == DamageClass.Melee ) && (Main.mouseItem.ModItem is BouncyRune))
+        if (item.prefix == 0 && (item.pick >= 1 || item.axe >= 1 || item.hammer >= 1) && (Main.mouseItem.ModItem is TyfloiteGeode))
+        {
+
+            Main.mouseItem.TurnToAir();
+            item.Prefix(0);
+            item.Prefix(ModContent.PrefixType<Shiny>());
+
+
+        }
+        if (item.prefix == 0 &&  (item.DamageType == DamageClass.Melee ) && (Main.mouseItem.ModItem is BouncyRune))
         {
 
             Main.mouseItem.TurnToAir();
@@ -60,7 +68,7 @@ public class ReforgeOverride : GlobalItem
 
         }
         //item.accessory
-        if (item.rare < Main.mouseItem.rare && (item.damage >= 0 ) && (Main.mouseItem.ModItem is SimpleRune))
+        if (item.prefix == 0 && (item.damage >= 0 ) && (Main.mouseItem.ModItem is SimpleRune))
         {
 
             Main.mouseItem.TurnToAir();
@@ -69,7 +77,7 @@ public class ReforgeOverride : GlobalItem
 
 
         }
-        if ((//item.type == ItemID.SlimeGun ||
+        if ((item.prefix == 0 && //item.type == ItemID.SlimeGun ||
          item.type == ItemID.SlimeStaff
         //|| item.type == ItemID.StickyGrenade
         //  || item.type == ItemID.BouncyGrenade
