@@ -24,10 +24,17 @@ public class Eclipse : Mod
         TextureAssets.Tile[TileID.ActiveStoneBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Stone");
         TextureAssets.Tile[TileID.Dirt] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Dirt");
         TextureAssets.Tile[TileID.ClayBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Clay");
-        TextureAssets.Liquid[LiquidID.Lava] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lava");
+        TextureAssets.Tile[TileID.Grass] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/ForestGrass");
         TextureAssets.Tile[TileID.Mud] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Mud");
         TextureAssets.Tile[TileID.Heart] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/LifeCrystal");
         TextureAssets.Tile[TileID.LifeCrystalBoulder] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/LifeCrystal");
+        TextureAssets.Tile[TileID.Lead] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lead");
+        TextureAssets.Tile[TileID.Iron] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Iron");
+
+
+
+        TextureAssets.Liquid[LiquidID.Lava] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lava");
+
         TextureAssets.Item[ItemID.IceBlade] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/IceBlade");
         TextureAssets.Item[ItemID.Starfury] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/Starfury");
         TextureAssets.Item[ItemID.EnchantedSword] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/EnchantedSword");

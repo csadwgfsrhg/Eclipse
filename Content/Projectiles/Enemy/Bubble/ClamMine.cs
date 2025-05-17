@@ -2,25 +2,26 @@
 
 using Eclipse.Content.NPCs.ClamDiver;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Utilities;
 
-namespace Eclipse.Content.Projectiles.Enemy
+namespace Eclipse.Content.Projectiles.Enemy.Bubble
 {
 	public class ClamMine : ModProjectile
 	{
-      
-   
+
+  
         public override void SetDefaults() {
 			Projectile.width = 44;
 			Projectile.height = 44;
-             Projectile.hostile = true;
-            Projectile.friendly = false;
+             Projectile.hostile = false;
+            Projectile.friendly = true;
         
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
             Projectile.aiStyle = -1;
             Projectile.tileCollide = false;
 
@@ -45,7 +46,7 @@ namespace Eclipse.Content.Projectiles.Enemy
             SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
           
  
-        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + new Vector2(0, -10), Vector2.Zero, ModContent.ProjectileType<MineExplosion>(), 10,  10);
+        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center , Vector2.Zero, ModContent.ProjectileType<MineExplosion>(), 15,  10);
 
             for (int i = 0; i < Main.rand.Next(1, 3); i++)
             {
@@ -66,11 +67,15 @@ namespace Eclipse.Content.Projectiles.Enemy
             Player player = Main.LocalPlayer;
             if (Projectile.position.Y > player.position.Y - 40)
                 Projectile.tileCollide = true;
+            if (player.Hitbox.Intersects(Projectile.Hitbox))
+            {
+         
+                Projectile.Kill();
+            }
 
 
 
-
-            Projectile.rotation = Projectile.velocity.Y / 10;
+                Projectile.rotation = Projectile.velocity.Y / 10;
 
           
 

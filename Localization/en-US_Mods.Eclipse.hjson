@@ -198,6 +198,11 @@ Items: {
 		DisplayName: Wood Scaling Rune
 		Tooltip: Scales weapon to light blue rariety
 	}
+
+	SimpleRune: {
+		DisplayName: Simple Rune
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -236,6 +241,7 @@ Projectiles: {
 	ClamBubble.DisplayName: Clam Bubble
 	ClamMine.DisplayName: Clam Mine
 	MineExplosion.DisplayName: Mine Explosion
+	Coral.DisplayName: Coral
 }
 
 UI: {
@@ -310,4 +316,8 @@ Buffs: {
 	}
 }
 
-Prefixes.Mutated.DisplayName: Mutated
+Prefixes: {
+	Mutated.DisplayName: Mutated
+	Simple.DisplayName: Simple
+	Bouncy.DisplayName: Bouncy
+}

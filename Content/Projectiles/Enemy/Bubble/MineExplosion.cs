@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Utilities;
 
-namespace Eclipse.Content.Projectiles.Enemy
+namespace Eclipse.Content.Projectiles.Enemy.Bubble
 {
 	public class MineExplosion : ModProjectile
 	{
@@ -18,8 +18,8 @@ namespace Eclipse.Content.Projectiles.Enemy
             Main.projFrames[Projectile.type] = 6;
         }
         public override void SetDefaults() {
-			Projectile.width = 44;
-			Projectile.height = 44;
+			Projectile.width = 54;
+			Projectile.height = 60;
              Projectile.hostile = true;
             Projectile.friendly = false;
             Projectile.timeLeft = 28;

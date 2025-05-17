@@ -22,14 +22,14 @@ namespace Eclipse.Content.NPCs.ClamDiver
             NPC.height = 28;
             NPC.damage = 20;
             NPC.defense = 20;
-            NPC.lifeMax = 40;
+            NPC.lifeMax = 10;
             NPC.HitSound = SoundID.NPCHit7;
             NPC.DeathSound = SoundID.NPCDeath11;
             NPC.value = 20f;
             NPC.knockBackResist = 0.1f;
             NPC.aiStyle = -1;
-
-
+            
+    
 
 
         }
@@ -70,7 +70,7 @@ namespace Eclipse.Content.NPCs.ClamDiver
             if (charge > 0)
             {
                 NPC.frame.Y = 0;
-                NPC.defense = 5;
+               
 
             }
             if (charge > 30)
@@ -80,8 +80,7 @@ namespace Eclipse.Content.NPCs.ClamDiver
                 NPC.velocity = (Vector2.Normalize((player.Center ) - NPC.Center) * Main.rand.Next(1, 10) ) + new Vector2(Main.rand.Next(-6, 6), Main.rand.Next(-8, -2) )      ;
 
                 NPC.frame.Y = 28;
-                NPC.defense = 20;
-
+          
             }
 
         }

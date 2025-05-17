@@ -1,5 +1,5 @@
 ﻿
-using Eclipse.Content.Projectiles.Enemy;
+using Eclipse.Content.Projectiles.Enemy.Bubble;
 using Terraria.Audio;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -21,7 +21,7 @@ namespace Eclipse.Content.NPCs.ClamDiver
             NPC.width = 66;
             NPC.height = 76;
             NPC.damage = 20;
-            NPC.defense = 16;
+            NPC.defense = 18;
             NPC.lifeMax = 700;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath18;
@@ -63,7 +63,11 @@ namespace Eclipse.Content.NPCs.ClamDiver
 
 
        
-
+            if (player.dead)
+            {
+              
+                NPC.despawnEncouraged = true;
+            }
 
 
 
