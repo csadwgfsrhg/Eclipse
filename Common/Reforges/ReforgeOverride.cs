@@ -47,7 +47,6 @@ public class ReforgeOverride : GlobalItem
     }
 
 
-
     public override bool CanRightClick(Item item)
     {
         if (item.prefix == 0 && (item.pick >= 1 || item.axe >= 1 || item.hammer >= 1) && (Main.mouseItem.ModItem is TyfloiteGeode))
@@ -69,14 +68,47 @@ public class ReforgeOverride : GlobalItem
 
         }
         //item.accessory
+        if (item.rare < 1 && item.prefix == 0 && (item.damage >= 0) && (Main.mouseItem.ModItem is WoodScalingRune))
+        {
+            Main.mouseItem.TurnToAir();
+            item.rare = 1;
+            item.Prefix(0);
+            item.Prefix(ModContent.PrefixType<Scaling>());
+        }
+        if (item.rare < 2 && item.prefix == 0 && (item.damage >= 0) && (Main.mouseItem.ModItem is StoneScalingRune))
+        {
+            Main.mouseItem.TurnToAir();
+            item.rare = 2;
+            item.Prefix(0);
+            item.Prefix(ModContent.PrefixType<Scaling>());
+        }
+        if (item.rare < 3 && item.prefix == 0 && (item.damage >= 0) && (Main.mouseItem.ModItem is CopperScalingRune))
+        {
+            Main.mouseItem.TurnToAir();
+            item.rare = 3;
+            item.Prefix(0);
+            item.Prefix(ModContent.PrefixType<Scaling>());
+        }
+        if (item.rare < 4 && item.prefix == 0 && (item.damage >= 0) && (Main.mouseItem.ModItem is SilverScalingRune))
+        {
+            Main.mouseItem.TurnToAir();
+            item.rare = 4;
+            item.Prefix(0);
+            item.Prefix(ModContent.PrefixType<Scaling>());
+        }
+        if (item.rare < 5 && item.prefix == 0 && (item.damage >= 0) && (Main.mouseItem.ModItem is GoldScalingRune))
+        {
+            Main.mouseItem.TurnToAir();
+            item.rare = 5;
+            item.Prefix(0);
+            item.Prefix(ModContent.PrefixType<Scaling>());
+        }
+
         if (item.prefix == 0 && (item.damage >= 0 ) && (Main.mouseItem.ModItem is SimpleRune))
         {
-
             Main.mouseItem.TurnToAir();
             item.Prefix(0);
             item.Prefix(ModContent.PrefixType<Simple>());
-
-
         }
         if ((item.prefix == 0 && //item.type == ItemID.SlimeGun ||
          item.type == ItemID.SlimeStaff

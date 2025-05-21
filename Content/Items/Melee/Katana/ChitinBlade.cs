@@ -12,7 +12,7 @@ public class ChitinBlade : ModItem
     public override void SetDefaults() {
 
         Item.DamageType = DamageClass.Melee;
-        Item.damage = 22;
+        Item.damage = 27;
         Item.knockBack = 6f;
         Item.width = 40;
         Item.height = 40;

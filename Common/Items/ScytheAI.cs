@@ -114,26 +114,30 @@ public abstract class ScytheProj : ModProjectile
         float collisionPoint = 0f;
         return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, 15f * Projectile.scale, ref collisionPoint);
     }
-    public sealed override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+    public sealed override void ModifyHitNPC(Terraria.NPC target, ref Terraria.NPC.HitModifiers modifiers)
     {
+       
 
         modifiers.HitDirectionOverride = target.position.X > Owner.MountedCenter.X ? 1 : -1;
 
     }
-    public sealed override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+    public sealed override void OnHitNPC(Terraria.NPC target, Terraria.NPC.HitInfo hit, int damageDone)
     {
 
-
-
-
-        if (canharvest == true)
         {
-            canharvest = false;
-            landhit = true;
+
+
+
+
+            if (canharvest == true)
+            {
+                canharvest = false;
+                landhit = true;
+
+            }
+
 
         }
-
-
     }
     public sealed override void OnSpawn(IEntitySource source)
     {

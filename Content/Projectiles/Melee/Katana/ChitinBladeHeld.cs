@@ -50,7 +50,7 @@ public class ChitinBladeHeld : ModProjectile
     public override void AI()
     {
    
-    Projectile.damage = (int)(22 * ((60+ ChargeTime) / 60));
+    Projectile.damage = (int)(Main.LocalPlayer.HeldItem.damage * ((60+ ChargeTime) / 60));  
    
 
 

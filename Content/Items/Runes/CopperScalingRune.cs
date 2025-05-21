@@ -7,7 +7,7 @@ namespace Eclipse.Content.Items.Runes
     public class CopperScalingRune : ModItem
 
     {
-        public override bool CanRightClick() => true;
+     
         public override void SetDefaults()
         {
             Item.rare = 3;

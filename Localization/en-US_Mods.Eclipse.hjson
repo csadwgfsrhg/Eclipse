@@ -220,6 +220,31 @@ Items: {
 		DisplayName: Wood Scaling Rune
 		Tooltip: ""
 	}
+
+	BlunderBuss: {
+		DisplayName: Blunder Buss
+		Tooltip: ""
+	}
+
+	Rubble: {
+		DisplayName: Rubble
+		Tooltip: ""
+	}
+
+	blunderbuss: {
+		DisplayName: blunderbuss
+		Tooltip: ""
+	}
+
+	GrowingCrystalShard: {
+		DisplayName: Growing Crystal Shard
+		Tooltip: ""
+	}
+
+	Blunderbuss: {
+		DisplayName: Blunderbuss
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -259,6 +284,8 @@ Projectiles: {
 	ClamMine.DisplayName: Clam Mine
 	MineExplosion.DisplayName: Mine Explosion
 	Coral.DisplayName: Coral
+	RubbleBall.DisplayName: Rubble Ball
+	GrowingCrystal.DisplayName: Growing Crystal
 }
 
 UI: {
@@ -338,4 +365,5 @@ Prefixes: {
 	Simple.DisplayName: Simple
 	Bouncy.DisplayName: Bouncy
 	Shiny.DisplayName: Shiny
+	Scaling.DisplayName: Scaling
 }
