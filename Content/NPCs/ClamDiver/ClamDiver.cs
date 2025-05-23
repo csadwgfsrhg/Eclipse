@@ -29,7 +29,7 @@ namespace Eclipse.Content.NPCs.ClamDiver
             NPC.knockBackResist = 0f;
             NPC.aiStyle = 26;
 
-
+           
 
 
         }

@@ -25,8 +25,14 @@ float uZoom;
 
 float4 MainPS(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
 {
-    float2 coolcords = floor(coords * uScreenResolution * uZoom / 2) / (uScreenResolution * uZoom / 2);
-    float4 color = tex2D(uImage0, coolcords);
+       float2 pixelated = coords * uScreenResolution ;   
+        pixelated.x = round(pixelated.x / 2) *2  / (uScreenResolution.x  ) ;
+        pixelated.y = round(pixelated.y / 2) *2  / (uScreenResolution.y ) ;
+      
+
+    float4 color = tex2D(uImage0, pixelated);
+   
+
     return color;
 }
 

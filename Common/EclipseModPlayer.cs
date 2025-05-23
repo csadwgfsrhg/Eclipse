@@ -23,11 +23,11 @@ namespace Eclipse.Common
        public bool attack ;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
+            return [
+                new Item(ItemID.ManaCrystal, 3)
+             	];
+
            
-             //   new Item(ItemID.ManaCrystal, 3);
-            
-      
-            return base.AddStartingItems(mediumCoreDeath);
         }
 
       
@@ -59,9 +59,9 @@ namespace Eclipse.Common
         }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-        //    Filters.Scene.Activate("Eclipse:PixelPerfect");
-         //   Filters.Scene["Eclipse:PixelPerfect"].GetShader().Update(Main.gameTimeCache);
-//
+          //  Filters.Scene.Activate("Eclipse:PixelPerfect");
+          //  Filters.Scene["Eclipse:PixelPerfect"].GetShader().Update(Main.gameTimeCache);
+
 
             if (ChitinBladeHeld == true &&  Player.ownedProjectileCounts[ModContent.ProjectileType<ChitinBladeHeld>()] < 1) {
 

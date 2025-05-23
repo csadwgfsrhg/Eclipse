@@ -51,7 +51,7 @@ public class Eclipse : Mod
 
     
     public static Filter SpaceWarp => Filters.Scene["Eclipse:SpaceWarp"];
-  //  public static Filter PixelPerfect => Filters.Scene["Eclipse:PixelPerfect"];
+    public static Filter PixelPerfect => Filters.Scene["Eclipse:PixelPerfect"];
     public static Asset<Effect> JigglePhysics;
     public static Texture2D SpiralNoise;
     public static Texture2D THENOISEPIZZATOWER;
@@ -69,13 +69,13 @@ public class Eclipse : Mod
             SpiralNoise = ModContent.Request<Texture2D>("Eclipse/Common/Effects/4SpiralMap", AssetRequestMode.ImmediateLoad).Value;
             Filters.Scene["Eclipse:SpaceWarp"] = new Filter(new ScreenShaderData(SpaceWarp, "Fard").UseImage(SpiralNoise, 1), EffectPriority.High);
             
-     //       var PixelPerfect = Assets.Request<Effect>("Common/Effects/PixelPerfect", AssetRequestMode.ImmediateLoad);
-         //   Filters.Scene["Eclipse:PixelPerfect"] = new Filter(new ScreenShaderData(PixelPerfect, "Fard").UseImage(SpiralNoise, 1), EffectPriority.VeryHigh);
+            var PixelPerfect = Assets.Request<Effect>("Common/Effects/PixelPerfect", AssetRequestMode.ImmediateLoad);
+            Filters.Scene["Eclipse:PixelPerfect"] = new Filter(new ScreenShaderData(PixelPerfect, "Fard").UseImage(SpiralNoise, 1), EffectPriority.VeryHigh);
             
             
             JigglePhysics = ModContent.Request<Effect>("Eclipse/Common/Effects/JigglePhysics", AssetRequestMode.AsyncLoad);
             THENOISEPIZZATOWER = ModContent.Request<Texture2D>("Eclipse/Common/Effects/THENOISEPIZZATOWER", AssetRequestMode.ImmediateLoad).Value;
-            //Filters.Scene["Eclipse:SpaceWarp"].Load();
+         //   Filters.Scene["Eclipse:SpaceWarp"].Load();
 
             BOING = new SoundStyle($"{nameof(Eclipse)}/Sounds/BOING") { Volume = 1f, PitchVariance = 0.5f };
         }
