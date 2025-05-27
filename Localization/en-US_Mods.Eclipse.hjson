@@ -250,6 +250,11 @@ Items: {
 		DisplayName: Marijuana
 		Tooltip: ""
 	}
+
+	MarijuanaItem: {
+		DisplayName: Marijuana Item
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
