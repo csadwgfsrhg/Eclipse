@@ -245,6 +245,11 @@ Items: {
 		DisplayName: Blunderbuss
 		Tooltip: ""
 	}
+
+	Marijuana: {
+		DisplayName: Marijuana
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
