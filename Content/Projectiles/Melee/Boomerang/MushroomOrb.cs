@@ -119,33 +119,38 @@ public class MushroomOrb : ModProjectile
         }
 
 
-            var player = Main.player[Projectile.owner];
+           
           
 
             Projectile.rotation = Projectile.velocity.ToRotation();
 
-            if (Projectile.Hitbox.Intersects(player.Hitbox))
+           
+
+            foreach (var player in Main.ActivePlayers)
             {
-
-
-            SoundEngine.PlaySound(SoundID.Item4 with { Pitch = .5f, PitchVariance = .5f, Volume = .4f }, Projectile.Center);
-            Projectile.Kill();
-
-                if (Projectile.ai[1] == 0)
+                if (player.Hitbox.Intersects(Projectile.Hitbox))
                 {
-                player.HealEffect(5);
-                player.statLife += 5;
+                    SoundEngine.PlaySound(SoundID.Item4 with { Pitch = .5f, PitchVariance = .5f, Volume = .4f }, Projectile.Center);
+                    Projectile.Kill();
+
+                    if (Projectile.ai[1] == 0)
+                    {
+                        player.HealEffect(5);
+                        player.statLife += 5;
 
 
+                    }
+                    else
+                    {
+                        player.ManaEffect(10);
+                        player.statMana += 10;
+
+                    }
                 }
-                else
-                {
-                player.ManaEffect(10);
-                player.statMana += 10;
-
-                }
-
             }
+          
+
+            
         }
     }
 

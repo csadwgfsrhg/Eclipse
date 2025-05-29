@@ -1,14 +1,9 @@
 ﻿
 
-using Eclipse.Common;
-using Eclipse.Utilities.Extensions;
-using Eclipse.Content.Items.Harvester.Scythes;
-using Eclipse.Content.Projectiles.Magic;
-using Eclipse.Content.Projectiles.Ranged;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 
-namespace Eclipse.Content.Items.Ranged.Guns.blunderbuss
+
+namespace Eclipse.Content.Items.Ranged.RubbleLaunchers
 {
     public class Blunderbuss : ModItem
 
@@ -22,7 +17,7 @@ namespace Eclipse.Content.Items.Ranged.Guns.blunderbuss
             Item.damage = 16;
             Item.DamageType = DamageClass.Ranged;
             Item.useAmmo = AmmoID.Sand;
-
+            Item.knockBack = 3;
             Item.shoot = 10;
             Item.shootSpeed = 11f;
             Item.useTime = 40;

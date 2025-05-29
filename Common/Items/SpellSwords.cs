@@ -1,13 +1,6 @@
 
 
 
-using Eclipse.Utilities.Extensions;
-using System.Runtime.InteropServices;
-using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.GameContent.Biomes;
-
 
 
 namespace Eclipse.Common.Items

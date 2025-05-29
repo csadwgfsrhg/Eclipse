@@ -1,14 +1,11 @@
 ﻿
 
 
-using Eclipse.Content.Tiles;
-using Eclipse.Utilities.Extensions;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using Terraria;
+
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
+
 
 namespace Eclipse.Content.Items.Ranged.Ammo.Blunderbuss
 {
@@ -55,8 +52,7 @@ namespace Eclipse.Content.Items.Ranged.Ammo.Blunderbuss
             Projectile.penetrate = -1;
             Projectile.width = 8;
             Projectile.height = 8;
-            Projectile.localNPCHitCooldown = 50;
-            Projectile.usesLocalNPCImmunity = true;
+           
             Projectile.friendly = false;
             Projectile.timeLeft = 600;
             Projectile.aiStyle = -1;
@@ -116,12 +112,12 @@ namespace Eclipse.Content.Items.Ranged.Ammo.Blunderbuss
 
             if (grounded == true)
             {
-                Projectile.Opacity += .004f;
+                Projectile.Opacity += .009f;
 
                 if (Projectile.scale < 1.5f)
                 {
 
-                    Projectile.scale *= 1.017f;
+                    Projectile.scale *= 1.032f;
                 }
                 else
                 {

@@ -1,13 +1,6 @@
-using System.IO;
-using Eclipse.Common;
 
-using Eclipse.Content.Items.Melee.Katana;
-using Eclipse.Utilities.Extensions;
-using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.Graphics;
 
 
 namespace Eclipse.Content.Projectiles.Magic;
@@ -48,20 +41,23 @@ public class HeartShard : ModProjectile
     }
     public override void AI()
     {
-        Player player = Main.player[Projectile.owner];
+     
 
         Projectile.velocity.X *= .9f;
 
       Projectile.velocity.Y *= .95f;
         Projectile.velocity.Y += .1f;
-
-        if (player.Hitbox.Intersects(Projectile.Hitbox))
+        foreach (var player in Main.ActivePlayers)
         {
-            player.statLife += 3;
-            player.HealEffect(3);
-            Projectile.Kill();
-            SoundEngine.PlaySound(SoundID.Item4 with { Pitch = .5f, PitchVariance = .5f, Volume = .4f },Projectile.Center);
+            if (player.Hitbox.Intersects(Projectile.Hitbox))
+            {
+                player.statLife += 3;
+                player.HealEffect(3);
+                Projectile.Kill();
+                SoundEngine.PlaySound(SoundID.Item4 with { Pitch = .5f, PitchVariance = .5f, Volume = .4f }, Projectile.Center);
+            }
         }
+  
 
     }
 

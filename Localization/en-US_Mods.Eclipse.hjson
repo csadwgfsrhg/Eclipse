@@ -245,6 +245,21 @@ Items: {
 		DisplayName: Blunderbuss
 		Tooltip: ""
 	}
+
+	Slingshot: {
+		DisplayName: Slingshot
+		Tooltip: ""
+	}
+
+	BottledCursedSpirits: {
+		DisplayName: Bottled Cursed Spirits
+		Tooltip: ""
+	}
+
+	Mawbuss: {
+		DisplayName: Mawbuss
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -286,6 +301,9 @@ Projectiles: {
 	Coral.DisplayName: Coral
 	RubbleBall.DisplayName: Rubble Ball
 	GrowingCrystal.DisplayName: Growing Crystal
+	Web.DisplayName: Web
+	WebBall.DisplayName: Web Ball
+	CompressedAir.DisplayName: Compressed Air
 }
 
 UI: {
