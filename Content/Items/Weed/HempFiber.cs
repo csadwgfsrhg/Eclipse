@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eclipse.Content.Items.Magic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace Eclipse.Content.Items.Weed
 
             Item.maxStack = 9999;
             //Item.value = Item.buyPrice(platinum: 2);
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.White;
         }
+        
     }
 }

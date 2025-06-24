@@ -5,12 +5,24 @@ using Eclipse.Common;
 using Eclipse.Content.Buffs;
 using Eclipse.Content.Dusts;
 using Eclipse.Content.Tiles;
+using System.Collections.Generic;
 
 namespace Eclipse.Content.Items.Weed
 
 {
     public class Joint : ModItem
     {
+      
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe(50);
+            recipe.AddIngredient(ModContent.ItemType<Paper>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<Marijauna>(), 2);
+          
+            recipe.Register();
+
+        }
+        int channeltime = 0;
         public override void SetStaticDefaults()
         {
             //Main.RegisterItemAnimation(Type, new DrawAnimationVertical(60, 2));
@@ -22,7 +34,7 @@ namespace Eclipse.Content.Items.Weed
             Item.width = 26;
             Item.height = 12;
             Item.useStyle = ItemUseStyleID.EatFood;
-            Item.consumable = false;
+            Item.consumable = true;
             Item.useTime = 17;
             Item.useAnimation= 17;
             Item.reuseDelay = 20;
@@ -31,7 +43,7 @@ namespace Eclipse.Content.Items.Weed
             Item.UseSound = SoundID.Unlock;
             Item.channel = true;
             Item.useTurn = true;
-
+            Item.maxStack = 999;
             //Item.value = Item.buyPrice(platinum: 2);
             Item.rare = ItemRarityID.Green;
         }
@@ -44,8 +56,17 @@ namespace Eclipse.Content.Items.Weed
             //spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             base.UseAnimation(player);
         }
+        public override bool CanUseItem(Player player)
+        {
+            if (player.HasBuff(ModContent.BuffType<Stoned>()))
+                return false;
+            else
+            return true;
+        }
         public override bool? UseItem(Player player)
         {
+          
+     
             /*var mp = player.GetModPlayer<WeedModPlayer>();
 
             if (mp.WeedTime < 1f)
@@ -53,22 +74,27 @@ namespace Eclipse.Content.Items.Weed
 
             return true;
         }
-        public override void HoldItem(Player player)
-        {
-            if (player.itemTime > 0 && !player.channel)
-                for (int i = 0; 10 > i; i++)
-                    Dust.NewDustPerfect(player.itemLocation + new Vector2(20 * player.direction, player.channel ? -12 : -4), ModContent.DustType<Smoke>(), new Vector2(player.direction * Main.rand.NextFloat(7, 10), Main.rand.NextFloat(-0.1f, 0.1f)), Alpha: (int)180);
-        }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
+
             if (player.itemTime > 0 || player.channel)
+            {
+
                 player.itemAnimation = 20;
+            }
+
             else
             {
+
                 player.itemAnimation = 0;
-                player.AddBuff(ModContent.BuffType<Stoned>(), 1800);
-                if (Main.rand.NextBool(20))
-                    player.AddBuff(BuffID.Stinky, 1800);
+                if (channeltime > 0)
+                {
+               
+                    if (Main.rand.NextBool(20))
+                        player.AddBuff(BuffID.Stinky, channeltime * 10);
+                }
+
+
                 SoundEngine.PlaySound(new SoundStyle($"{nameof(Eclipse)}/Sounds/blowjob{Main.rand.Next(2)}")
                 {
                     Volume = 0.5f,
@@ -79,6 +105,35 @@ namespace Eclipse.Content.Items.Weed
             }
 
         }
+        int timer = 0;
+        public override void HoldItem(Player player)
+        {
+          
+            if (player.channel)
+            {
+                channeltime++;
+                player.AddBuff(ModContent.BuffType<Stoned>(), channeltime * 10);
+
+            }
+              
+            if (channeltime >= 140 )
+            {
+                player.AddBuff(ModContent.BuffType<LungCancer>(), (channeltime - 140) * 4);
+              
+            
+            }
+              
+
+
+            
+            if (player.itemTime > 0 && !player.channel)
+            {
+                channeltime = 0;
+                for (int i = 0; 5 > i; i++)
+                    Dust.NewDustPerfect(player.itemLocation + new Vector2(20 * player.direction, player.channel ? -12 : -4), ModContent.DustType<Smoke>(), new Vector2(player.direction * Main.rand.NextFloat(7, 10), Main.rand.NextFloat(-0.1f, 0.1f)), Alpha: (int)180);
+            }
+        }
+              
         public override void HoldStyle(Player player, Rectangle heldItemFrame)
         {
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, -1.4f * player.direction);
@@ -88,15 +143,17 @@ namespace Eclipse.Content.Items.Weed
             player.itemRotation += MathHelper.ToRadians(12.5f) * player.direction;
             
         }
-        public override void AddRecipes()
-        {
-            Recipe pee = Recipe.Create(Type, 1);
-            pee.AddIngredient(ModContent.ItemType<Marijauna>(), 7);
-            pee.AddIngredient(ModContent.ItemType<RollingPaper>(), 1);
-            pee.Register();
-
-        }
+       
     }
+   // public override void ModifyTooltips(List<TooltipLine> tooltips)
+  //  {
+
+        //  TooltipLine tooltip = new TooltipLine(Mod, " Potency: ", $" Potency: {Potency} / 100 ");
+        // tooltips.Add(tooltip);
+        // TooltipLine tooltip2 = new TooltipLine(Mod, " Useage: ", $" Quality: {Useage} / Useage ");
+        //tooltips.Add(tooltip2);
+
+    //}
 
     public class JointDrawLayer : PlayerDrawLayer
     {
@@ -132,4 +189,5 @@ namespace Eclipse.Content.Items.Weed
 
         }
     }
+
 }

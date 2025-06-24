@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Eclipse.Content.Items.Weed;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.Localization;
 
 namespace Eclipse.Utilities.Extensions
@@ -10,6 +12,17 @@ namespace Eclipse.Utilities.Extensions
     public class Recipes : ModSystem
 
     {
+        public override void AddRecipes()
+        {
+            Recipe recipeRope = Recipe.Create(ItemID.Rope, 5);
+            recipeRope.AddTile(TileID.Loom);
+            recipeRope.AddIngredient(ModContent.ItemType<HempFiber>(), 1);
+            recipeRope.Register();
+            Recipe recipeSilk = Recipe.Create(ItemID.Silk, 1);
+            recipeSilk.AddTile(TileID.Loom);
+            recipeSilk.AddIngredient(ModContent.ItemType<HempFiber>(), 3);
+            recipeSilk.Register();
+        }
         public override void AddRecipeGroups()
         {
             RecipeGroup SilverBarRecipeGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.SilverBar)}", ItemID.SilverBar, ItemID.TungstenBar);

@@ -1,4 +1,5 @@
 ﻿using Eclipse.Content.Items.Magic;
+using Eclipse.Content.Items.Runes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ using Terraria.DataStructures;
 using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Eclipse.Content.Items.Runes.ShinyItems;
 using static tModPorter.ProgressUpdate;
 namespace Eclipse.Content.Items.Weed
 
 {
-    public class RollingPaper : ModItem
+    public class Paper : ModItem
     {
         public override void SetDefaults()
         {
@@ -24,10 +26,11 @@ namespace Eclipse.Content.Items.Weed
             //Item.value = Item.buyPrice(platinum: 2);
             Item.rare = ItemRarityID.White;
         }
+      
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ModContent.ItemType<HempFiber>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<HempFiber>(), 10);
             recipe.AddTile(TileID.Loom);
             recipe.Register();
 

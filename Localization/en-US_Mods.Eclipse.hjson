@@ -306,8 +306,8 @@ Items: {
 		Tooltip: ""
 	}
 
-	RollingPaper: {
-		DisplayName: Rolling Paper
+	Paper: {
+		DisplayName: Paper
 		Tooltip: ""
 	}
 }
@@ -429,7 +429,12 @@ Buffs: {
 
 	Stoned: {
 		DisplayName: Stoned
-		Description: Mods.Eclipse.Buffs.Stoned.Description
+		Description: Bruh..
+	}
+
+	LungCancer: {
+		DisplayName: Lung Cancer
+		Description: Mods.Eclipse.Buffs.LungCancer.Description
 	}
 }
 

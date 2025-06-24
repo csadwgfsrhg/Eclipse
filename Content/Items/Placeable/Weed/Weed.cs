@@ -10,6 +10,7 @@ using Terraria.Enums;
 using Eclipse.Content.Items.Weed;
 using Terraria.Audio;
 using Terraria.Utilities;
+using Mono.Cecil;
 
 namespace Eclipse.Content.Items.Placeable.Weed
 {
@@ -90,7 +91,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
 
         public override bool CanPlace(int i, int j)
         {
-            int[] GoodTiles = { TileID.Dirt, TileID.Grass};
+            int[] GoodTiles = { TileID.Dirt, TileID.Grass, TileID.JungleGrass, TileID.Mud, TileID.MushroomGrass, TileID.CorruptGrass, TileID.CrimsonGrass,  };
             Tile below = Framing.GetTileSafely(i, j + 1);
             return GoodTiles.Contains(below.TileType);
         }
@@ -123,8 +124,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
                 if (Main.rand.NextBool(7))
                 {
                     tiol.TileFrameX += 16 * 3;
-                    /*tiol2.TileFrameX += 16 * 3;
-                    tio33l.TileFrameX += 16 * 3;*/
+                
                     SoundEngine.PlaySound(SoundID.Grass);
                 }
         }
@@ -158,7 +158,8 @@ namespace Eclipse.Content.Items.Placeable.Weed
             Tile tiol = Framing.GetTileSafely(i, j);
             if (tiol.TileFrameX > 96)
                 Harvest(i, j, 2);
-
+         
+            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<HempFiber>(), Main.rand.Next(2, 7));
             base.KillTile(i, j, ref fail, ref effectOnly, ref noItem);
         }
         public override void MouseOver(int i, int j) // show weed icon on mouse
@@ -176,15 +177,11 @@ namespace Eclipse.Content.Items.Placeable.Weed
             return base.AutoSelect(i, j, item);
         }
 
-        public void Harvest(int i, int j, int SeedChance = 3)
+        public void Harvest(int i, int j, int SeedChance = 5)
         {
-            Dictionary<short, int> SeedDrop = new Dictionary<short, int>();
-            SeedDrop.Add(16 * 12, ModContent.ItemType<WeedSeed>());
-            
-            Dictionary<short, int> DrugDrop = new Dictionary<short, int>();
           
-            DrugDrop.Add(16 * 12, ModContent.ItemType<WeedSeed>());
-
+          
+      
 
             Tile tile = Framing.GetTileSafely(i, j);
             /*Tile tiol2 = Framing.GetTileSafely(i, j + 1);
@@ -193,7 +190,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
             /*tiol2.TileFrameX -= 16 * 3;
             tio33l.TileFrameX -= 16 * 3*/;
             IEntitySource sex = WorldGen.GetItemSource_FromTileBreak(i, j);
-            Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), DrugDrop[tile.TileFrameY], Main.rand.Next(2, 5));
+            Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<Marijauna>(), 1);
 
             WeightedRandom<int> rando = new WeightedRandom<int>();
             rando.Add(1, 0.75f);
@@ -203,7 +200,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
            // Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<HempFiber>(), rando.Get());
 
             if (Main.rand.NextBool(SeedChance))
-                Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), SeedDrop[tile.TileFrameY], rando.Get());
+                Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<WeedSeed>(), 1);
         }
     }
 }
