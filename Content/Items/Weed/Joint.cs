@@ -69,7 +69,7 @@ namespace Eclipse.Content.Items.Weed
                 player.AddBuff(ModContent.BuffType<Stoned>(), 1800);
                 if (Main.rand.NextBool(20))
                     player.AddBuff(BuffID.Stinky, 1800);
-                SoundEngine.PlaySound(new SoundStyle($"{nameof(Eclipse)}/Assets/Sounds/blowjob{Main.rand.Next(2)}")
+                SoundEngine.PlaySound(new SoundStyle($"{nameof(Eclipse)}/Sounds/blowjob{Main.rand.Next(2)}")
                 {
                     Volume = 0.5f,
                     PitchVariance = 0.4f,
