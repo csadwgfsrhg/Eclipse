@@ -11,9 +11,11 @@ using Terraria.Audio;
 namespace Eclipse;
 public class Eclipse : Mod
 {
-    
 
-    private void TextureOverride()
+    public static Asset<Texture2D> JointGlow;
+    public static bool StonedDebuff;
+
+        private void TextureOverride()
     {
         //npcs
         TextureAssets.Npc[NPCID.DungeonGuardian] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/NPCs/DungeonGuardian");
@@ -41,7 +43,7 @@ public class Eclipse : Mod
         //weapons
         TextureAssets.Item[ItemID.IceBlade] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/IceBlade");
         TextureAssets.Item[ItemID.Starfury] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/Starfury");
-        TextureAssets.Item[ItemID.EnchantedSword] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/EnchantedSword");
+        TextureAssets.Item[ItemID.EnchantedSword] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/EnchantedWeapons/EnchantedSword");
 
 
 
@@ -73,8 +75,11 @@ public class Eclipse : Mod
 
     public override void Load()
     {
+   
         if (Main.netMode != NetmodeID.Server)
         {
+
+            JointGlow = ModContent.Request<Texture2D>("Eclipse/Content/Items/Weed/JointLit");
             On_Player.UpdateManaRegen += On_Player_UpdateManaRegen;
 
             /*Effect sw = ModContent.Request<Effect>("Common/Effects/SpaceWarp").Value;

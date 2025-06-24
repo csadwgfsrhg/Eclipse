@@ -27,13 +27,6 @@ namespace Eclipse.Content.Items.Accessories
                 player.AddBuff(BuffID.Panic, 60);
                 
         }
-        public override void AddRecipes()
-        {
-            Recipe DisRecipe = Recipe.Create(ModContent.ItemType<PanicShield>());
-            DisRecipe.AddIngredient(ItemID.PanicNecklace);
-            DisRecipe.AddIngredient(ItemID.CobaltShield);
-            DisRecipe.AddTile(TileID.TinkerersWorkbench);
-            DisRecipe.Register();
-        }
+     
     }
 }

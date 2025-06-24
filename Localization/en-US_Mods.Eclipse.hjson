@@ -260,6 +260,56 @@ Items: {
 		DisplayName: Mawbuss
 		Tooltip: ""
 	}
+
+	MarijuanaItem: {
+		DisplayName: Marijuana Item
+		Tooltip: ""
+	}
+
+	ThermalPlating: {
+		DisplayName: Thermal Plating
+		Tooltip: ""
+	}
+
+	ThermalScaffolding: {
+		DisplayName: Thermal Scaffolding
+		Tooltip: ""
+	}
+
+	ThermalPlatingWall: {
+		DisplayName: Thermal Plating Wall
+		Tooltip: ""
+	}
+
+	ThermalScaffoldingWall: {
+		DisplayName: Thermal Scaffolding Wall
+		Tooltip: ""
+	}
+
+	WeedSeed: {
+		DisplayName: Weed Seed
+		Tooltip: ""
+	}
+
+	HempFiber: {
+		DisplayName: Hemp Fiber
+		Tooltip: ""
+	}
+
+	Joint: {
+		DisplayName: Joint
+		Tooltip: ""
+	}
+
+	Marijauna: {
+		DisplayName: Marijauna
+		Tooltip: ""
+	}
+
+	RollingPaper: {
+		DisplayName: Rolling Paper
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -375,6 +425,11 @@ Buffs: {
 	GlowingMushroomHealing: {
 		DisplayName: Glowing Mushroom Healing
 		Description: Mods.Eclipse.Buffs.GlowingMushroomHealing.Description
+	}
+
+	Stoned: {
+		DisplayName: Stoned
+		Description: Mods.Eclipse.Buffs.Stoned.Description
 	}
 }
 

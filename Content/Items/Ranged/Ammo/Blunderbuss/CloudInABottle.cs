@@ -81,7 +81,7 @@ namespace Eclipse.Content.Items.Ranged.Ammo.Blunderbuss
                     {
                         //  npc.velocity.Y += (Projectile.velocity.Y /5);
                         //  npc.velocity.X += (Projectile.velocity.X / 10);
-                        npc.velocity += -npc.velocity / 4f + new Vector2(Projectile.velocity.X * .05f, Projectile.velocity.Y * .05f);
+                        npc.velocity = -npc.velocity / 4f + new Vector2(Projectile.velocity.X * .05f, Projectile.velocity.Y * .05f);
                      
                     }
                       
@@ -90,7 +90,7 @@ namespace Eclipse.Content.Items.Ranged.Ammo.Blunderbuss
                         npc.AddBuff(BuffID.Featherfall, 10);
                         //   npc.velocity.Y += (Projectile.velocity.Y / 3);
                         //  npc.velocity.X += (Projectile.velocity.X / 8);
-                        npc.velocity += -npc.velocity / 3 + new Vector2(Projectile.velocity.X * .8f, Projectile.velocity.Y * 1.4f);
+                        npc.velocity = -npc.velocity / 3 + new Vector2(Projectile.velocity.X * .8f, Projectile.velocity.Y * 1.4f);
                       //  npc.velocity = npc.velocity / 2 + Projectile.velocity * .6f;
                     }
                         
@@ -102,10 +102,11 @@ namespace Eclipse.Content.Items.Ranged.Ammo.Blunderbuss
                 if (player.Hitbox.Intersects(Projectile.Hitbox) && collide )
                 {
                     player.AddBuff(BuffID.Featherfall, 10);
-             
-                  //  player.velocity.Y = Projectile.velocity.Y * 1.6f; ;
-                   // player.velocity.X = Projectile.velocity.X * .8f;
-                      player.velocity += - player.velocity / 3 + new Vector2(Projectile.velocity.X * .8f, Projectile.velocity.Y * 1.4f) ;
+
+                    //  player.velocity.Y = Projectile.velocity.Y * 1.6f; ;
+                    // player.velocity.X = Projectile.velocity.X * .8f;
+                    player.velocity = player.velocity / 2;
+                      player.velocity +=  new Vector2(Projectile.velocity.X * .6f, Projectile.velocity.Y * 1.4f) ;
                 }
             }
 

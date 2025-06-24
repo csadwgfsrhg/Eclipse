@@ -9,6 +9,7 @@ namespace Eclipse.Content.Gen
     {
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
+            int Corruption = tasks.FindIndex(t => t.Name.Equals("Corruption"));
             int SmoothWorld = tasks.FindIndex(t => t.Name.Equals("Smooth World"));
             if (SmoothWorld != -1)
             {
