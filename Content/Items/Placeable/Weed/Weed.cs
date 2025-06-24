@@ -17,7 +17,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
     {
         //public virtual
 
-        public override string Texture => "WEEDMOD/Content/Tiles/WeedSeed";
+        public override string Texture => "Eclipse/Content/Items/Placeable/Weed/WeedSeed";
         public override void SetDefaults()
         {
             Item.width = 14;
@@ -41,7 +41,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
   
     public class WeedTile : ModTile
     {
-        public override string Texture => "WEEDMOD/Content/Tiles/fixWeedTile";
+        public override string Texture => "Eclipse/Content/Items/Placeable/Weed/WeedTile";
         public override void SetStaticDefaults()
         {
             TileID.Sets.SwaysInWindBasic[Type] = true;
