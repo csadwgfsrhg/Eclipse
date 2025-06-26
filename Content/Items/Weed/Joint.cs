@@ -16,7 +16,7 @@ namespace Eclipse.Content.Items.Weed
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe(50);
-            recipe.AddIngredient(ModContent.ItemType<Paper>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<Paper>(), 50);
             recipe.AddIngredient(ModContent.ItemType<Marijauna>(), 2);
           
             recipe.Register();

@@ -445,3 +445,10 @@ Prefixes: {
 	Shiny.DisplayName: Shiny
 	Scaling.DisplayName: Scaling
 }
+
+Biomes: {
+	WeedBiome: {
+		DisplayName: Weed Biome
+		TownNPCDialogueName: the Weed Biome
+	}
+}

@@ -39,7 +39,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
 
     }
 
-  
+
     public class WeedTile : ModTile
     {
         public override string Texture => "Eclipse/Content/Items/Placeable/Weed/WeedTile";
@@ -53,6 +53,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
             //TileObjectData.newTile.Height = 1;
             //TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16, 16, 16 };
             //TileObjectData.newTile.Origin = new Point16(-2, 3);
+
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
@@ -68,13 +69,13 @@ namespace Eclipse.Content.Items.Placeable.Weed
             Tile tiol = Framing.GetTileSafely(i, j);
 
             tiol.TileFrameX = 0;
-        //    if (item.type == ModContent.ItemType<ShroomSeed>())
-             //   tiol.TileFrameY = 16 * 8;
+            //    if (item.type == ModContent.ItemType<ShroomSeed>())
+            //   tiol.TileFrameY = 16 * 8;
             if (item.type == ModContent.ItemType<WeedSeed>())
                 tiol.TileFrameY = 16 * 12;
-         //   if (item.type == ModContent.ItemType<OpiumSeed>())
-         //       tiol.TileFrameY = 0;
-         //   if (item.type == ModContent.ItemType<MethSeed>())
+            //   if (item.type == ModContent.ItemType<OpiumSeed>())
+            //       tiol.TileFrameY = 0;
+            //   if (item.type == ModContent.ItemType<MethSeed>())
             //    tiol.TileFrameY = 16 * 4;
 
 
@@ -82,16 +83,16 @@ namespace Eclipse.Content.Items.Placeable.Weed
 
 
             //ghost tiles ig (BADCODE!) 
-/*            WorldGen.PlaceTile(i, j - 1, Type, true, true);
-            Framing.GetTileSafely(i, j - 1).TileFrameY = short.MinValue;
-            WorldGen.PlaceTile(i, j - 2, Type, true, true);
-            Framing.GetTileSafely(i, j - 2).TileFrameY = short.MinValue;*/
-            
+            /*            WorldGen.PlaceTile(i, j - 1, Type, true, true);
+                        Framing.GetTileSafely(i, j - 1).TileFrameY = short.MinValue;
+                        WorldGen.PlaceTile(i, j - 2, Type, true, true);
+                        Framing.GetTileSafely(i, j - 2).TileFrameY = short.MinValue;*/
+
         }
 
         public override bool CanPlace(int i, int j)
         {
-            int[] GoodTiles = { TileID.Dirt, TileID.Grass, TileID.JungleGrass, TileID.Mud, TileID.MushroomGrass, TileID.CorruptGrass, TileID.CrimsonGrass,  };
+            int[] GoodTiles = { TileID.Dirt, TileID.Grass, TileID.JungleGrass, TileID.Mud, TileID.MushroomGrass, TileID.CorruptGrass, TileID.CrimsonGrass, };
             Tile below = Framing.GetTileSafely(i, j + 1);
             return GoodTiles.Contains(below.TileType);
         }
@@ -124,7 +125,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
                 if (Main.rand.NextBool(7))
                 {
                     tiol.TileFrameX += 16 * 3;
-                
+
                     SoundEngine.PlaySound(SoundID.Grass);
                 }
         }
@@ -152,6 +153,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
             }
             return false;
         }
+   
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
             
@@ -160,6 +162,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
                 Harvest(i, j, 2);
          
             Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<HempFiber>(), Main.rand.Next(2, 7));
+            
             base.KillTile(i, j, ref fail, ref effectOnly, ref noItem);
         }
         public override void MouseOver(int i, int j) // show weed icon on mouse

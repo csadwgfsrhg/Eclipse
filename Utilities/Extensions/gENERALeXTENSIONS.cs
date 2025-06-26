@@ -18,10 +18,18 @@ namespace Eclipse.Utilities.Extensions
             recipeRope.AddTile(TileID.Loom);
             recipeRope.AddIngredient(ModContent.ItemType<HempFiber>(), 1);
             recipeRope.Register();
+
+
             Recipe recipeSilk = Recipe.Create(ItemID.Silk, 1);
             recipeSilk.AddTile(TileID.Loom);
             recipeSilk.AddIngredient(ModContent.ItemType<HempFiber>(), 3);
             recipeSilk.Register();
+
+            Recipe recipeBook = Recipe.Create(ItemID.Book, 3);
+            recipeBook.AddIngredient(ModContent.ItemType<Paper>(), 100);
+            recipeBook.AddIngredient(ItemID.Leather);
+            recipeBook.AddTile(TileID.WorkBenches);
+            recipeBook.Register();
         }
         public override void AddRecipeGroups()
         {

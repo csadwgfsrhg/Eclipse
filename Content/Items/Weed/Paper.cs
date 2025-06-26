@@ -29,8 +29,8 @@ namespace Eclipse.Content.Items.Weed
       
         public override void AddRecipes()
         {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ModContent.ItemType<HempFiber>(), 10);
+            Recipe recipe = CreateRecipe(30);
+            recipe.AddIngredient(ModContent.ItemType<HempFiber>(), 7);
             recipe.AddTile(TileID.Loom);
             recipe.Register();
 

@@ -1,10 +1,7 @@
 ﻿
 using System.Collections.Generic;
-
 using Terraria.IO;
-
 using Terraria.WorldBuilding;
-
 using Terraria.Utilities;
 using Eclipse.Content.Items.Placeable.Weed;
 namespace Eclipse.Common
@@ -39,53 +36,71 @@ namespace Eclipse.Common
         }
         public static void GenWeed()
         {
-            int Type2Place = ModContent.TileType<WeedTile>();
-
-            int numweed = 200;
-
-            if (Main.maxTilesX > 4200)
-                numweed = 550;
-
-            if (Main.maxTilesX > 6400)
-                numweed = 700;
-
-            for (int k = 0; k < 200; k++)
+            for (int i = 0; i < 2; i++)
             {
-                bool success = false;
-                int attempts = 0;
+                int Type2Place = ModContent.TileType<WeedTile>();
 
-                while (!success)
+                int x = 0;
+         
+                x = WorldGen.genRand.Next(0, Main.maxTilesX / 4);
+                if (Main.rand.NextBool(2))
                 {
-                    attempts++;
-                    if (attempts > 10000)
+                    x = WorldGen.genRand.Next(Main.maxTilesX - Main.maxTilesX / 4, Main.maxTilesX );
+
+
+
+
+                }
+            
+
+
+
+
+                for (int k = 0; k < 23; k++)
+                {
+                    bool success = false;
+                    int attempts = 0;
+
+                    while (!success)
                     {
-                        break;
+                   
+                        attempts++;
+                        if (attempts > 10000)
+                        {
+                            i -= 1;
+                            break;
+                         
+                        }
+
+                        Dictionary<int, short> WeedGrowTiles = new Dictionary<int, short>();
+                        WeedGrowTiles.Add(TileID.Grass, 16 * 12);
+                        //     WeedGrowTiles.Add(TileID.CrimsonGrass, 16 * 4);
+                        //      WeedGrowTiles.Add(TileID.CorruptGrass, 0);
+                        //      WeedGrowTiles.Add(TileID.MushroomGrass, 16 * 8);
+
+
+                        int x2 = x + Main.rand.Next(-50, 50);
+                        int y = Main.rand.Next(100, Main.maxTilesY - 500);
+
+
+
+                        var shit = Framing.GetTileSafely(x2, y);
+                        var piss = Framing.GetTileSafely(x2, y - 1);
+
+                        if (WeedGrowTiles.ContainsKey(shit.TileType) && !WorldGen.SolidTile(x2, y - 1))
+                        {
+                            WeightedRandom<short> ran = new WeightedRandom<short>();
+                            ran.Add(0, 0.4);
+                            ran.Add(48, 0.3);
+                            ran.Add(96, 0.2);
+                            ran.Add(144, 0.1);
+                            WorldGen.PlaceTile(x2, y - 1, Type2Place, true, true);
+                            piss.TileFrameX = ran.Get();
+                            piss.TileFrameY = WeedGrowTiles[shit.TileType];
+                            success = Main.tile[x2, y - 1].TileType == Type2Place;
+                        }
+
                     }
-
-                    Dictionary<int, short> WeedGrowTiles = new Dictionary<int, short>();
-                    WeedGrowTiles.Add(TileID.Grass, 16 * 12);
-                    WeedGrowTiles.Add(TileID.CrimsonGrass, 16 * 4);
-                    WeedGrowTiles.Add(TileID.CorruptGrass, 0);
-                    WeedGrowTiles.Add(TileID.MushroomGrass, 16 * 8);
-
-                    int x = WorldGen.genRand.Next(200, Main.maxTilesX - 200);
-                    int y = WorldGen.genRand.Next(200, Main.maxTilesY - 200);
-
-                    var shit = Framing.GetTileSafely(x, y);
-                    var piss = Framing.GetTileSafely(x, y - 1);
-                    
-                    if (WeedGrowTiles.ContainsKey(shit.TileType) && !WorldGen.SolidTile(x,y-1))
-                    {
-                        WeightedRandom<short> ran = new WeightedRandom<short>();
-                        ran.Add(0, 0.75);
-                        ran.Add(48, 0.2);
-                        ran.Add(96, 0.05);
-                        WorldGen.PlaceTile(x, y - 1, Type2Place, true, true);
-                        piss.TileFrameX = ran.Get();
-                        piss.TileFrameY = WeedGrowTiles[shit.TileType];
-                        success = Main.tile[x, y - 1].TileType == Type2Place;
-                    }
-
                 }
             }
         }
