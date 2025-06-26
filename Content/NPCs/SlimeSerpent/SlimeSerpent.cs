@@ -20,6 +20,7 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
         int? SegmentsInBody = null;
         public static Texture2D tex;
         public static Texture2D bodytex;
+        int iSeeYou = 0;
 
         public override string Texture => "Eclipse/Content/NPCs/SlimeSerpent/SlimeSerpentHead";
 
@@ -394,6 +395,9 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 NPC.TargetClosest();
                 Player target = Main.player[NPC.target];
                 NPC.FaceTarget();
+
+                if (NPC.spriteDirection != -NPC.direction)
+                    iSeeYou = 20;
                 NPC.spriteDirection = -NPC.direction;
 
                 switch (NPC.ai[1])
@@ -484,6 +488,10 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                 else
                     ChangePhaseRand();
 
+                if (iSeeYou-- > 0)
+                {
+                    NPC.frameCounter = 2;
+                }
             }
             else
             {
@@ -588,7 +596,6 @@ namespace Eclipse.Content.NPCs.SlimeSerpent
                         }
                         break;
                 }
-
             }
         }
     }
