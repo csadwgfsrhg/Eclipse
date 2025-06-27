@@ -113,12 +113,13 @@ namespace Eclipse.Content.Items.Weed
             {
                 channeltime++;
                 player.AddBuff(ModContent.BuffType<Stoned>(), channeltime * 10);
+                player.GetModPlayer<LungCancerPlayer>().stonedintensity = channeltime * 10;
 
             }
               
             if (channeltime >= 140 )
             {
-                player.AddBuff(ModContent.BuffType<LungCancer>(), (channeltime - 140) * 4);
+             //   player.AddBuff(ModContent.BuffType<LungCancer>(), (channeltime - 140) * 4);
               
             
             }

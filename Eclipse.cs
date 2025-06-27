@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Audio;
+using Eclipse.Content.Buffs;
 
 namespace Eclipse;
 public class Eclipse : Mod
@@ -18,27 +19,27 @@ public class Eclipse : Mod
         private void TextureOverride()
     {
         //npcs
-        TextureAssets.Npc[NPCID.DungeonGuardian] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/NPCs/DungeonGuardian");
+    //    TextureAssets.Npc[NPCID.DungeonGuardian] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/NPCs/DungeonGuardian");
 
 
         //tiles
         TextureAssets.Tile[TileID.Ash] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Ash");
         TextureAssets.Tile[TileID.AshGrass] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/AshGrass");
         TextureAssets.Tile[TileID.Hellstone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Hellstone");
-        TextureAssets.Tile[TileID.Stone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Stone");
-        TextureAssets.Tile[TileID.ActiveStoneBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Stone");
-        TextureAssets.Tile[TileID.Dirt] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Dirt");
-        TextureAssets.Tile[TileID.ClayBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Clay");
-        TextureAssets.Tile[TileID.Grass] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/ForestGrass");
-        TextureAssets.Tile[TileID.Mud] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Mud");
+      //  TextureAssets.Tile[TileID.Stone] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Stone");
+      //  TextureAssets.Tile[TileID.ActiveStoneBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Stone");
+     //   TextureAssets.Tile[TileID.Dirt] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Dirt");
+     //   TextureAssets.Tile[TileID.ClayBlock] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Clay");
+     //   TextureAssets.Tile[TileID.Grass] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/ForestGrass");
+     //   TextureAssets.Tile[TileID.Mud] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Mud");
         TextureAssets.Tile[TileID.Heart] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/LifeCrystal");
         TextureAssets.Tile[TileID.LifeCrystalBoulder] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/LifeCrystal");
-        TextureAssets.Tile[TileID.Lead] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lead");
-        TextureAssets.Tile[TileID.Iron] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Iron");
+     //   TextureAssets.Tile[TileID.Lead] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lead");
+     //   TextureAssets.Tile[TileID.Iron] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Iron");
 
 
         //liquds
-        TextureAssets.Liquid[LiquidID.Lava] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lava");
+     //   TextureAssets.Liquid[LiquidID.Lava] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/Lava");
 
         //weapons
         TextureAssets.Item[ItemID.IceBlade] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/IceBlade");
@@ -49,12 +50,12 @@ public class Eclipse : Mod
 
         //consumables
         TextureAssets.Item[ItemID.LifeCrystal] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Consumables/LifeCrystal");
-        TextureAssets.Item[ItemID.Bottle] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Consumables/Bottle");
-        TextureAssets.Item[ItemID.BottledWater] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Consumables/BottledWater");
-        TextureAssets.Item[ItemID.BottledHoney] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Consumables/BottledHoney");
+        //TextureAssets.Item[ItemID.Bottle] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Consumables/Bottle");
+      //  TextureAssets.Item[ItemID.BottledWater] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Consumables/BottledWater");
+      //  TextureAssets.Item[ItemID.BottledHoney] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Consumables/BottledHoney");
 
         //accessories
-        TextureAssets.Item[ItemID.CloudinaBottle] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Accessories/CloudInABottle");
+      //  TextureAssets.Item[ItemID.CloudinaBottle] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Accessories/CloudInABottle");
     }
 
 
@@ -99,15 +100,17 @@ public class Eclipse : Mod
             BOING = new SoundStyle($"{nameof(Eclipse)}/Sounds/BOING") { Volume = 1f, PitchVariance = 0.5f };
         }
     }
-  
+   
     private void On_Player_UpdateManaRegen(On_Player.orig_UpdateManaRegen orig, Player self)
     {
+
+        int ManaCooldown = self.GetModPlayer<EclipseModPlayer>().ManaCooldown;
         if (self.statMana < 0)
         {
             self.statMana = 0;
         }
         var poo = (1 + self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 75f)) / ((int)(1+ (self.slotsMinions / self.maxMinions) *3 ));
-        if (120 <= self.manaRegenCount && (self.statMana < self.statManaMax2 || poo < 0))
+        if (120 - ManaCooldown <= self.manaRegenCount && (self.statMana < self.statManaMax2 || poo < 0))
         {
             self.ManaEffect(poo);
             self.statMana += poo;

@@ -36,16 +36,16 @@ namespace Eclipse.Common
         }
         public static void GenWeed()
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 int Type2Place = ModContent.TileType<WeedTile>();
 
                 int x = 0;
          
-                x = WorldGen.genRand.Next(0, Main.maxTilesX / 4);
+                x = WorldGen.genRand.Next(100, Main.maxTilesX / 4);
                 if (Main.rand.NextBool(2))
                 {
-                    x = WorldGen.genRand.Next(Main.maxTilesX - Main.maxTilesX / 4, Main.maxTilesX );
+                    x = WorldGen.genRand.Next(Main.maxTilesX - Main.maxTilesX / 4, Main.maxTilesX - 100);
 
 
 
@@ -67,19 +67,19 @@ namespace Eclipse.Common
                         attempts++;
                         if (attempts > 10000)
                         {
-                            i -= 1;
+                            i = 2;
                             break;
                          
                         }
 
                         Dictionary<int, short> WeedGrowTiles = new Dictionary<int, short>();
                         WeedGrowTiles.Add(TileID.Grass, 16 * 12);
-                        //     WeedGrowTiles.Add(TileID.CrimsonGrass, 16 * 4);
-                        //      WeedGrowTiles.Add(TileID.CorruptGrass, 0);
-                        //      WeedGrowTiles.Add(TileID.MushroomGrass, 16 * 8);
+                            // WeedGrowTiles.Add(TileID.CrimsonGrass, 16 * 4);
+                          //    WeedGrowTiles.Add(TileID.CorruptGrass, 0);
+                           //   WeedGrowTiles.Add(TileID.MushroomGrass, 16 * 8);
 
 
-                        int x2 = x + Main.rand.Next(-50, 50);
+                        int x2 = x + Main.rand.Next(-75, 75);
                         int y = Main.rand.Next(100, Main.maxTilesY - 500);
 
 

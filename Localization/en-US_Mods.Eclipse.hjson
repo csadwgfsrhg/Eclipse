@@ -310,6 +310,11 @@ Items: {
 		DisplayName: Paper
 		Tooltip: ""
 	}
+
+	MortarAndPestle: {
+		DisplayName: Mortar And Pestle
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

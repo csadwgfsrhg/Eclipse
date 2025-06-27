@@ -21,6 +21,7 @@ namespace Eclipse.Common
         public bool DerplingPheromones;
 
        public bool attack ;
+
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return [
@@ -48,9 +49,11 @@ namespace Eclipse.Common
             }
         }
 
-
+        public int ManaCooldown = 0;
+   
         public bool ChitinBladeHeld = false;
         public bool LifeCrystalStaffHeld = false;
+
         public override void Initialize()
         {
             BlahHole = 0f;
