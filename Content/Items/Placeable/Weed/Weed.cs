@@ -38,7 +38,18 @@ namespace Eclipse.Content.Items.Placeable.Weed
     {
 
     }
-
+    public class MethSeed : Seed
+    {
+        public override string Texture => "Eclipse/Content/Items/Placeable/Weed/MethSeed";
+    }
+    public class OpiumSeed : Seed
+    {
+        public override string Texture => "Eclipse/Content/Items/Placeable/Weed/OpiumSeed";
+    }
+    public class PsychedelicSeed : Seed
+    {
+        public override string Texture => "Eclipse/Content/Items/Placeable/Weed/PsychedelicSeed";
+    }
 
     public class WeedTile : ModTile
     {
@@ -69,14 +80,14 @@ namespace Eclipse.Content.Items.Placeable.Weed
             Tile tiol = Framing.GetTileSafely(i, j);
 
             tiol.TileFrameX = 0;
-            //    if (item.type == ModContent.ItemType<ShroomSeed>())
-            //   tiol.TileFrameY = 16 * 8;
+                if (item.type == ModContent.ItemType<PsychedelicSeed>())
+               tiol.TileFrameY = 16 * 8;
             if (item.type == ModContent.ItemType<HempSeed>())
                 tiol.TileFrameY = 16 * 12;
-            //   if (item.type == ModContent.ItemType<OpiumSeed>())
-            //       tiol.TileFrameY = 0;
-            //   if (item.type == ModContent.ItemType<MethSeed>())
-            //    tiol.TileFrameY = 16 * 4;
+              if (item.type == ModContent.ItemType<OpiumSeed>())
+                   tiol.TileFrameY = 0;
+               if (item.type == ModContent.ItemType<MethSeed>())
+                tiol.TileFrameY = 16 * 4;
 
 
             //NVM IDC

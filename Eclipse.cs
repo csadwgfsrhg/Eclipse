@@ -46,7 +46,7 @@ public class Eclipse : Mod
         TextureAssets.Item[ItemID.IceBlade] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/IceBlade");
         TextureAssets.Item[ItemID.Starfury] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/Melee/Starfury");
         TextureAssets.Item[ItemID.EnchantedSword] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Items/Weapons/EnchantedWeapons/EnchantedSword");
-
+        TextureAssets.Item[ItemID.ClayPot] = ModContent.Request<Texture2D>("Eclipse/Common/Textures/Tiles/ClayPot");
 
 
         //consumables

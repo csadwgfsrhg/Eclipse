@@ -321,7 +321,27 @@ Items: {
 
 	ThcSalve: {
 		DisplayName: Thc Salve
-		Tooltip: "Grants Relaxed for 60 seconds, gaining total immunity to most debuffs"
+		Tooltip: Grants Relaxed for 60 seconds, gaining total immunity to most debuffs
+	}
+
+	HempSeed: {
+		DisplayName: Hemp Seed
+		Tooltip: ""
+	}
+
+	MethSeed: {
+		DisplayName: Meth Seed
+		Tooltip: ""
+	}
+
+	OpiumSeed: {
+		DisplayName: Opium Seed
+		Tooltip: ""
+	}
+
+	PsychedelicSeed: {
+		DisplayName: Psychedelic Seed
+		Tooltip: ""
 	}
 }
 
