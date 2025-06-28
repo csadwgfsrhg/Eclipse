@@ -25,7 +25,7 @@ namespace Eclipse.Content.Biomes
         {
         
             // First, we will use the exampleBlockCount from our added ModSystem for our first custom condition
-            bool b1 = ModContent.GetInstance<TileCount>().WeedTileCount >= 18;
+            bool b1 = ModContent.GetInstance<TileCount>().WeedTileCount >= 15;
 
 
 
@@ -33,6 +33,6 @@ namespace Eclipse.Content.Biomes
         }
 
         // Declare biome priority. The default is BiomeLow so this is only necessary if it needs a higher priority.
-        public override SceneEffectPriority Priority => SceneEffectPriority.BiomeLow;
+        public override SceneEffectPriority Priority => SceneEffectPriority.BiomeMedium;
     }
 }

@@ -166,29 +166,17 @@ Items: {
 
 	MutatedGenome: {
 		DisplayName: Mutated Genome
-		Tooltip:
-			'''
-			applies mutated reforge to slime items
-			Appliable only to lower rarity items
-			'''
+		Tooltip: ""
 	}
 
 	BouncyRune: {
 		DisplayName: Bouncy Rune
-		Tooltip:
-			'''
-			Applies bouncy reforge to melee weapons
-			Appliable only to lower rarity items
-			'''
+		Tooltip: ""
 	}
 
 	SimpleRune: {
 		DisplayName: Simple Rune
-		Tooltip:
-			'''
-			Applies Simple reforge to any weapon
-			Appliable only to lower rarity items
-			'''
+		Tooltip: ""
 	}
 
 	TyfloiteGeode: {
@@ -315,6 +303,26 @@ Items: {
 		DisplayName: Mortar And Pestle
 		Tooltip: ""
 	}
+
+	Bowl: {
+		DisplayName: Bowl
+		Tooltip: ""
+	}
+
+	Stardust: {
+		DisplayName: Stardust
+		Tooltip: ""
+	}
+
+	HealingSalve: {
+		DisplayName: Healing Salve
+		Tooltip: Slowly regen 80 life over 20 seconds
+	}
+
+	ThcSalve: {
+		DisplayName: Thc Salve
+		Tooltip: "Grants Relaxed for 60 seconds, gaining total immunity to most debuffs"
+	}
 }
 
 Projectiles: {
@@ -424,12 +432,12 @@ Buffs: {
 
 	MushroomHealing: {
 		DisplayName: Mushroom Healing
-		Description: Mods.Eclipse.Buffs.MushroomHealing.Description
+		Description: Health regen
 	}
 
 	GlowingMushroomHealing: {
 		DisplayName: Glowing Mushroom Healing
-		Description: Mods.Eclipse.Buffs.GlowingMushroomHealing.Description
+		Description: Mana regen
 	}
 
 	Stoned: {
@@ -440,6 +448,11 @@ Buffs: {
 	LungCancer: {
 		DisplayName: Lung Cancer
 		Description: Mods.Eclipse.Buffs.LungCancer.Description
+	}
+
+	Relaxed: {
+		DisplayName: Relaxed
+		Description: It's 100% organic
 	}
 }
 

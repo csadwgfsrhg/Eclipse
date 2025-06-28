@@ -18,7 +18,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
     {
         //public virtual
 
-        public override string Texture => "Eclipse/Content/Items/Placeable/Weed/WeedSeed";
+        public override string Texture => "Eclipse/Content/Items/Placeable/Weed/HempSeed";
         public override void SetDefaults()
         {
             Item.width = 14;
@@ -34,7 +34,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
         }
         
     }
-    public class WeedSeed : Seed
+    public class HempSeed : Seed
     {
 
     }
@@ -71,7 +71,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
             tiol.TileFrameX = 0;
             //    if (item.type == ModContent.ItemType<ShroomSeed>())
             //   tiol.TileFrameY = 16 * 8;
-            if (item.type == ModContent.ItemType<WeedSeed>())
+            if (item.type == ModContent.ItemType<HempSeed>())
                 tiol.TileFrameY = 16 * 12;
             //   if (item.type == ModContent.ItemType<OpiumSeed>())
             //       tiol.TileFrameY = 0;
@@ -92,7 +92,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
 
         public override bool CanPlace(int i, int j)
         {
-            int[] GoodTiles = { TileID.Dirt, TileID.Grass, TileID.JungleGrass, TileID.Mud, TileID.MushroomGrass, TileID.CorruptGrass, TileID.CrimsonGrass, };
+            int[] GoodTiles = { TileID.Dirt, TileID.Grass, TileID.JungleGrass, TileID.Mud, TileID.MushroomGrass, TileID.CorruptGrass, TileID.CrimsonGrass, TileID.ClayPot, TileID.PlanterBox };
             Tile below = Framing.GetTileSafely(i, j + 1);
             return GoodTiles.Contains(below.TileType);
         }
@@ -203,7 +203,7 @@ namespace Eclipse.Content.Items.Placeable.Weed
            // Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<HempFiber>(), rando.Get());
 
             if (Main.rand.NextBool(SeedChance))
-                Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<WeedSeed>(), 1);
+                Item.NewItem(sex, new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<HempSeed>(), 1);
         }
     }
 }

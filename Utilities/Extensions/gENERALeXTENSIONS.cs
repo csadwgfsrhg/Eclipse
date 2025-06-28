@@ -1,12 +1,7 @@
-﻿using Eclipse.Content.Items.Weed;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+﻿
+using Eclipse.Content.Items.Weed;
 using Terraria.Localization;
-
+using Eclipse.Content.Tiles;
 namespace Eclipse.Utilities.Extensions
 {
     public class Recipes : ModSystem
@@ -30,6 +25,16 @@ namespace Eclipse.Utilities.Extensions
             recipeBook.AddIngredient(ItemID.Leather);
             recipeBook.AddTile(TileID.WorkBenches);
             recipeBook.Register();
+
+            Recipe recipeSilt = Recipe.Create(ItemID.SiltBlock, 1);
+            recipeSilt.AddIngredient(ItemID.StoneBlock, 5);
+            recipeSilt.AddTile(ModContent.TileType<MortarAndPestle>());
+            recipeSilt.Register();
+
+            Recipe recipeSand = Recipe.Create(ItemID.SandBlock, 1);
+            recipeSand.AddIngredient(ItemID.HardenedSand);
+            recipeSand.AddTile(ModContent.TileType<MortarAndPestle>());
+            recipeSand.Register();
         }
         public override void AddRecipeGroups()
         {
