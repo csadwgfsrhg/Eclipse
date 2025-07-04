@@ -26,14 +26,20 @@ namespace Eclipse.Content.NPCs.Guy
         public override string GetChat()
         {
             WeightedRandom<string> poggerschat = new WeightedRandom<string>();
-            poggerschat.Add("I hate my bitch wife, I can NEVER find any peace and quiet around her. I just wana fish for god's sake!");
-            poggerschat.Add("Back in my fishing prime in '87 they used to call me the master baiter.");
-            poggerschat.Add("Fun fact: Derplings pee out of our belly buttons.");
-            poggerschat.Add("Derp derp derpaty derp.", 0.1);
-            poggerschat.Add("DO THE DISHES", 0.1);
-            poggerschat.Add("PORN IS FOR LOOSERS.", 0.1);
-            poggerschat.Add("Who the fuck listens to \"THE WEEKEND\". 😂", 0.1);
-            poggerschat.Add("🅱0I", 0.001);
+            poggerschat.Add("I hate my bitch wife, she took my kid and ruined him");
+            poggerschat.Add("People never want to be around me, they say that derplings make up 13% of the jungle population and commit 52% of all murders. ");
+            poggerschat.Add("Who the fuck listens to \"THE WEEKEND\"." );
+            poggerschat.Add("My son keeps trying to use me as bait...");
+            poggerschat.Add("Got any weed?");
+            poggerschat.Add("Sometimes I think my curse is a blessing, fish love me now! ");
+            poggerschat.Add("My son needs to stop watching porn , he can't even talk to girls normally. ");
+            poggerschat.Add("I regret not being around that much for my son, but my bitch wife took him as soon as I got cursed.");
+            //   poggerschat.Add("Fun fact: Derplings pee out of our belly buttons.");
+            //    poggerschat.Add("Derp derp derpaty derp.", 0.1);  
+            //    poggerschat.Add("DO THE DISHES", 0.1);
+            //  poggerschat.Add("PORN IS FOR LOOSERS.", 0.1);
+            //  poggerschat.Add("Back in my fishing prime in '87 they used to call me the master baiter.");
+            //   poggerschat.Add("🅱0I", 0.001);
             return poggerschat;
         }
         public override List<string> SetNPCNameList()
@@ -62,7 +68,7 @@ namespace Eclipse.Content.NPCs.Guy
         }
         public override void SetStaticDefaults()
         {
-            Main.npcFrameCount[Type] = 10;
+            Main.npcFrameCount[Type] = 14;
 
             NPCID.Sets.AttackFrameCount[Type] = 3;
             NPCID.Sets.ExtraFramesCount[Type] = 1;
@@ -137,7 +143,7 @@ namespace Eclipse.Content.NPCs.Guy
 
                     GlowmaskNeeded = true;
                     if (NPC.ai[1] == NPCID.Sets.AttackTime[Type])
-                        NPC.frameCounter = 6;
+                        NPC.frameCounter = 9;
                     if (NPC.ai[1] % 12 == 0)
                         NPC.frameCounter = MathHelper.Clamp((int)(NPC.frameCounter + 1) % 9, 6, 8);
 
@@ -145,7 +151,7 @@ namespace Eclipse.Content.NPCs.Guy
                     //Main.NewText(NPC.frameCounter);
                     break;
             }
-            Rectangle frame = new Rectangle(0, (int)NPC.frameCounter * /*(56 + 2)*/frameHeight, 76, 56);
+            Rectangle frame = new Rectangle(0, (int)NPC.frameCounter * /*(56 + 2)*/frameHeight, 58, 56);
             NPC.frame = frame;
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

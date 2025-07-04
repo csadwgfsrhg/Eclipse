@@ -437,6 +437,8 @@ NPCs: {
 			Princess_LovesNPC: I like {NPCName}.
 		}
 	}
+
+	StrawDollNpc.DisplayName: Straw Doll Npc
 }
 
 Buffs: {
@@ -473,6 +475,11 @@ Buffs: {
 	Relaxed: {
 		DisplayName: Relaxed
 		Description: It's 100% organic
+	}
+
+	Hurt: {
+		DisplayName: Hurt
+		Description: Mods.Eclipse.Buffs.Hurt.Description
 	}
 }
 
