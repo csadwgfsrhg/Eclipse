@@ -105,7 +105,7 @@ public abstract class BowHeld : ModProjectile
         Projectile.friendly = false;
         Projectile.tileCollide = false;
         Projectile.penetrate = -1;
-
+        Projectile.ignoreWater = true;
         Projectile.aiStyle = -1;
         Projectile.hide = true;
     }

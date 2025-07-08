@@ -343,6 +343,16 @@ Items: {
 		DisplayName: Psychedelic Seed
 		Tooltip: ""
 	}
+
+	GoldObsidianScythe: {
+		DisplayName: Gold Obsidian Scythe
+		Tooltip: ""
+	}
+
+	PlatinumObsidianScythe: {
+		DisplayName: Platinum Obsidian Scythe
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -387,6 +397,8 @@ Projectiles: {
 	Web.DisplayName: Web
 	WebBall.DisplayName: Web Ball
 	CompressedAir.DisplayName: Compressed Air
+	GoldObsidianScytheProjectile.DisplayName: Gold Obsidian Scythe Projectile
+	PlatinumObsidianScytheProjectile.DisplayName: Platinum Obsidian Scythe Projectile
 }
 
 UI: {

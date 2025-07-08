@@ -23,14 +23,18 @@ namespace Eclipse.Content.NPCs.Spells
 
         public override void SetDefaults()
         {
+          
+          //  NPC.buffImmune[Type] = true;
             NPC.width = 30;
             NPC.height = 34;
             NPC.damage = 0;
+            NPC.chaseable = false;
+
             NPC.defense = 0;
             NPC.lifeMax = 100;
       NPC.HitSound = SoundID.NPCHit11;
             NPC.DeathSound = SoundID.NPCDeath15;
-      
+            NPC.noTileCollide = true;
             NPC.knockBackResist = 1f;
             NPC.aiStyle = -1;
             NPC.noGravity = true;

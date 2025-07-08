@@ -35,8 +35,8 @@ namespace Eclipse.Content.Items.Weed
             Item.height = 12;
             Item.useStyle = ItemUseStyleID.EatFood;
             Item.consumable = true;
-            Item.useTime = 17;
-            Item.useAnimation= 17;
+            Item.useTime = 30;
+            Item.useAnimation= 30;
             Item.reuseDelay = 20;
             //Item.holdStyle = ItemHoldStyleID.HoldLamp;
             Item.holdStyle = ItemHoldStyleID.HoldHeavy;

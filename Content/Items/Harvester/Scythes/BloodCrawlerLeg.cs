@@ -12,8 +12,9 @@ namespace Eclipse.Content.Items.Harvester.Scythes
             Item.height = 44;
             Item.rare = 2;
             Item.shoot = ModContent.ProjectileType<BloodCrawlerLegProj>();
-            Item.useTime = 15;
-            Item.useAnimation = 15;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
+            Item.autoReuse = true;
         }
 
 

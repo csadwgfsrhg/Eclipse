@@ -14,7 +14,7 @@ namespace Eclipse.Content.Projectiles.Harvester.Scythe
 			Projectile.width = 22;
 			Projectile.height = 24;
 			Projectile.friendly = true; 
-			Projectile.timeLeft = 120; 
+			Projectile.timeLeft = 200; 
 			Projectile.penetrate = 1; 
 			Projectile.tileCollide = false;
 			Projectile.usesLocalNPCImmunity = true;
@@ -57,18 +57,18 @@ namespace Eclipse.Content.Projectiles.Harvester.Scythe
                 Player p = Main.player[Projectile.owner];
             Lighting.AddLight(Projectile.position, .2f, 0f, .2f);
             //Factors for calculations
-            double deg = (double)Projectile.ai[0] * 5; //The degrees, you can multiply projectile.ai[1] to make it orbit faster, may be choppy depending on the value
+            double deg = (double)Projectile.ai[0] * -5; //The degrees, you can multiply projectile.ai[1] to make it orbit faster, may be choppy depending on the value
             double rad = deg * (Math.PI / 180) * Projectile.spriteDirection; //Convert degrees to radians
-            double dist = 40  ; //Distance away from the player
+            double dist = 160  ; //Distance away from the player
 
             /*Position the player based on where the player is, the Sin/Cos of the angle times the /
             /distance for the desired distance away from the player minus the projectile's width   /
             /and height divided by two so the center of the projectile is at the right place.     */
-            Projectile.position.X = p.Center.X - (int)(Math.Cos(rad) * Projectile.spriteDirection * (dist + Projectile.ai[0] )) - Projectile.width / 2;
-            Projectile.position.Y = p.Center.Y - (int)(Math.Sin(rad) * Projectile.spriteDirection * (dist + Projectile.ai[0] )) - Projectile.height / 2;
+            Projectile.position.X = p.Center.X - (int)(Math.Cos(rad) * Projectile.spriteDirection * (dist + Projectile.ai[0] / 3 )) - Projectile.width / 2;
+            Projectile.position.Y = p.Center.Y - (int)(Math.Sin(rad) * Projectile.spriteDirection * (dist + Projectile.ai[0] / 3 )) - Projectile.height / 2;
 
             //Increase the counter/angle in degrees by 1 point, you can change the rate here too, but the orbit may look choppy depending on the value
-            Projectile.ai[0] += 1f;
+            Projectile.ai[0] -= Main.rand.NextFloat(0, 2);
 
 
             if (++Projectile.frameCounter >= 8) {

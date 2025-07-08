@@ -110,7 +110,7 @@ public class Eclipse : Mod
         {
             self.statMana = 0;
         }
-        var poo = (1 + self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 75f)) / ((int)(1+ (self.slotsMinions / self.maxMinions) *3 ));
+        var poo =  (  1+ self.manaRegen + (int)(self.manaRegenBonus / 10f) + (int)(self.statManaMax2 / 75f)) / ((int)(1+ (self.slotsMinions / self.maxMinions) *3 ));
         if (120 - ManaCooldown <= self.manaRegenCount && (self.statMana < self.statManaMax2 || poo < 0))
         {
             self.ManaEffect(poo);

@@ -1,5 +1,6 @@
 ﻿
 using Eclipse.Common.Items;
+using Terraria.DataStructures;
 
 namespace Eclipse.Content.Items.Harvester.Scythes
 {
@@ -7,17 +8,18 @@ namespace Eclipse.Content.Items.Harvester.Scythes
     {
         public override void SetStaticDefaults()
         {
-            Item.width = 42;
-            Item.damage = 12;
-            Item.height = 38;
+            Item.width = 62;
+            Item.damage = 20;
+            Item.height = 56;
             Item.rare = 0;
             Item.shoot = ModContent.ProjectileType<EbonwoodScytheProj>();
             Item.useTime = 40;
             Item.useAnimation = 40;
+            Item.autoReuse = false;
         }
 
 
-
+       
 
         public override void AddRecipes()
         {
@@ -34,8 +36,8 @@ namespace Eclipse.Content.Items.Harvester.Scythes
         {
            
 
-            Projectile.width = 42;
-            Projectile.height = 38;
+            Projectile.width = 62;
+            Projectile.height = 56;
             Projectile.timeLeft = 40;
 
 
